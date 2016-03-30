@@ -54,9 +54,9 @@
 
 
 agronomic_values_fields <- function(field_id,
-                                       day_start = '', day_end = '',
-                                       accumulation_start_date = '',gdd_method = 'standard',gdd_base_temp = '10',
-                                       gdd_min_boundary = '10', gdd_max_boundary = '30') {
+                                    day_start = '', day_end = '',
+                                    accumulation_start_date = '',gdd_method = 'standard',gdd_base_temp = '10',
+                                    gdd_min_boundary = '10', gdd_max_boundary = '30') {
 
   if (exists('awhereEnv75247') == FALSE) {
     warning('Please Run the Command \'get_token()\' and then retry running command. \n')
@@ -91,9 +91,9 @@ agronomic_values_fields <- function(field_id,
               Use the GetForecast function to request data from today onward.\n')
       return()
     }# else if (ymd(day_start) <= ymd(Sys.Date())-months(30)) {
-     # warning('By default, the aWhere APIs only allow daily data from the previous 30 months. \n
-     #        Use the Norms API for long-term averages or speak to your account manager for longer access.\n')
-     # return()
+    # warning('By default, the aWhere APIs only allow daily data from the previous 30 months. \n
+    #        Use the Norms API for long-term averages or speak to your account manager for longer access.\n')
+    # return()
     #}
   }
 
@@ -106,9 +106,9 @@ agronomic_values_fields <- function(field_id,
               Use the GetForecast function to request data from today onward.\n')
       return()
     }# else if (ymd(day_end) <= ymd(Sys.Date())-months(30)) {
-     # warning('By default, the aWhere APIs only allow daily data from the previous 30 months. \n
-     #        Use the Norms API for long-term averages or speak to your account manager for longer access.\n')
-     # return()
+    # warning('By default, the aWhere APIs only allow daily data from the previous 30 months. \n
+    #        Use the Norms API for long-term averages or speak to your account manager for longer access.\n')
+    # return()
     #}
 
     if ((day_start != '') == TRUE) {
@@ -148,171 +148,109 @@ agronomic_values_fields <- function(field_id,
     return()
   }
 
-  ## Create Request
-  #Calculate number of loops needed if requesting more than 50 days
-  numObsReturned <- 50
 
-  if (day_start != '' & day_end != '') {
-    numOfDays <- as.numeric(difftime(ymd(day_end), ymd(day_start), units = 'days'))
-    allDates <- seq(as.Date(ymd(day_start)),as.Date(ymd(day_end)), by="days")
 
-    loops <- ((length(allDates))) %/% numObsReturned
-    remainder <- ((length(allDates))) %% numObsReturned
+  # Create query
 
-  } else if (day_start != ''){
+  urlAddress <- "https://api.awhere.com/v2/agronomics"
 
-    numOfDays <- 1
-    allDates <- ymd(day_start)
-    loops <- 1
-    remainder <- 0
+  strBeg <- paste0('/fields')
+  strCoord <- paste0('/',field_id)
+  strType <- paste0('/agronomicvalues')
+
+  if (as.character(day_start) != '' & as.character(day_end) != '') {
+    strDates <- paste0('/',day_start,',',day_end)
+  } else if (day_end != '') {
+    strDates <- paste0('/',day_start,',',day_start)
   } else {
-    numOfDays <- 1
-    allDates <- ''
-    loops <- 1
-    remainder <- 0
+    strDates <- ''
   }
 
-  if(remainder > 0) {
-    loops <- loops + 1
+  gdd_methodString      <- paste0('?gddMethod=',gdd_method)
+  gdd_base_tempString    <- paste0('&gddBaseTemp=',gdd_base_temp)
+  gdd_min_boundaryString <- paste0('&gddMinBoundary=',gdd_min_boundary)
+  gdd_max_boundaryString <- paste0('&gddMaxBoundary=',gdd_max_boundary)
+
+  accumulation_start_dateString = paste0('&accumulationStartDate=',accumulation_start_date)
+
+
+  if (accumulation_start_date == '') {
+    address <- paste0(urlAddress, strBeg, strCoord, strType, strDates,
+                      gdd_methodString,gdd_base_tempString,gdd_min_boundaryString,gdd_max_boundaryString)
+  } else {
+    address <- paste0(urlAddress, strBeg, strCoord, strType, strDates,
+                      gdd_methodString,gdd_base_tempString,gdd_min_boundaryString,gdd_max_boundaryString,accumulation_start_dateString)
   }
-  i <- 1
 
-  dataList <- list()
+  doWeatherGet <- TRUE
 
-  # loop through, making requests in 50-day chunks
+  while (doWeatherGet == TRUE) {
 
-  for (i in 1:loops) {
-
-    starting = numObsReturned*(i-1)+1
-    ending = numObsReturned*i
-
-    if(paste(allDates,sep = '',collapse ='') != '') {
-      day_start <- allDates[starting]
-      day_end <- allDates[ending]
-      if(is.na(day_end)) {
-        tempDates <- allDates[c(starting:length(allDates))]
-        day_start <- tempDates[1]
-        day_end <- tempDates[length(tempDates)]
-      }
-    }
-
-
-    # Create query
-
-    urlAddress <- "https://api.awhere.com/v2/agronomics"
-
-    strBeg <- paste0('/fields')
-    strCoord <- paste0('/',field_id)
-    strType <- paste0('/agronomicvalues')
-
-    if (as.character(day_start) != '' & as.character(day_end) != '') {
-      strDates <- paste0('/',day_start,',',day_end)
-    } else if (day_end != '') {
-      strDates <- paste0('/',day_start,',',day_start)
-    } else {
-      strDates <- ''
-    }
-
-    gdd_methodString      <- paste0('?gddMethod=',gdd_method)
-    gdd_base_tempString    <- paste0('&gddBaseTemp=',gdd_base_temp)
-    gdd_min_boundaryString <- paste0('&gddMinBoundary=',gdd_min_boundary)
-    gdd_max_boundaryString <- paste0('&gddMaxBoundary=',gdd_max_boundary)
-
-    accumulation_start_dateString = paste0('&accumulationStartDate=',accumulation_start_date)
-
-    if(paste(allDates,sep = '',collapse ='') != '') {
-      returnedAmount <- as.integer(difftime(ymd(day_end),ymd(day_start),units = 'days')) + 1L
-      if (returnedAmount > numObsReturned) {
-        returnedAmount <- numObsReturned
-      }
-      limitString <- paste0('?limit=',returnedAmount)
-    } else {
-      limitString <- paste0('?limit=50')
-    }
-
-    if (accumulation_start_date == '') {
-      address <- paste0(urlAddress, strBeg, strCoord, strType, strDates, limitString,
-                        gdd_methodString,gdd_base_tempString,gdd_min_boundaryString,gdd_max_boundaryString)
-    } else {
-      address <- paste0(urlAddress, strBeg, strCoord, strType, strDates, limitString,
-                        gdd_methodString,gdd_base_tempString,gdd_min_boundaryString,gdd_max_boundaryString,accumulation_start_dateString)
-    }
-
-    doWeatherGet <- TRUE
-
-    while (doWeatherGet == TRUE) {
-
-      requestString <- paste0('request <- GET(address,
+    requestString <- paste0('request <- GET(address,
   	                                    add_headers(Authorization =
   	                                    paste0(\"Bearer \", awhereEnv75247$token)))')
 
-      # Make request
+    # Make request
 
-      eval(parse(text = requestString))
+    eval(parse(text = requestString))
 
-      a <- suppressMessages(content(request, as = "text"))
+    a <- suppressMessages(content(request, as = "text"))
 
-      #The JSONLITE Serializer properly handles the JSON conversion
+    #The JSONLITE Serializer properly handles the JSON conversion
 
-      x <- jsonlite::fromJSON(a,flatten = TRUE)
+    x <- jsonlite::fromJSON(a,flatten = TRUE)
 
-      if (grepl('API Access Expired',a)) {
-        get_token(awhereEnv75247$uid,awhereEnv75247$secret)
-      } else {
-        doWeatherGet <- FALSE
-      }
+    if (grepl('API Access Expired',a)) {
+      get_token(awhereEnv75247$uid,awhereEnv75247$secret)
+    } else {
+      doWeatherGet <- FALSE
     }
-
-    data <- as.data.table(x[[3]])
-
-    varNames <- colnames(data)
-
-    #This removes the non-data info returned with the JSON object
-    data[,grep('_links',varNames) := NULL, with = FALSE]
-    data[,grep('.units',varNames) := NULL, with = FALSE]
-
-#    varNames <- colnames(data)
-#
-#     for (x in 1:length(varNames)) {
-#
-#       if (varNames[x] == 'location.latitude'){
-#         varNames[x] <- 'latitude'
-#       } else if (varNames[x] == 'location.longitude'){
-#         varNames[x] <- 'longitude'
-#       } else if (varNames[x] == 'temperatures.max'){
-#         varNames[x] <- 'maxTemperature'
-#       } else if (varNames[x] == 'temperatures.min'){
-#         varNames[x] <- 'minTemperature'
-#       } else if (varNames[x] == 'precipitation.amount'){
-#         varNames[x] <- 'precipitation'
-#       } else if (varNames[x] == 'solar.amount'){
-#         varNames[x] <- 'solarEnergy'
-#       } else if (varNames[x] == 'relativeHumidity.max'){
-#         varNames[x] <- 'maxRH'
-#       } else if (varNames[x] == 'relativeHumidity.min'){
-#         varNames[x] <- 'minRH'
-#       } else if (varNames[x] == 'wind.morningMax'){
-#         varNames[x] <- 'maxMorningWind'
-#       } else if (varNames[x] == 'wind.dayMax'){
-#         varNames[x] <- 'maxDayWind'
-#       } else if (varNames[x] == 'wind.average'){
-#         varNames[x] <- 'avgWind'
-#       } else if (varNames[x] == 'location.field_id') {
-#         varNames[x] <- 'field_id'
-#       }
-#     }
-
-#    setnames(data,varNames)
-
-    dataList[[i]] <- data
-
   }
 
+  data <- as.data.table(x[[3]])
 
-  allWeath <- rbindlist(dataList)
-  setkey(allWeath,date)
+  varNames <- colnames(data)
 
-  return(as.data.frame(allWeath))
+  #This removes the non-data info returned with the JSON object
+  data[,grep('_links',varNames) := NULL, with = FALSE]
+  data[,grep('.units',varNames) := NULL, with = FALSE]
+
+  #    varNames <- colnames(data)
+  #
+  #     for (x in 1:length(varNames)) {
+  #
+  #       if (varNames[x] == 'location.latitude'){
+  #         varNames[x] <- 'latitude'
+  #       } else if (varNames[x] == 'location.longitude'){
+  #         varNames[x] <- 'longitude'
+  #       } else if (varNames[x] == 'temperatures.max'){
+  #         varNames[x] <- 'maxTemperature'
+  #       } else if (varNames[x] == 'temperatures.min'){
+  #         varNames[x] <- 'minTemperature'
+  #       } else if (varNames[x] == 'precipitation.amount'){
+  #         varNames[x] <- 'precipitation'
+  #       } else if (varNames[x] == 'solar.amount'){
+  #         varNames[x] <- 'solarEnergy'
+  #       } else if (varNames[x] == 'relativeHumidity.max'){
+  #         varNames[x] <- 'maxRH'
+  #       } else if (varNames[x] == 'relativeHumidity.min'){
+  #         varNames[x] <- 'minRH'
+  #       } else if (varNames[x] == 'wind.morningMax'){
+  #         varNames[x] <- 'maxMorningWind'
+  #       } else if (varNames[x] == 'wind.dayMax'){
+  #         varNames[x] <- 'maxDayWind'
+  #       } else if (varNames[x] == 'wind.average'){
+  #         varNames[x] <- 'avgWind'
+  #       } else if (varNames[x] == 'location.field_id') {
+  #         varNames[x] <- 'field_id'
+  #       }
+  #     }
+
+  #    setnames(data,varNames)
+
+
+
+  return(as.data.frame(data))
 }
 
 
@@ -372,9 +310,9 @@ agronomic_values_fields <- function(field_id,
 
 
 agronomic_values_latlng <- function(latitude, longitude,
-                                     day_start = ymd(Sys.Date()) - days(1), day_end = '',
-                                     accumulation_start_date = '',gdd_method = 'standard',gdd_base_temp = '10',
-                                     gdd_min_boundary = '10', gdd_max_boundary = '30') {
+                                    day_start = ymd(Sys.Date()) - days(1), day_end = '',
+                                    accumulation_start_date = '',gdd_method = 'standard',gdd_base_temp = '10',
+                                    gdd_min_boundary = '10', gdd_max_boundary = '30') {
 
   if (exists('awhereEnv75247') == FALSE) {
     warning('Please Run the Command \'get_token()\' and then retry running command. \n')
@@ -459,46 +397,6 @@ agronomic_values_latlng <- function(latitude, longitude,
     return()
   }
 
-  ## Create Request
-  #Calculate number of loops needed if requesting more than 50 days
-  numObsReturned <- 50
-
-  if (day_end != '') {
-    numOfDays <- as.numeric(difftime(ymd(day_end), ymd(day_start), units = 'days'))
-    allDates <- seq(as.Date(ymd(day_start)),as.Date(ymd(day_end)), by="days")
-
-    loops <- ((length(allDates))) %/% numObsReturned
-    remainder <- ((length(allDates))) %% numObsReturned
-
-  } else {
-
-    numOfDays <- 1
-    allDates <- ymd(day_start)
-    loops <- 1
-    remainder <- 0
-  }
-
-  if(remainder > 0) {
-    loops <- loops + 1
-  }
-  i <- 1
-
-  dataList <- list()
-
-  # loop through, making requests in 50-day chunks
-
-  for (i in 1:loops) {
-
-    starting = numObsReturned*(i-1)+1
-    ending = numObsReturned*i
-    day_start <- allDates[starting]
-    day_end <- allDates[ending]
-    if(is.na(day_end)) {
-      tempDates <- allDates[c(starting:length(allDates))]
-      day_start <- tempDates[1]
-      day_end <- tempDates[length(tempDates)]
-    }
-
 
     # Create query
 
@@ -516,17 +414,12 @@ agronomic_values_latlng <- function(latitude, longitude,
 
     accumulation_start_dateString = paste0('&accumulationStartDate=',accumulation_start_date)
 
-    returnedAmount <- as.integer(difftime(ymd(day_end),ymd(day_start),units = 'days')) + 1L
-    if (returnedAmount > numObsReturned) {
-      returnedAmount <- numObsReturned
-    }
-    limitString <- paste0('?limit=',returnedAmount)
 
     if (accumulation_start_date == '') {
-      address <- paste0(urlAddress, strBeg, strCoord, strType, strDates, limitString,
+      address <- paste0(urlAddress, strBeg, strCoord, strType, strDates,
                         gdd_methodString,gdd_base_tempString,gdd_min_boundaryString,gdd_max_boundaryString)
     } else {
-      address <- paste0(urlAddress, strBeg, strCoord, strType, strDates, limitString,
+      address <- paste0(urlAddress, strBeg, strCoord, strType, strDates,
                         gdd_methodString,gdd_base_tempString,gdd_min_boundaryString,gdd_max_boundaryString,accumulation_start_dateString)
     }
 
@@ -596,14 +489,7 @@ agronomic_values_latlng <- function(latitude, longitude,
 
     #    setnames(data,varNames)
 
-    dataList[[i]] <- data
 
-  }
-
-
-  allWeath <- rbindlist(dataList)
-  setkey(allWeath,date)
-
-  return(as.data.frame(allWeath))
-  }
+  return(as.data.frame(data))
+}
 
