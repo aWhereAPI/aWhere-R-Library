@@ -379,7 +379,7 @@ agronomic_norms_fields <- function(field_id, month_day_start = '', month_day_end
 #
 
   setnames(data,varNames)
-  setkey(data,day)
+  # setkey(data,day)
 
   return(as.data.frame(data))
 }
