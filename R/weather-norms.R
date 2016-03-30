@@ -200,18 +200,19 @@ weather_norms_fields <- function(field_id, monthday_start = '', monthday_end = '
     strMonthsDays <- ''
   }
 
+
   if (exclude_years != '') {
     strexclude_years <- paste0('?excludeYears=',exclude_years)
   } else {
     strexclude_years <- ''
   }
 
-  if (year_start != '' & year_end != '') {
+    if (year_start != '' & year_end != '') {
     strYearsType <- paste0('/years')
     strYears <- paste0('/',year_start,',',year_end)
-    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays, strYearsType,strYears,exclude_years)
+    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays, strYearsType,strYears,strexclude_years)
   } else {
-    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays,exclude_years)
+    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays,strexclude_years)
   }
   doWeatherGet <- TRUE
   while (doWeatherGet == TRUE) {
@@ -222,7 +223,6 @@ weather_norms_fields <- function(field_id, monthday_start = '', monthday_end = '
     eval(parse(text = requestString))
 
     a <- suppressMessages(content(request, as = "text"))
-
     #The JSONLITE Serializer properly handles the JSON conversion
 
     x <- jsonlite::fromJSON(a,flatten = TRUE)
@@ -464,9 +464,9 @@ weather_norms_latlng <- function(latitude, longitude, monthday_start, monthday_e
   if (year_start != '' & year_end != '') {
     strYearsType <- paste0('/years')
     strYears <- paste0('/',year_start,',',year_end)
-    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays, strYearsType,strYears,exclude_years)
+    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays, strYearsType,strYears,strexclude_years)
   } else {
-    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays,exclude_years)
+    address <- paste0(urlAddress, strBeg, strCoord, strType, strMonthsDays,strexclude_years)
   }
   doWeatherGet <- TRUE
   while (doWeatherGet == TRUE) {
@@ -481,7 +481,6 @@ weather_norms_latlng <- function(latitude, longitude, monthday_start, monthday_e
     #The JSONLITE Serializer properly handles the JSON conversion
 
     x <- jsonlite::fromJSON(a,flatten = TRUE)
-
     if (grepl('API Access Expired',a)) {
       get_token(awhereEnv75247$uid,awhereEnv75247$secret)
     } else {
@@ -489,7 +488,7 @@ weather_norms_latlng <- function(latitude, longitude, monthday_start, monthday_e
     }
   }
 
-  data <- as.data.table(x[[3]])
+  data <- as.data.table(x$norms)
 
   varNames <- colnames(data)
   #This removes the non-data info returned with the JSON object
