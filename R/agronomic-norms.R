@@ -846,6 +846,10 @@ agronomic_norms_area <- function(polygon
                             ,.packages = c("aWhereAPI")
                             ,.export = c('awhereEnv75247')) %dopar% {
 
+      Sys.sleep(runif(1
+                      ,min = .05
+                      ,max = 1.5))                          
+                              
       t <- agronomic_norms_latlng(latitude = grid[[j]]$lat
                                   ,longitude = grid[[j]]$lon
                                   ,month_day_start = month_day_start

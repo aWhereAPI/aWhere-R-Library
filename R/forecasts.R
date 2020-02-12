@@ -453,6 +453,10 @@ forecasts_area <- function(polygon
                                 ,.packages = c("aWhereAPI")
                                 ,.export = c('awhereEnv75247')) %dopar% {
     
+      Sys.sleep(runif(1
+                      ,min = .05
+                      ,max = 1.5))  
+                                  
       t <- forecasts_latlng(latitude = grid[[j]]$lat
                            ,longitude = grid[[j]]$lon
                            ,day_start = day_start

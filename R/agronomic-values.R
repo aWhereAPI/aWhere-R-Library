@@ -660,7 +660,10 @@ agronomic_values_area <- function(polygon
   observed <- foreach::foreach(j=c(1:length(grid))
                                ,.packages = c("aWhereAPI")
                                ,.export = c('awhereEnv75247')) %dopar% {
-
+   Sys.sleep(runif(1
+                   ,min = .05
+                   ,max = 1.5))  
+    
     t <- agronomic_values_latlng(latitude = grid[[j]]$lat
                                  ,longitude = grid[[j]]$lon
                                  ,day_start = day_start

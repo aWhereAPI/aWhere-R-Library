@@ -513,6 +513,10 @@ daily_observed_area <- function(polygon
                                ,.export = c('awhereEnv75247')
                                ,.errorhandling = 'pass') %dopar% {
     
+    Sys.sleep(runif(1
+                    ,min = .05
+                    ,max = 1.5))                             
+                                 
     t <- daily_observed_latlng(latitude = grid[[j]]$lat
                                ,longitude = grid[[j]]$lon
                                ,day_start = day_start
