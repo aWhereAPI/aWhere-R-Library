@@ -542,7 +542,7 @@ daily_observed_area <- function(polygon
 
   if (length(indexToRemove) > 0) {
     
-    warning(paste0('The following locations returned errors and have been removed from the output.  Please investigate by running manually:\n'
+    cat(paste0('The following locations returned errors and have been removed from the output.  Please investigate by running manually:\n'
                   ,paste0(grid[indexToRemove,paste0('(',lat,', ',lon,')')],collapse = ', ')
                   ,'\n'))
     
