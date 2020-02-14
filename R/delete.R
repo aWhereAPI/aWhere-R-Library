@@ -31,7 +31,7 @@ delete_field <- function(field_id
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
-  url <- paste0(awhereEnv75247$apiAddress, "/fields/", field_id)
+  url <- paste0("https://api.awhere.com/v2/fields/", field_id)
 
   postbody <- paste0('{', field_id, '}');
 
@@ -96,7 +96,7 @@ delete_planting <- function(field_id
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/", field_id,'/plantings/',planting_id)
+  url <- paste0("https://api.awhere.com/v2/agronomics/fields/", field_id,'/plantings/',planting_id)
 
   doWeatherGet = TRUE
   while (doWeatherGet == TRUE) {

@@ -154,7 +154,7 @@ weather_norms_fields <- function(field_id
 
       # Create query
 
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- "https://api.awhere.com/v2/weather"
 
       strBeg <- paste0('/fields')
       strCoord <- paste0('/',field_id)
@@ -419,7 +419,7 @@ weather_norms_latlng <- function(latitude
 
       # Create query
 
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- "https://api.awhere.com/v2/weather"
 
       strBeg <- paste0('/locations')
       strCoord <- paste0('/',latitude,',',longitude)

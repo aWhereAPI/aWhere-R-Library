@@ -23,30 +23,30 @@
 #' \dontrun{token_response <- get_token('uid', 'secret', use_environment = FALSE)}
 #' @export
 
-get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awhere.com") {
-  
-  url <- paste0("https://", apiAddress, "/oauth/token")
-  
+get_token <- function(uid, secret, use_environment = TRUE) {
+
+  url <- "https://api.awhere.com/oauth/token"
+
   authen_char <- charToRaw(paste0(uid,':',secret))
-  
+
   request <- httr::POST(url, body='grant_type=client_credentials',
                         httr::content_type('application/x-www-form-urlencoded'),
                         httr::add_headers(Authorization = paste0('Basic ', base64enc::base64encode(authen_char))))
-  
+
   a <- suppressMessages(httr::content(request, as = "text"))
-  
+
   if (request$status_code != 200) {
     error <- TRUE
     error_message <- 'The UID/Secret combination is incorrect.'
     token <- NULL
-    
+
     cat(paste(error_message, '\n'))
   } else {
     error <- FALSE
     error_message <- NULL
-    
+
     parsedResponse <- jsonlite::fromJSON(a, simplifyDataFrame = FALSE)
-    
+
     # Keeping environment approach for backward compatibility,
     # but adding an optional argument to skip it.
     if (use_environment) {
@@ -55,7 +55,7 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
         assign('awhereEnv75247',awhereEnv75247,envir = baseenv())
         rm(awhereEnv75247)
       }
-      
+
       if (exists('uid',envir = awhereEnv75247,inherits = FALSE) == TRUE) {
         if (bindingIsLocked('uid',awhereEnv75247) == TRUE) {
           unlockBinding('uid',awhereEnv75247)
@@ -71,27 +71,20 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
           unlockBinding('token',awhereEnv75247)
         }
       }
-      if (exists('apiAddress',where = awhereEnv75247,inherits = FALSE) == TRUE) {
-        if (bindingIsLocked('apiAddress',awhereEnv75247) == TRUE) {
-          unlockBinding('apiAddress',awhereEnv75247)
-        }
-      }
-      
+
       awhereEnv75247$uid    <- uid
       awhereEnv75247$secret <- secret
       awhereEnv75247$token  <- token <- parsedResponse$access_token
-      awhereEnv75247$apiAddress <- paste0("https://", apiAddress, "/v2")
-      
+
       lockBinding('uid',    awhereEnv75247)
       lockBinding('secret', awhereEnv75247)
       lockBinding('token',  awhereEnv75247)
-      lockBinding('apiAddress', awhereEnv75247)
-      
+
       lockEnvironment(awhereEnv75247,bindings = TRUE)
       rm(awhereEnv75247)
     }
   }
-  
+
   return(list(error = error
               ,error_message = error_message
               ,token = token))
@@ -121,10 +114,10 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
 
 load_credentials <- function(path_to_credentials) {
   credentials <- readLines(path_to_credentials)
-  
+
   uid <- credentials[1]
   secret <- credentials[2]
-  
+
   get_token(uid, secret)
 }
 
@@ -149,23 +142,23 @@ check_JSON <- function(jsonObject
                        ,keyToUse 
                        ,secretToUse 
                        ,tokenToUse) {
-  
+
   #Parses JSON to see if tells us we made too large of a request
   if (any(grepl('The maximum value for the limit parameter is',jsonObject))) {
-    
+
     #Non enterprise accounts are allowed to return 10 days of data at a time
     #FALSE is returned because the logic of the API call will need to be
     #adjusted due to the changed limit paramater
     return(list(FALSE,10,tokenToUse))
   }
-  
+
   #Parses JSON to see if it tells us that we need a new token
   if (any(grepl('API Access Expired',jsonObject))) {
     if(exists("awhereEnv75247")) {
       if(tokenToUse == awhereEnv75247$token) {
         get_token(keyToUse,secretToUse)
         tokenToUse <- awhereEnv75247$token
-        
+
         #This boolean will cause the API request to be repeated
         return(list(TRUE,NA,tokenToUse))
       } else {
@@ -175,10 +168,10 @@ check_JSON <- function(jsonObject
       stop("The token you passed in has expired. Please request a new one and retry your function call with the new token.")
     }
   }
-  
+
   #Finally check to see if there was a different problem with the query and if so return the message
   checkStatusCode(request)
-  
+
   return(list(FALSE,NA,tokenToUse))
 }
 

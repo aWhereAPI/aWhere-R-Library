@@ -131,7 +131,7 @@ agronomic_values_fields <- function(field_id
       }
 
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/agronomics")
+      urlAddress <- "https://api.awhere.com/v2/agronomics"
 
       strBeg <- paste0('/fields')
       strCoord <- paste0('/',field_id)
@@ -389,7 +389,7 @@ agronomic_values_latlng <- function(latitude
       }
 
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/agronomics")
+      urlAddress <- "https://api.awhere.com/v2/agronomics"
 
       strBeg <- paste0('/locations')
       strCoord <- paste0('/',latitude,',',longitude)

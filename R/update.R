@@ -45,7 +45,7 @@ update_field <- function(field_id
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
   ## Creating the request
-  url <- paste0(awhereEnv75247$apiAddress, "/fields/",field_id)
+  url <- paste0("https://api.awhere.com/v2/fields/",field_id)
 
   postbody <- paste0('[{"op":"replace","path":"/', variable_update, '","value":"', value_update, '"}]')
 
@@ -197,7 +197,7 @@ update_planting <- function(field_id
 
   ## Creating the request
 
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/", field_id, "/plantings/")
+  url <- paste0("https://api.awhere.com/v2/agronomics/fields/", field_id, "/plantings/")
 
   if(planting_id == "") {
     url <- paste0(url, "current")

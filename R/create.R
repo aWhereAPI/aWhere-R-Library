@@ -67,7 +67,7 @@ create_field <- function(field_id
   farm_id <- gsub(' ','_',farm_id)
 
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/fields")
+  url <- "https://api.awhere.com/v2/fields"
 
   postbody <- paste0('{"id":"', field_id, '",',
                      '"centerPoint":{"latitude":', latitude, ',"longitude":', longitude, '}',
@@ -188,7 +188,7 @@ create_planting <- function(field_id
 
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/", field_id, "/plantings")
+  url <- paste0("https://api.awhere.com/v2/agronomics/fields/", field_id, "/plantings")
 
   postbody <- paste0('{',
                      '"crop":"', crop, '",',
@@ -303,7 +303,7 @@ create_job <- function(api_requests
   job_title <- gsub(' ','_', job_title)
 
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/jobs")
+  url <- "https://api.awhere.com/v2/jobs"
 
   requests <- data.frame(title=request_titles, api=api_requests)
   postbody <- jsonlite::toJSON(list(title=job_title, type=job_type,

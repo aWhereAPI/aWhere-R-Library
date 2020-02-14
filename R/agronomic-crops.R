@@ -41,7 +41,7 @@ get_crops <- function(crop_id = ''
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/crops/")
+  url <- "https://api.awhere.com/v2/agronomics/crops/"
   
   if(crop_id != "") {
     url <- paste0(url, crop_id)

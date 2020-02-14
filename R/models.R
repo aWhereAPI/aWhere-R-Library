@@ -38,7 +38,7 @@ get_models <- function(model_id = ''
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/models/")
+  url <- "https://api.awhere.com/v2/agronomics/models/"
   
   if(model_id != "") {
     url <- paste0(url, model_id)
@@ -135,7 +135,7 @@ get_model_details <- function(model_id
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/models/")
+  url <- "https://api.awhere.com/v2/agronomics/models/"
   
   url <- paste0(url, model_id, "/details")
   
@@ -229,7 +229,7 @@ get_model_results <- function(field_id
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/")
+  url <- "https://api.awhere.com/v2/agronomics/fields/"
   
   url <- paste0(url, field_id, "/models/", model_id, "/results")
   
