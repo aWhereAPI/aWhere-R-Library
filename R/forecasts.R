@@ -71,7 +71,7 @@ forecasts_fields <- function(field_id
   #checkValidStartEndDatesForecast(day_start,day_end)
   checkForecastParams(block_size)
 
-  fieldInfo <- get_fields(field_id)
+  fieldInfo <- get_fields('field_id')
   
   #Checks if dates need to be adjusted.  This only applies when someone is request
   tz_request <- lutz::tz_lookup_coords(fieldInfo$Latitude
