@@ -660,7 +660,10 @@ agronomic_values_area <- function(polygon
   observed <- foreach::foreach(j=c(1:length(grid))
                                ,.packages = c("aWhereAPI")
                                ,.export = c('awhereEnv75247')) %dopar% {
-
+   Sys.sleep(runif(1
+                   ,min = .05
+                   ,max = 1.5))  
+    
     t <- agronomic_values_latlng(latitude = grid[[j]]$lat
                                  ,longitude = grid[[j]]$lon
                                  ,day_start = day_start
@@ -669,22 +672,25 @@ agronomic_values_area <- function(polygon
 
     currentNames <- colnames(t)
 
-    t$gridy <- grid[[j]]$gridy[i]
-    t$gridx <- grid[[j]]$gridx[i]
+    t$gridy <- grid[[j]]$gridy
+    t$gridx <- grid[[j]]$gridx
 
     data.table::setcolorder(t, c(currentNames[c(1:2)], "gridy", "gridx", currentNames[c(3:length(currentNames))]))
 
     return(t)
   }
 
+  grid <- data.table::rbindlist(grid)
   indexToRemove <- c()
+  
   for (x in 1:length(observed)) {
     if (any(class(observed[[x]]) == 'simpleError')) {
       indexToRemove <- c(indexToRemove,x)
     }
-    grid <- data.table::rbindlist(grid)
-    
-    warning(paste0('The following locations returned errors and have been removed from the output.  Please investigate by running manually:\n'
+  }
+  
+  if (length(indexToRemove) > 0) {  
+    cat(paste0('The following locations returned errors and have been removed from the output.  Please investigate by running manually:\n'
                    ,paste0(grid[indexToRemove,paste0('(',lat,', ',lon,')')],collapse = ', ')
                    ,'\n'))
     
