@@ -290,7 +290,7 @@ get_model_results <- function(field_id
     nextStage <- suppressWarnings(dplyr::mutate_at(nextStage, c("gddRemaining",'gddThreshold'), as.numeric))
     nextStage <- dplyr::mutate_at(nextStage, c("gddRemaining",'gddThreshold'), round, 2)
     
-    nextStage <- dplyr::select(currentStage,c('stage','id','description','gddThreshold','gddThreshold'))
+    nextStage <- dplyr::select(nextStage,c('stage','id','description','gddThreshold','gddThreshold'))
   }
   
   stages <- list(previousStages = previousStages
