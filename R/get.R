@@ -46,16 +46,16 @@ get_fields <- function(field_id = ""
                        ,keyToUse = awhereEnv75247$uid
                        ,secretToUse = awhereEnv75247$secret
                        ,tokenToUse = awhereEnv75247$token) {
-
+  
   checkCredentials(keyToUse,secretToUse,tokenToUse)
-
+  
   if (requestAllFields == TRUE & offset != '') {
     stop('Cannot specify both offset parameter and have requestAllFields == TRUE')
   }
   
   ## Create Request
-  url <- "https://api.awhere.com/v2/fields/"
-
+  url <- paste0(awhereEnv75247$apiAddress, "/fields/")
+  
   if(field_id != "") {
     url <- paste0(url, field_id)
   }
@@ -69,16 +69,16 @@ get_fields <- function(field_id = ""
       url <- paste0(url, "&limit=", limit)
     }
   }
-
+  
   doWeatherGet <- TRUE
   while (doWeatherGet == TRUE) {
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
-                                 paste0("Bearer ", tokenToUse)))
-
+                                             paste0("Bearer ", tokenToUse)))
+    
     a <- suppressMessages(httr::content(request))
-
+    
     temp <- check_JSON(a
                        ,request
                        ,keyToUse
@@ -95,16 +95,16 @@ get_fields <- function(field_id = ""
     if (requestAllFields == TRUE & doWeatherGet == FALSE & field_id == ''){
       #If the API indicates more fields to get, use URL it gives to get them
       if (c('next') %in% names(a[['_links']])) {
-
+        
         url <- paste0(gsub(pattern = '/v2',replacement = '',x = awhereEnv75247$apiAddress),a[['_links']][['next']][['href']])
         doWeatherGet <- TRUE
-       
+        
         if (exists('tempReturn') == TRUE) {
           tempReturn$fields <- c(tempReturn$fields,a$fields)
         } else {
           tempReturn <- copy(a)
         }
-      #If API says no more fields, take appended list of fields and return it
+        #If API says no more fields, take appended list of fields and return it
       } else {
         
         if (exists('tempReturn') == TRUE) {
@@ -113,7 +113,7 @@ get_fields <- function(field_id = ""
       }
     }
   }
-
+  
   ## Create & fill data frame
   if(is.null(a$statusCode)) {
     if(field_id == "") {
@@ -122,28 +122,40 @@ get_fields <- function(field_id = ""
         data <- cbind(data, do.call(rbind, lapply(data$centerPoint, rbind)))
         data$centerPoint <- NULL
         colnames(data) <- c("fieldName", "Acres", "farmId", "fieldId", "Latitude", "Longitude")
-    
+        
         data <- as.matrix(data)
         data[sapply(data, is.null)] <- NA
         data <- as.data.frame(data)
         for(i in 1:ncol(data)) {
           data[,i] <- do.call(rbind, lapply(data[,i], rbind))[,1]
         }
+        
+        data$fieldName <- as.character(data$fieldName)
+        data$Acres <- as.numeric(data$Acres)
+        data$farmId <- as.character(data$farmId)
+        data$fieldId <- as.character(data$fieldId)
+        data$Latitude <- as.numeric(data$Latitude)
+        data$Longitude <- as.numeric(data$Longitude)
+        
       } else {
         #Return empty data.frame if no fields have been made
-        data <-  data.frame(matrix(ncol = 6, nrow = 0))
-        colnames(data) <- c("fieldName", "Acres", "farmId", "fieldId", "Latitude", "Longitude")
-        
-        return(as.data.frame(data))
+        data <- data.frame(fieldName = as.character(NA)
+                           ,Acres = as.numeric(NA)
+                           ,farmId = as.character(NA)
+                           ,fieldId = as.character(NA)
+                           ,Latitude = as.numeric(NA)
+                           ,Longitude = as.numeric(NA)
+                           ,stringsAsFactors = FALSE)
       }
     } else {
       a[sapply(a, is.null)] <- NA
-      data <- data.frame(fieldName = unlist(a$name)
-                         ,Acres = unlist(a$acres)
-                         ,farmId = unlist(a$farmId)
-                         ,fieldId = unlist(a$id)
-                         ,Latitude = unlist(a$centerPoint$latitude)
-                         ,Longitude = unlist(a$centerPoint$longitude))
+      data <- data.frame(fieldName = as.character(unlist(a$name))
+                         ,Acres = as.numeric(unlist(a$acres))
+                         ,farmId = as.character(unlist(a$farmId))
+                         ,fieldId = as.character(unlist(a$id))
+                         ,Latitude = as.numeric(unlist(a$centerPoint$latitude))
+                         ,Longitude = as.numeric(unlist(a$centerPoint$longitude))
+                         ,stringsAsFactors = FALSE)
     }
   }
   
@@ -209,31 +221,31 @@ get_planting <- function(field_id = ""
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
                          ,tokenToUse = awhereEnv75247$token) {
-
+  
   checkCredentials(keyToUse,secretToUse,tokenToUse)
-
+  
   if (requestAllPlantings == TRUE & offset != '') {
     stop('Cannot specify both offset parameter and have requestAllFields == TRUE')
   }
   
   ## Create Request
-  url <- "https://api.awhere.com/v2/agronomics/"
-
+  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/")
+  
   if(field_id != "") {
     checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
     url <- paste0(url, "fields/", field_id, "/plantings")
   } else {
     url <- paste0(url, "plantings")
   }
-
+  
   if(planting_id != "") {
     url <- paste0(url, "/", planting_id)
   }
-
+  
   if(current) {
     url <- paste0(url, "/current")
   }
-
+  
   if(offset != "" || limit != "") {
     url <- paste0(url, "?")
     if(offset != "") {
@@ -249,10 +261,10 @@ get_planting <- function(field_id = ""
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
-                                 paste0("Bearer ", tokenToUse)))
-
+                                             paste0("Bearer ", tokenToUse)))
+    
     a <- suppressMessages(httr::content(request))
-
+    
     temp <- check_JSON(a
                        ,request
                        ,keyToUse
@@ -260,7 +272,7 @@ get_planting <- function(field_id = ""
                        ,tokenToUse)
     
     doWeatherGet <- temp[[1]]
-
+    
     #if the token was updated, this will cause it to be used through function
     tokenToUse <- temp[[3]]
     
@@ -287,18 +299,17 @@ get_planting <- function(field_id = ""
       }
     }
   }
-
+  
   ## Create & fill data frame
   if(is.null(a$statusCode)) {
     
- #   if (c('plantings') %in% names(a)) {
     if (length(a$plantings) > 0 | length(a$id) > 0) {
       
       if((field_id != '' && planting_id == "" && current == FALSE) ||
          (field_id == '' && current == TRUE)) {
-           
+        
         data <- as.data.frame(do.call(rbind, lapply(a$plantings, rbind)))
-      
+        
         # case if field has no plantings
         if (nrow(data) == 0) {
           stop(paste("field_id:", field_id, "has no planting.", a$detailedMessage))
@@ -310,54 +321,61 @@ get_planting <- function(field_id = ""
         data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
         data$yield <- NULL
         data$projections <- NULL
-  
+        
         colnames(data) <- c("planting_id", "crop", "field_id", "plantingDate"
                             ,"actualHarvestDate", "yieldAmount", "yieldUnits"
                             ,"projectedHarvestDate", "projectedYieldAmount"
                             ,"projectedYieldUnits")
         
         data <- as.matrix(data)
-        data[sapply(data, is.null)] <- NA
+        data[sapply(data, is.null)] <- as.character(NA)
         data <- as.data.frame(data)
         for(i in 1:ncol(data)) {
           data[,i] <- do.call(rbind, lapply(data[,i], rbind))[,1]
         }
-  
+        data$yieldAmount <- as.numeric(data$yieldAmount)
+        data$projectedYieldAmount <- as.numeric(data$projectedYieldAmount)
+        
       } else {
         a[sapply(a, is.null)] <- NA
         a$yield[sapply(a$yield, is.null)] <- NA
         a$projections$yield[sapply(a$projections$yield, is.null)] <- NA
         a$projections$harvestDate[is.null(a$projections$harvestDate)] <- NA
-  
-        data <- data.frame(planting_id = unlist(a$id)
-                           ,crop = unlist(a$crop)
-                           ,field_id = unlist(a$field)
-                           ,plantingDate = unlist(a$plantingDate)
-                           ,actualHarvestDate = unlist(a$harvestDate)
-                           ,yieldAmount = unlist(a$yield$amount)
-                           ,yieldUnits = unlist(a$yield$units)
-                           ,projectedHarvestDate = unlist(a$projections$harvestDate)
-                           ,projectedYieldAmount = unlist(a$projections$yield$amount)
-                           ,projectedYieldUnits = unlist(a$projections$yield$units))
+        
+        data <- data.frame(planting_id = as.integer(unlist(a$id))
+                           ,crop = as.character(unlist(a$crop))
+                           ,field_id = as.character(unlist(a$field))
+                           ,plantingDate = as.character(unlist(a$plantingDate))
+                           ,actualHarvestDate = as.character(unlist(a$harvestDate))
+                           ,yieldAmount = as.numeric(unlist(a$yield$amount))
+                           ,yieldUnits = as.character(unlist(a$yield$units))
+                           ,projectedHarvestDate = as.character(unlist(a$projections$harvestDate))
+                           ,projectedYieldAmount = as.numeric(unlist(a$projections$yield$amount))
+                           ,projectedYieldUnits = as.character(unlist(a$projections$yield$units))
+                           ,stringsAsFactors = FALSE)
       }
     } else {
       #Return empty data.frame if no fields have been made
-      data <-  data.frame(matrix(ncol = 10, nrow = 0))
-      colnames(data) <- c("planting_id", "crop", "field_id", "plantingDate"
-                          ,"actualHarvestDate", "yieldAmount", "yieldUnits"
-                          ,"projectedHarvestDate", "projectedYieldAmount"
-                          ,"projectedYieldUnits")
-      
-      return(as.data.frame(data))
+      data <- data.frame(planting_id = as.integer(NA)
+                         ,crop = as.character(NA)
+                         ,field_id = as.character(NA)
+                         ,plantingDate = as.character(NA)
+                         ,actualHarvestDate = as.character(NA)
+                         ,yieldAmount = as.numeric(NA)
+                         ,yieldUnits = as.character(NA)
+                         ,projectedHarvestDate = as.character(NA)
+                         ,projectedYieldAmount = as.numeric(NA)
+                         ,projectedYieldUnits = as.character(NA)
+                         ,stringsAsFactors = FALSE)
     }
   }
-
+  
   if(!is.null(a$statusCode)) {
     stop(a$detailedMessage)
   } else {
     return(as.data.frame(data))
   }
-
+  
 }
 
 #' @title Get Job
@@ -392,27 +410,27 @@ get_job <- function(job_id
                     ,keyToUse = awhereEnv75247$uid
                     ,secretToUse = awhereEnv75247$secret
                     ,tokenToUse = awhereEnv75247$token) {
-
+  
   checkCredentials(keyToUse,secretToUse,tokenToUse)
-
+  
   ## Create Request
-  url <- "https://api.awhere.com/v2/jobs/"
-
+  url <- paste0(awhereEnv75247$apiAddress, "/jobs/")
+  
   if(is.na(job_id)) {
     stop("must specify job_id")
   }
-
+  
   url <- paste0(url, job_id)
-
+  
   doWeatherGet <- TRUE
   retries <- 0
   while (doWeatherGet == TRUE) {
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization = paste0("Bearer ", tokenToUse)))
-
+    
     a <- suppressMessages(httr::content(request))
-
+    
     if (any(grepl('API Access Expired',a))) {
       if(exists("awhereEnv75247")) {
         if(tokenToUse == awhereEnv75247$token) {
