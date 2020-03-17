@@ -6,7 +6,8 @@
 \usage{
 forecasts_fields(field_id, day_start = as.character(Sys.Date()),
   day_end = "", block_size = 1, useLocalTime = TRUE,
-  keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
+  returnOnlySoilVars = FALSE, keyToUse = awhereEnv75247$uid,
+  secretToUse = awhereEnv75247$secret,
   tokenToUse = awhereEnv75247$token)
 }
 \arguments{

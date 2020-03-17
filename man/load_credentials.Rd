@@ -4,7 +4,7 @@
 \alias{load_credentials}
 \title{Load Credentials.}
 \usage{
-load_credentials(path_to_credentials)
+load_credentials(path_to_credentials, apiAddress = "api.awhere.com")
 }
 \arguments{
 \item{-}{path_to_credentials: absolute or relative path to the text file}

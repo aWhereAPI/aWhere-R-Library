@@ -95,8 +95,8 @@ get_fields <- function(field_id = ""
     if (requestAllFields == TRUE & doWeatherGet == FALSE & field_id == ''){
       #If the API indicates more fields to get, use URL it gives to get them
       if (c('next') %in% names(a[['_links']])) {
-        
-        url <- paste0("https://api.awhere.com",a[['_links']][['next']][['href']])
+
+        url <- paste0(gsub(pattern = '/v2',replacement = '',x = awhereEnv75247$apiAddress),a[['_links']][['next']][['href']])
         doWeatherGet <- TRUE
        
         if (exists('tempReturn') == TRUE) {
@@ -270,7 +270,7 @@ get_planting <- function(field_id = ""
       #If the API indicates more fields to get, use URL it gives to get them
       if (c('next') %in% names(a[['_links']])) {
         
-        url <- paste0("https://api.awhere.com",a[['_links']][['next']][['href']])
+        url <- paste0(gsub(pattern = '/v2',replacement = '',x = awhereEnv75247$apiAddress),a[['_links']][['next']][['href']])
         doWeatherGet <- TRUE
         
         if (exists('tempReturn') == TRUE) {

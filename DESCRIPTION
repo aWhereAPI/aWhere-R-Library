@@ -1,6 +1,6 @@
 Package: aWhereAPI
 Title: API calls for aWhere API
-Version: 0.6.02
+Version: 0.6.12
 Authors@R: 
     c(person("Technical", "Support", ,"technicalsupport@awhere.com", role = c("aut","cre","ctb")))
 Description: 
@@ -25,7 +25,9 @@ Imports:
     raster,
     rgeos,
     sp,
-    doParallel
+    doParallel,
+    magrittr,
+    tidyr (>= 1.0.0)
 Suggests: 
     testthat, 
     knitr, 

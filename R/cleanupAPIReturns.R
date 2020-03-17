@@ -5,8 +5,12 @@
 #' \code{removeUnnecessaryColumns} Removes unnecessary columns from API Return
 #'
 #' @param - data: data.table to have columns removed from
+#' 
+#' @import tidyr
+#' @import data.table
+#' @import magrittr
 
-removeUnnecessaryColumns <- function(data) {
+removeUnnecessaryColumns <- function(data, returnOnlySoilVars = FALSE) {
 
   varNames <- colnames(data)
 
@@ -16,7 +20,26 @@ removeUnnecessaryColumns <- function(data) {
   suppressWarnings(data[,grep('latitude',varNames) := NULL])
   suppressWarnings(data[,grep('longitude',varNames) := NULL])
   suppressWarnings(data[,grep('fieldId',varNames) := NULL])
-  suppressWarnings(data[,c('soilTemperatures','soilMoisture') := NULL])
+  
+  if (returnOnlySoilVars == FALSE) {
+    suppressWarnings(data[,c('soilTemperatures','soilMoisture') := NULL])
+  } else{
+    columnsToRemove <- colnames(data)
+    columnsToRemove <- 
+      columnsToRemove[!(columnsToRemove %in% c('startTime'
+                                             ,'endTime'
+                                             ,'soilTemperatures'
+                                             ,'soilMoisture'))]
+    
+    data[,(columnsToRemove) := NULL]
+    
+    data <- 
+      tidyr::unnest(data,col = c('soilTemperatures','soilMoisture'),names_sep = '_') %>%
+      as.data.table(.)
+    
+    data[,c('soilMoisture_depth','soilTemperatures_units') := NULL]
+    setnames(data,'soilTemperatures_depth','soilDepth')
+  }
 
   return(data)
 }

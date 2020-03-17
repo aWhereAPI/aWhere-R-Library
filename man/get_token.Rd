@@ -4,7 +4,8 @@
 \alias{get_token}
 \title{Get Access Token}
 \usage{
-get_token(uid, secret, use_environment = TRUE)
+get_token(uid, secret, use_environment = TRUE,
+  apiAddress = "api.awhere.com")
 }
 \arguments{
 \item{-}{uid: Consumer key associated with the user's aWhere API account}

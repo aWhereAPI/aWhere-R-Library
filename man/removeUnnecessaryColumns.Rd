@@ -4,7 +4,7 @@
 \alias{removeUnnecessaryColumns}
 \title{Removes unnecessary columns from API Return}
 \usage{
-removeUnnecessaryColumns(data)
+removeUnnecessaryColumns(data, returnOnlySoilVars = FALSE)
 }
 \arguments{
 \item{-}{data: data.table to have columns removed from}
