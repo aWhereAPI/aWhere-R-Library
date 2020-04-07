@@ -1,6 +1,6 @@
 Package: aWhereAPI
 Title: API calls for aWhere API
-Version: 0.6.15
+Version: 0.6.16
 Authors@R: 
     c(person("Technical", "Support", ,"technicalsupport@awhere.com", role = c("aut","cre","ctb")))
 Description: 

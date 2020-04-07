@@ -333,15 +333,21 @@ get_planting <- function(field_id = ""
                           ,"projectedHarvestDate", "projectedYieldAmount"
                           ,"projectedYieldUnits")
       
-      data <- as.matrix(data)
-      data[sapply(data, is.null)] <- as.character(NA)
-      data <- as.data.frame(data)
-      
       #Replace NULL with NA
       data[data == "NULL"] <- NA
       
+      #Columns are currently of type list, need to convert.  
+      #Doing explicitly for ease of following code logic
+      data$planting_id <- as.integer(data$planting_id)
+      data$crop <- as.character(data$crop)
+      data$field_id <- as.character(data$field_id)
+      data$plantingDate <- as.character(data$plantingDate)
+      data$actualHarvestDate <- as.character(data$actualHarvestDate)
       data$yieldAmount <- as.numeric(data$yieldAmount)
+      data$yieldUnits <- as.character(data$yieldUnits)
+      data$projectedHarvestDate <- as.character(data$projectedHarvestDate)
       data$projectedYieldAmount <- as.numeric(data$projectedYieldAmount)
+      data$projectedYieldUnits <- as.character(data$projectedYieldUnits)
       
     } else {
       a[sapply(a, is.null)] <- NA
