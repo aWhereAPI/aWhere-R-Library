@@ -256,6 +256,8 @@ get_planting <- function(field_id = ""
     }
   }
   
+  url <- paste0(url,'&sort=id')
+  
   doWeatherGet <- TRUE
   while (doWeatherGet == TRUE) {
     request <- httr::GET(url,
