@@ -311,14 +311,23 @@ get_planting <- function(field_id = ""
       if (nrow(data) == 0) {
         stop(paste("field_id:", field_id, "has no planting.", a$detailedMessage))
       }
-      data <- data[, c(1:7)]
+      data <- data[, c('id','crop','field','plantingDate','harvestDate','yield','projections')]
+      
+      #expand the nested column
       data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
+      #remove the original columns
       data$yield <- NULL
+      
+      #expand the nested column
       data <- cbind(data, do.call(rbind, lapply(data$projections, rbind)))
-      data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
-      data$yield <- NULL
+      #remove the original column
       data$projections <- NULL
       
+      #expand the new nested yield column
+      data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
+      #remove the original columns
+      data$yield <- NULL
+
       colnames(data) <- c("planting_id", "crop", "field_id", "plantingDate"
                           ,"actualHarvestDate", "yieldAmount", "yieldUnits"
                           ,"projectedHarvestDate", "projectedYieldAmount"
@@ -327,9 +336,10 @@ get_planting <- function(field_id = ""
       data <- as.matrix(data)
       data[sapply(data, is.null)] <- as.character(NA)
       data <- as.data.frame(data)
-      for(i in 1:ncol(data)) {
-        data[,i] <- do.call(rbind, lapply(data[,i], rbind))[,1]
-      }
+      
+      #Replace NULL with NA
+      data[data == "NULL"] <- NA
+      
       data$yieldAmount <- as.numeric(data$yieldAmount)
       data$projectedYieldAmount <- as.numeric(data$projectedYieldAmount)
       
