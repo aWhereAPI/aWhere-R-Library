@@ -41,7 +41,7 @@
 
 get_fields <- function(field_id = ""
                        ,offset = ""
-                       ,limit = 50
+                       ,limit = 10
                        ,requestAllFields = TRUE
                        ,keyToUse = awhereEnv75247$uid
                        ,secretToUse = awhereEnv75247$secret
@@ -216,7 +216,7 @@ get_planting <- function(field_id = ""
                          ,planting_id = ""
                          ,current = FALSE
                          ,offset = ""
-                         ,limit = 50
+                         ,limit = 10
                          ,requestAllPlantings = TRUE
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
