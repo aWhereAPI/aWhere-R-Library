@@ -41,7 +41,7 @@
 
 get_fields <- function(field_id = ""
                        ,offset = ""
-                       ,limit = 50
+                       ,limit = 10
                        ,requestAllFields = TRUE
                        ,keyToUse = awhereEnv75247$uid
                        ,secretToUse = awhereEnv75247$secret
@@ -145,7 +145,7 @@ get_fields <- function(field_id = ""
                            ,fieldId = as.character(NA)
                            ,Latitude = as.numeric(NA)
                            ,Longitude = as.numeric(NA)
-                           ,stringsAsFactors = FALSE)
+                           ,stringsAsFactors = FALSE)[0,]
       }
     } else {
       a[sapply(a, is.null)] <- NA
@@ -216,7 +216,7 @@ get_planting <- function(field_id = ""
                          ,planting_id = ""
                          ,current = FALSE
                          ,offset = ""
-                         ,limit = 50
+                         ,limit = 10
                          ,requestAllPlantings = TRUE
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
@@ -255,6 +255,8 @@ get_planting <- function(field_id = ""
       url <- paste0(url, "&limit=", limit)
     }
   }
+  
+  url <- paste0(url,'&sort=id')
   
   doWeatherGet <- TRUE
   while (doWeatherGet == TRUE) {
@@ -305,69 +307,78 @@ get_planting <- function(field_id = ""
     
     if (length(a$plantings) > 0 | length(a$id) > 0) {
       
-      if((field_id != '' && planting_id == "" && current == FALSE) ||
-         (field_id == '' && current == TRUE)) {
-        
-        data <- as.data.frame(do.call(rbind, lapply(a$plantings, rbind)))
-        
-        # case if field has no plantings
-        if (nrow(data) == 0) {
-          stop(paste("field_id:", field_id, "has no planting.", a$detailedMessage))
-        }
-        data <- data[, c(1:7)]
-        data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
-        data$yield <- NULL
-        data <- cbind(data, do.call(rbind, lapply(data$projections, rbind)))
-        data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
-        data$yield <- NULL
-        data$projections <- NULL
-        
-        colnames(data) <- c("planting_id", "crop", "field_id", "plantingDate"
-                            ,"actualHarvestDate", "yieldAmount", "yieldUnits"
-                            ,"projectedHarvestDate", "projectedYieldAmount"
-                            ,"projectedYieldUnits")
-        
-        data <- as.matrix(data)
-        data[sapply(data, is.null)] <- as.character(NA)
-        data <- as.data.frame(data)
-        for(i in 1:ncol(data)) {
-          data[,i] <- do.call(rbind, lapply(data[,i], rbind))[,1]
-        }
-        data$yieldAmount <- as.numeric(data$yieldAmount)
-        data$projectedYieldAmount <- as.numeric(data$projectedYieldAmount)
-        
-      } else {
-        a[sapply(a, is.null)] <- NA
-        a$yield[sapply(a$yield, is.null)] <- NA
-        a$projections$yield[sapply(a$projections$yield, is.null)] <- NA
-        a$projections$harvestDate[is.null(a$projections$harvestDate)] <- NA
-        
-        data <- data.frame(planting_id = as.integer(unlist(a$id))
-                           ,crop = as.character(unlist(a$crop))
-                           ,field_id = as.character(unlist(a$field))
-                           ,plantingDate = as.character(unlist(a$plantingDate))
-                           ,actualHarvestDate = as.character(unlist(a$harvestDate))
-                           ,yieldAmount = as.numeric(unlist(a$yield$amount))
-                           ,yieldUnits = as.character(unlist(a$yield$units))
-                           ,projectedHarvestDate = as.character(unlist(a$projections$harvestDate))
-                           ,projectedYieldAmount = as.numeric(unlist(a$projections$yield$amount))
-                           ,projectedYieldUnits = as.character(unlist(a$projections$yield$units))
-                           ,stringsAsFactors = FALSE)
+      data <- as.data.frame(do.call(rbind, lapply(a$plantings, rbind)))
+      
+      # case if field has no plantings
+      if (nrow(data) == 0) {
+        stop(paste("field_id:", field_id, "has no planting.", a$detailedMessage))
       }
+      data <- data[, c('id','crop','field','plantingDate','harvestDate','yield','projections')]
+      
+      #expand the nested column
+      data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
+      #remove the original columns
+      data$yield <- NULL
+      
+      #expand the nested column
+      data <- cbind(data, do.call(rbind, lapply(data$projections, rbind)))
+      #remove the original column
+      data$projections <- NULL
+      
+      #expand the new nested yield column
+      data <- cbind(data, do.call(rbind, lapply(data$yield, rbind)))
+      #remove the original columns
+      data$yield <- NULL
+
+      colnames(data) <- c("planting_id", "crop", "field_id", "plantingDate"
+                          ,"actualHarvestDate", "yieldAmount", "yieldUnits"
+                          ,"projectedHarvestDate", "projectedYieldAmount"
+                          ,"projectedYieldUnits")
+      
+      #Replace NULL with NA
+      data[data == "NULL"] <- NA
+      
+      #Columns are currently of type list, need to convert.  
+      #Doing explicitly for ease of following code logic
+      data$planting_id <- as.integer(data$planting_id)
+      data$crop <- as.character(data$crop)
+      data$field_id <- as.character(data$field_id)
+      data$plantingDate <- as.character(data$plantingDate)
+      data$actualHarvestDate <- as.character(data$actualHarvestDate)
+      data$yieldAmount <- as.numeric(data$yieldAmount)
+      data$yieldUnits <- as.character(data$yieldUnits)
+      data$projectedHarvestDate <- as.character(data$projectedHarvestDate)
+      data$projectedYieldAmount <- as.numeric(data$projectedYieldAmount)
+      data$projectedYieldUnits <- as.character(data$projectedYieldUnits)
+      
     } else {
-      #Return empty data.frame if no fields have been made
-      data <- data.frame(planting_id = as.integer(NA)
-                         ,crop = as.character(NA)
-                         ,field_id = as.character(NA)
-                         ,plantingDate = as.character(NA)
-                         ,actualHarvestDate = as.character(NA)
-                         ,yieldAmount = as.numeric(NA)
-                         ,yieldUnits = as.character(NA)
-                         ,projectedHarvestDate = as.character(NA)
-                         ,projectedYieldAmount = as.numeric(NA)
-                         ,projectedYieldUnits = as.character(NA)
+      a[sapply(a, is.null)] <- NA
+      
+      data <- data.frame(planting_id = as.integer(unlist(a$id))
+                         ,crop = as.character(unlist(a$crop))
+                         ,field_id = as.character(unlist(a$field))
+                         ,plantingDate = as.character(unlist(a$plantingDate))
+                         ,actualHarvestDate = as.character(unlist(a$harvestDate))
+                         ,yieldAmount = as.numeric(unlist(a$yield$amount))
+                         ,yieldUnits = as.character(unlist(a$yield$units))
+                         ,projectedHarvestDate = as.character(unlist(a$projections$harvestDate))
+                         ,projectedYieldAmount = as.numeric(unlist(a$projections$yield$amount))
+                         ,projectedYieldUnits = as.character(unlist(a$projections$yield$units))
                          ,stringsAsFactors = FALSE)
     }
+  } else {
+    #Return empty data.frame if no fields have been made
+    data <- data.frame(planting_id = as.integer(NA)
+                       ,crop = as.character(NA)
+                       ,field_id = as.character(NA)
+                       ,plantingDate = as.character(NA)
+                       ,actualHarvestDate = as.character(NA)
+                       ,yieldAmount = as.numeric(NA)
+                       ,yieldUnits = as.character(NA)
+                       ,projectedHarvestDate = as.character(NA)
+                       ,projectedYieldAmount = as.numeric(NA)
+                       ,projectedYieldUnits = as.character(NA)
+                       ,stringsAsFactors = FALSE)[0,]
   }
   
   if(!is.null(a$statusCode)) {
@@ -375,7 +386,6 @@ get_planting <- function(field_id = ""
   } else {
     return(as.data.frame(data))
   }
-  
 }
 
 #' @title Get Job
