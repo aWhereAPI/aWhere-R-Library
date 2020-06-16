@@ -5,7 +5,7 @@
 \title{Get Planting}
 \usage{
 get_planting(field_id = "", planting_id = "", current = FALSE,
-  offset = "", limit = 50, requestAllPlantings = TRUE,
+  offset = "", limit = 10, requestAllPlantings = TRUE,
   keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
   tokenToUse = awhereEnv75247$token)
 }

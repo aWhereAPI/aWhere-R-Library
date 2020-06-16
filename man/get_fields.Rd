@@ -4,7 +4,7 @@
 \alias{get_fields}
 \title{Get Fields}
 \usage{
-get_fields(field_id = "", offset = "", limit = 50,
+get_fields(field_id = "", offset = "", limit = 10,
   requestAllFields = TRUE, keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
   tokenToUse = awhereEnv75247$token)
