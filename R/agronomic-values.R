@@ -85,7 +85,7 @@ agronomic_values_fields <- function(field_id
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
-  #checkValidStartEndDatesAgronomics(day_start,day_end)
+  checkValidStartEndDatesAgronomics(day_start,day_end)
   checkGDDParams(gdd_method,gdd_base_temp,gdd_min_boundary,gdd_max_boundary)
   checkAccumulationStartDate(accumulation_start_date, day_start)
   checkPropertiesEndpoint('agronomics',propertiesToInclude)
@@ -343,7 +343,7 @@ agronomic_values_latlng <- function(latitude
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidLatLong(latitude,longitude)
-  #checkValidStartEndDatesAgronomics(day_start,day_end)
+  checkValidStartEndDatesAgronomics(day_start,day_end)
   checkGDDParams(gdd_method,gdd_base_temp,gdd_min_boundary,gdd_max_boundary)
   checkAccumulationStartDate(accumulation_start_date, day_start)
   checkPropertiesEndpoint('agronomics',propertiesToInclude)
@@ -622,7 +622,7 @@ agronomic_values_area <- function(polygon
                                   ,tokenToUse = awhereEnv75247$token) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
-  #checkValidStartEndDatesAgronomics(day_start,day_end)
+  checkValidStartEndDatesAgronomics(day_start,day_end)
   checkGDDParams(gdd_method,gdd_base_temp,gdd_min_boundary,gdd_max_boundary)
   checkAccumulationStartDate(accumulation_start_date)
   checkPropertiesEndpoint('agronomics',propertiesToInclude)

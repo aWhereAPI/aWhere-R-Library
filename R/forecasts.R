@@ -69,7 +69,7 @@ forecasts_fields <- function(field_id
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
-  #checkValidStartEndDatesForecast(day_start,day_end)
+  checkValidStartEndDatesForecast(day_start,day_end)
   checkForecastParams(block_size)
 
   fieldInfo <- get_fields(field_id)
@@ -246,7 +246,7 @@ forecasts_latlng <- function(latitude
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidLatLong(latitude,longitude)
-#  checkValidStartEndDatesForecast(day_start,day_end)
+  checkValidStartEndDatesForecast(day_start,day_end)
   checkForecastParams(block_size)
 
   #Checks if dates need to be adjusted.  This only applies when someone is request
@@ -425,7 +425,7 @@ forecasts_area <- function(polygon
                            ,tokenToUse = awhereEnv75247$token) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
- # checkValidStartEndDatesForecast(day_start,day_end)
+  checkValidStartEndDatesForecast(day_start,day_end)
   checkForecastParams(block_size)
   
   if (!(all(class(polygon) %in% c('data.frame','data.table')))) {
