@@ -57,7 +57,7 @@ daily_observed_fields <- function(field_id
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
- # checkValidStartEndDates(day_start,day_end)
+  checkValidStartEndDates(day_start,day_end)
   checkPropertiesEndpoint('weather',propertiesToInclude)
   
   
@@ -257,7 +257,7 @@ daily_observed_latlng <- function(latitude
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidLatLong(latitude,longitude)
-  #checkValidStartEndDates(day_start,day_end)
+  checkValidStartEndDates(day_start,day_end)
   checkPropertiesEndpoint('weather',propertiesToInclude)
   
   # Create Logic of API Request
@@ -476,7 +476,7 @@ daily_observed_area <- function(polygon
                                 ,tokenToUse = awhereEnv75247$token) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
- # checkValidStartEndDates(day_start,day_end)
+  checkValidStartEndDates(day_start,day_end)
   
   if (!(all(class(polygon) %in% c('data.frame','data.table')))) {
     

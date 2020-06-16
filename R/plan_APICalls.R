@@ -13,7 +13,7 @@
 plan_APICalls <- function(day_start
                           ,day_end
                           ,numObsReturned
-                          ,includesLeapYear) {
+                          ,includesLeapYear = TRUE) {
 
   
   #We need to make sure Feb 29th is included if appropriate

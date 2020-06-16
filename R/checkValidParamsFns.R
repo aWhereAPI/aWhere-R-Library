@@ -91,19 +91,19 @@ checkValidStartEndDates <- function(day_start,day_end) {
   if ((day_start != '') == TRUE) {
     if (suppressWarnings(is.na(lubridate::ymd(day_start))) == TRUE) {
       stop('The Start Date is Not Properly Formatted.  Please change to proper format. \n')
-    } else if (lubridate::ymd(day_start) > lubridate::ymd(Sys.Date()) - lubridate::days(1)) {
-      stop('By default, this function can only be used to access data up until yesterday. \n
-              Use the GetForecast function to request data from today onward.\n')
-    }
+    } #else if (lubridate::ymd(day_start) > lubridate::ymd(Sys.Date()) - lubridate::days(1)) {
+      #stop('By default, this function can only be used to access data up until yesterday. \n
+      #        Use the GetForecast function to request data from today onward.\n')
+    #}
   }
 
   if ((day_end != '') == TRUE) {
     if (suppressWarnings(is.na(lubridate::ymd(day_end))) == TRUE) {
       stop('The End Date is Not Properly Formatted.  Please change to proper format. \n')
-    } else if (lubridate::ymd(day_end) > lubridate::ymd(Sys.Date()) - lubridate::days(1)) {
-      stop('By default, this function can only be used to access data up until yesterday. \n
-              Use the GetForecast function to request data from today onward.\n')
-    }
+    } #else if (lubridate::ymd(day_end) > lubridate::ymd(Sys.Date()) - lubridate::days(1)) {
+      #stop('By default, this function can only be used to access data up until yesterday. \n
+      #        Use the GetForecast function to request data from today onward.\n')
+    #}
   }
 }
 
@@ -124,9 +124,9 @@ checkValidStartEndDatesAgronomics <- function(day_start,day_end) {
   if (day_end != '') {
     if (lubridate::ymd(day_start) > lubridate::ymd(day_end)) {
       stop('The endDate must come after the startDate. Please correct\n')
-    } else if ((lubridate::ymd(day_end) - lubridate::ymd(Sys.Date())) > 15) {
-      stop('Forecast data only availabe 15 days into future\n')
-    }
+    } #else if ((lubridate::ymd(day_end) - lubridate::ymd(Sys.Date())) > 15) {
+      #stop('Forecast data only availabe 15 days into future\n')
+    #}
   }
 
   if ((day_start != '') == TRUE) {
@@ -157,8 +157,6 @@ checkForecastParams <- function(block_size) {
   }
 }
 
-
-
 #' @title Check Valid Start End Dates for Forecast
 #'
 #' @description
@@ -176,10 +174,10 @@ checkValidStartEndDatesForecast <- function(day_start,day_end) {
   if ((day_start != '') == TRUE) {
     if (suppressWarnings(is.na(lubridate::ymd(day_start))) == TRUE) {
       stop('The Start Date is Not Properly Formatted.  Please change to proper format. \n')
-    } else if (lubridate::ymd(day_start) < lubridate::ymd(Sys.Date())) {
-      stop('By default, this function can only be used to access data from today onward. \n
-            Use the GetWeatherObservationsHist function to request data from yesterday backwards.\n')
-    }
+    } #else if (lubridate::ymd(day_start) < lubridate::ymd(Sys.Date())) {
+      #stop('By default, this function can only be used to access data from today onward. \n
+      #      Use the GetWeatherObservationsHist function to request data from yesterday backwards.\n')
+    #}
   }
 
   if ((day_end != '') == TRUE) {
@@ -187,14 +185,13 @@ checkValidStartEndDatesForecast <- function(day_start,day_end) {
       stop('The endDate must come after the startDate. Please correct\n')
     } else if (suppressWarnings(is.na(lubridate::ymd(day_end))) == TRUE) {
       stop('The End Date is Not Properly Formatted.  Please change to proper format. \n')
-    } else if (lubridate::ymd(day_end) < lubridate::ymd(Sys.Date())) {
-      stop('This function can only access data from today onward.\n')
-    } else if ((lubridate::ymd(day_end) - lubridate::ymd(day_start)) > 14) {
-      stop('Forecast data only availabe 15 days into future\n')
-    }
+    } #else if (lubridate::ymd(day_end) < lubridate::ymd(Sys.Date())) {
+      #stop('This function can only access data from today onward.\n')
+    #} else if ((lubridate::ymd(day_end) - lubridate::ymd(day_start)) > 14) {
+      #stop('Forecast data only availabe 15 days into future\n')
+    #}
   }
 }
-
 
 #' @title Check Valid GDD Params
 #'
