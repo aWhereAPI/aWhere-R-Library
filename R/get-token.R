@@ -47,6 +47,9 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
     
     parsedResponse <- jsonlite::fromJSON(a, simplifyDataFrame = FALSE)
     
+    token <- parsedResponse$access_token
+    apiAddress <- paste0("https://", apiAddress, "/v2")
+    
     # Keeping environment approach for backward compatibility,
     # but adding an optional argument to skip it.
     if (use_environment) {
@@ -79,8 +82,8 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
       
       awhereEnv75247$uid    <- uid
       awhereEnv75247$secret <- secret
-      awhereEnv75247$token  <- token <- parsedResponse$access_token
-      awhereEnv75247$apiAddress <- paste0("https://", apiAddress, "/v2")
+      awhereEnv75247$token  <- token
+      awhereEnv75247$apiAddress <- apiAddress
       
       lockBinding('uid',    awhereEnv75247)
       lockBinding('secret', awhereEnv75247)
