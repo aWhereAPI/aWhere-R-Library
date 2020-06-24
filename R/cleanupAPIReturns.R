@@ -72,30 +72,29 @@ recalculateAccumulations <- function(dataList) {
   accumulatedColumns <- setdiff(accumulatedColumns
                                 ,columnsToRemove)
   
-  for (x in 1:length(dataList)) {
-    #Remove those unneccesary columns
-    suppressWarnings(dataList[[x]][,(columnsToRemove) := NULL])
-    
-    #if any accumulated columns should be present that aren't add them
-    suppressWarnings(dataList[[x]][,(setdiff(accumulatedColumns
-                                     ,colnames(dataList[[x]]))) := NA,])
-    
-  }
-  
-  
-  for (x in 1:length(dataList)) {
-    if (x > 1) {
-      for (y in 1:length(accumulatedColumns)) {
-        eval(parse(text = paste0('dataList[[x]][,',accumulatedColumns[y],' := ',accumulatedColumns[y],' + lastValue.accumulatedColumns$',accumulatedColumns[y],']')))
-        #eval(parse(text = paste0('dataList[[x]][,',accumulatedColumns[y],' := sum(',accumulatedColumns[y],',lastValue.accumulatedColumns$',accumulatedColumns[y],')]')))
-      }  
+  if (length(accumulatedColumns) > 0) {
+    for (x in 1:length(dataList)) {
+      #Remove those unneccesary columns
+      suppressWarnings(dataList[[x]][,(columnsToRemove) := NULL])
+      
+      #if any accumulated columns should be present that aren't add them
+      suppressWarnings(dataList[[x]][,(setdiff(accumulatedColumns
+                                       ,colnames(dataList[[x]]))) := NA,])
     }
-    
-    lastValue.accumulatedColumns <- dataList[[x]][.N,accumulatedColumns,with = FALSE]
+  
+    for (x in 1:length(dataList)) {
+      if (x > 1) {
+        for (y in 1:length(accumulatedColumns)) {
+          eval(parse(text = paste0('dataList[[x]][,',accumulatedColumns[y],' := ',accumulatedColumns[y],' + lastValue.accumulatedColumns$',accumulatedColumns[y],']')))
+          #eval(parse(text = paste0('dataList[[x]][,',accumulatedColumns[y],' := sum(',accumulatedColumns[y],',lastValue.accumulatedColumns$',accumulatedColumns[y],')]')))
+        }  
+      }
+      
+      lastValue.accumulatedColumns <- dataList[[x]][.N,accumulatedColumns,with = FALSE]
     
     #keep NA's from propagating 
     #lastValue.accumulatedColumns[is.na(lastValue.accumulatedColumns)] <- 0
-    
+    }
   }
   
   return(dataList)
