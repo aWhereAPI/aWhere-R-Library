@@ -425,17 +425,17 @@ checkNormsYearsToRequest <- function(year_start,year_end,month_day_start,month_d
       stop('The year_end parameter must be between 1994 and the current year.  Please correct. \n')
     }
   }
-  if (year_start != '' & month_day_start != '') {
-    if (lubridate::ymd(paste0(year_start,'-',month_day_start)) > lubridate::ymd(Sys.Date())) {
-      stop('The combination of year_start and month_day_start implies data from the future must be retrieved.  Please correct. \n')
-    }
-  }
+  #if (year_start != '' & month_day_start != '') {
+  #  if (lubridate::ymd(paste0(year_start,'-',month_day_start)) > lubridate::ymd(Sys.Date())) {
+  #    stop('The combination of year_start and month_day_start implies data from the future must be retrieved.  Please correct. \n')
+  #  }
+  #}
 
-  if (year_end != '' & month_day_end != '') {
-    if (lubridate::ymd(paste0(year_end,'-',month_day_end)) > lubridate::ymd(Sys.Date())) {
-      stop('The combination of year_end and month_day_end implies data from the future must be retrieved.  Please correct. \n')
-    }
-  }
+  #if (year_end != '' & month_day_end != '') {
+  #  if (lubridate::ymd(paste0(year_end,'-',month_day_end)) > lubridate::ymd(Sys.Date())) {
+  #    stop('The combination of year_end and month_day_end implies data from the future must be retrieved.  Please correct. \n')
+  #  }
+  #}
 
   if ((((year_start != '') & (year_end == '')) | ((year_start == '') & (year_end != ''))) == TRUE) {
     stop('Both the starting and ending years myst be specified explicitly if using years. \n')
@@ -446,9 +446,9 @@ checkNormsYearsToRequest <- function(year_start,year_end,month_day_start,month_d
 
     if (length(exclude_years) != 0) {
       for (z in 1:length(exclude_years)) {
-        if (as.integer(exclude_years[z]) < 1994 | as.integer(exclude_years[z]) > year(Sys.Date())) {
+        if (as.integer(exclude_years[z]) < 2006 | as.integer(exclude_years[z]) > year(Sys.Date())) {
           stop('One of the years included in the exclude_years parameter is not in the \n
-                  proper range (1994-CurrentYear).  Please correct. \n')
+                  proper range (2006-CurrentYear).  Please correct. \n')
         }
         yearsToRequest <- yearsToRequest[yearsToRequest != as.integer(exclude_years[z])]
       }
