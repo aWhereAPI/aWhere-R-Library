@@ -4,19 +4,17 @@
 \alias{get_job}
 \title{Get Job}
 \usage{
-get_job(job_id, wait = TRUE, retry_secs = 60, num_retries = 60,
-  keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+get_job(
+  job_id,
+  wait = TRUE,
+  retry_secs = 60,
+  num_retries = 60,
+  keyToUse = awhereEnv75247$uid,
+  secretToUse = awhereEnv75247$secret,
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{job_id: a job ID assigned by an aWhere create job.}
-
-\item{-}{wait: wait for job to complete before returning}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
 \item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{

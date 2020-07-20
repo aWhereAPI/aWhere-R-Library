@@ -4,30 +4,19 @@
 \alias{get_planting}
 \title{Get Planting}
 \usage{
-get_planting(field_id = "", planting_id = "", current = FALSE,
-  offset = "", limit = 10, requestAllPlantings = TRUE,
-  keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+get_planting(
+  field_id = "",
+  planting_id = "",
+  current = FALSE,
+  offset = "",
+  limit = 10,
+  requestAllPlantings = TRUE,
+  keyToUse = awhereEnv75247$uid,
+  secretToUse = awhereEnv75247$secret,
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{field_id: a field ID to look within (string - optional)}
-
-\item{-}{planting_id: a planting ID to look for (string - optional)}
-
-\item{-}{current: whether to just get current plantings(T) or include historical plantings(F).
-To get most recent planting record for a field, set current to TRUE and do not pass in a planting_id (boolean - optional)}
-
-\item{-}{offset: The number of objects to skip before returning objects. Used in conjunction with offset to paginate. (optional)}
-
-\item{-}{limit: The number of results to include on each of page of listed fields. Used in conjunction with offset to paginate. (optional)}
-
-\item{-}{requestAllPlantings: Causes function to execute logic to return all of a users plantins using the minimum number of API calls 
-based on the limit parameter and the value of current.  If used, offset must be set to default value (optional)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
 \item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{

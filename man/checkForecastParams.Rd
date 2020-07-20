@@ -7,8 +7,6 @@
 checkForecastParams(block_size)
 }
 \arguments{
-\item{-}{day_start: character string of start date in form: YYYY-MM-DD}
-
 \item{-}{block_size: Integer value that corresponds to the number of hours to include in each time block.}
 }
 \description{

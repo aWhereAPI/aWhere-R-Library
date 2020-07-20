@@ -7,10 +7,6 @@
 checkCredentials(keyToUse, secretToUse, tokenToUse)
 }
 \arguments{
-\item{-}{keyToUse: aWhere API key to use}
-
-\item{-}{secretToUse: aWhere API secret to use}
-
 \item{-}{tokenToUse: aWhere API token to use}
 }
 \description{

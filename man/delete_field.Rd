@@ -4,17 +4,15 @@
 \alias{delete_field}
 \title{Delete Field}
 \usage{
-delete_field(field_id, verbose = TRUE, keyToUse = awhereEnv75247$uid,
+delete_field(
+  field_id,
+  verbose = TRUE,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{field_id: an ID of your choosing (string)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
 \item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{

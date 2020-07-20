@@ -4,27 +4,18 @@
 \alias{create_job}
 \title{Create Job}
 \usage{
-create_job(api_requests, request_titles, job_title, job_type = "batch",
-  verbose = TRUE, keyToUse = awhereEnv75247$uid,
+create_job(
+  api_requests,
+  request_titles,
+  job_title,
+  job_type = "batch",
+  verbose = TRUE,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{api_requests: a list of "verb endpoint" strings. This is the actual API request you're asking the Batch Jobs system to call.
-It must be a valid aWhere endpoint and is expressed as the HTTP verb, a space, and the relative URI.
-For example: "GET /v2/weather/fields/1234/observations"}
-
-\item{-}{titles: a vector of names for each individual request in api, which can aid in identifying each set of results within a batch.
-This need not be unique between all the jobs.}
-
-\item{-}{job_title: A name for the job, which can aid you in identifying the result set.}
-
-\item{-}{job_type: The type of job. Currently this system only supports the type "batch."}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
 \item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{

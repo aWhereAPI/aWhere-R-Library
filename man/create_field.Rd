@@ -4,28 +4,20 @@
 \alias{create_field}
 \title{Create Field}
 \usage{
-create_field(field_id, latitude, longitude, farm_id, field_name = "",
-  acres = "", verbose = TRUE, keyToUse = awhereEnv75247$uid,
+create_field(
+  field_id,
+  latitude,
+  longitude,
+  farm_id,
+  field_name = "",
+  acres = "",
+  verbose = TRUE,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{field_id: an ID of your choosing (string)}
-
-\item{-}{latitude: the latitude of the field location in decimal format (double)}
-
-\item{-}{longitude: the longitude of the field location in decimal format (double)}
-
-\item{-}{farmid: an ID of your choosing for the farm to which this field belongs (string)}
-
-\item{-}{field_name: a name of the location (optional - string)}
-
-\item{-}{acres: the acres of the field (optional)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
 \item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{

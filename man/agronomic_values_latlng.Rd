@@ -4,55 +4,24 @@
 \alias{agronomic_values_latlng}
 \title{agronomic_values_latlng.}
 \usage{
-agronomic_values_latlng(latitude, longitude, day_start, day_end,
-  propertiesToInclude = "", accumulation_start_date = "",
-  gdd_method = "standard", gdd_base_temp = 10, gdd_min_boundary = 10,
-  gdd_max_boundary = 30, keyToUse = awhereEnv75247$uid,
+agronomic_values_latlng(
+  latitude,
+  longitude,
+  day_start,
+  day_end,
+  propertiesToInclude = "",
+  accumulation_start_date = "",
+  gdd_method = "standard",
+  gdd_base_temp = 10,
+  gdd_min_boundary = 10,
+  gdd_max_boundary = 30,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
+)
 }
 \arguments{
-\item{-}{latitude: the latitude of the requested location (double)}
-
-\item{-}{longitude: the longitude of the requested locations (double)}
-
-\item{-}{day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD}
-
-\item{-}{day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD}
-
-\item{-}{propertiesToInclude: character vector of properties to retrieve from API.
-Valid values are accumulations, gdd, pet, ppet, accumulatedGdd,
-accumulatedPrecipitation, accumulatedPet, accumulatedPpet (optional)}
-
-\item{-}{accumulation_start_date: Allows the user to start counting accumulations from
-before the specified start date (or before the
-planting date if using the most recent planting).
-Use this parameter to specify the date from which
-you wish to start counting, in the form: YYYY-MM-DD.
-The daily values object
-will still only return the days between the start
-and end date. This date must come before the start date. (optional)}
-
-\item{-}{gdd_method: There are variety of equations available for calculating growing degree-days.
-Valid entries are: 'standard', 'modifiedstandard', 'min-temp-cap', 'min-temp-constant'
-See the API documentation for a description of each method.  The standard
-method will be used if none is specified. (character - optional)}
-
-\item{-}{gdd_base_temp: The base temp to use for the any of the GDD equations. The default value of 10 will
-be used if none is specified. (optional)}
-
-\item{-}{gdd_min_boundary: The minimum boundary to use in the selected GDD equation.
-The behavior of this value is different depending on the equation you're using
-The default value of 10 will be used if none is specified. (optional)}
-
-\item{-}{gdd_max_boundary: The max boundary to use in the selected GDD equation. The
-behavior of this value is different depending on the equation you're using.
-The default value of 30 will be used if none is specified. (optional)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
 \item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{

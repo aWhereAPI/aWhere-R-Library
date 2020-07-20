@@ -7,14 +7,6 @@
 check_JSON(jsonObject, request, keyToUse, secretToUse, tokenToUse)
 }
 \arguments{
-\item{-}{JSON object returned from aWhere API}
-
-\item{-}{keyToUse: aWhere API key to use.}
-
-\item{-}{request: the returned request code}
-
-\item{-}{secretToUse: aWhere API secret to use.}
-
 \item{-}{tokenToUse: aWhere API token to use.}
 }
 \value{

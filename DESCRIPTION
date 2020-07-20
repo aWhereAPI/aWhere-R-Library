@@ -10,7 +10,7 @@ Description:
     and forecast data.
 License: MIT, Copyright 2016 aWhere
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Depends: 
     R (>= 3.3.2)
 Imports: 

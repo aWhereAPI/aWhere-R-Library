@@ -4,27 +4,17 @@
 \alias{get_fields}
 \title{Get Fields}
 \usage{
-get_fields(field_id = "", offset = "", limit = 10,
-  requestAllFields = TRUE, keyToUse = awhereEnv75247$uid,
+get_fields(
+  field_id = "",
+  offset = "",
+  limit = 10,
+  requestAllFields = TRUE,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{field_id: Either a field id to retrieve information for that specific field
-or an empty string to retrieve information on all fields associated
-with the user's aWhere API account (string - optional)}
-
-\item{-}{offset: The number of objects to skip before returning objects. Used in conjunction with offset to paginate. (optional)}
-
-\item{-}{limit: The number of results to include on each of page of listed fields. Used in conjunction with offset to paginate. (optional)}
-
-\item{-}{requestAllFields: Causes function to execute logic to return all of a users fields using the minimum number of API calls 
-based on the limit parameter.  If used, offset must be set to default value (optional)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
 \item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
