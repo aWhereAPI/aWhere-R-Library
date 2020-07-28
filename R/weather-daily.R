@@ -175,7 +175,7 @@ daily_observed_latlng <- function(latitude
         #The JSONLITE Serializer properly handles the JSON conversion
         x <- jsonlite::fromJSON(a,flatten = TRUE)
         
-        data <- data.table::as.data.table(x[[1]])
+        data <- data.table::as.data.table(t(unlist(x)))
         
         data <- removeUnnecessaryColumns(data)
         
