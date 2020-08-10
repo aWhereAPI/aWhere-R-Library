@@ -236,6 +236,7 @@ weather_norms_fields <- function(field_id
         #the logic of the API requests can be recalculated
 
         calculateAPIRequests <- TRUE
+        break
       }
     }
     continueRequestingData <- FALSE
@@ -501,6 +502,7 @@ weather_norms_latlng <- function(latitude
         #the logic of the API requests can be recalculated
 
         calculateAPIRequests <- TRUE
+        break
       }
     }
     continueRequestingData <- FALSE

@@ -53,10 +53,20 @@ checkDataReturn_norms <- function(dataset,monthday_start,monthday_end,year_start
     currentYear <- yearsToTest[x]
     currentMonthDay_start <- paste0(currentYear,'-',monthday_start)
     currentMonthDay_end   <- paste0(currentYear,'-',monthday_end)
-    currentNumDays <- round(difftime(currentMonthDay_end
+    
+    currentNumDays <- tryCatch({round(difftime(currentMonthDay_end
                                      ,currentMonthDay_start
                                      ,units = 'days') +1L)
+    
+    
+    }, error = function(e) {
+      return(e)
+    })
 
+    if (any(class(currentNumDays) == 'simpleError')) {
+      next
+    }
+    
     if (includeFeb29thData == FALSE) {
       if (is.leapyear(currentYear) == TRUE) {
         if (currentMonthDay_start <= paste0(currentYear,'-02-29')) {
