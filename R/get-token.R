@@ -187,8 +187,13 @@ check_JSON <- function(jsonObject
   }
   
   #Finally check to see if there was a different problem with the query and if so return the message
-  checkStatusCode(request)
+  statusCode <- checkStatusCode(request)
   
-  return(list(FALSE,NA,tokenToUse))
+  #We need to repeat the query if 429 code encountered, above fxn will have paused the thread
+  if (statusCode == 429) {
+    return(list = TRUE,NA,tokenToUse)
+  } else {
+    return(list(FALSE,NA,tokenToUse))
+  }
 }
 
