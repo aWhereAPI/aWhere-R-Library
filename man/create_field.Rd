@@ -55,5 +55,5 @@ create_field(field_id = "field_test", latitude = 39.971906, longitude = -105.088
 }
 }
 \references{
-http://developer.awhere.com/api/reference/fields/create-field
+https://docs.awhere.com/knowledge-base-docs/create-a-field-location/
 }

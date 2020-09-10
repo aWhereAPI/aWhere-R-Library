@@ -38,5 +38,5 @@ review of the available models, you can often save the model ID and simply refer
 }
 }
 \references{
-https://developer.awhere.com/api/reference/models/get-models
+https://docs.awhere.com/knowledge-base-docs/get-models/
 }

@@ -51,5 +51,5 @@ calculate information for you.
 }
 }
 \references{
-http://developer.awhere.com/api/reference/fields/get-fields
+https://docs.awhere.com/knowledge-base-docs/get-field-locations/
 }

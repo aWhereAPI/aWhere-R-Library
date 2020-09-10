@@ -109,5 +109,5 @@ Note about dates: The system does not adjust for any difference in dates between
                                 ,gdd_max_boundary = 30)}
 }
 \references{
-http://developer.awhere.com/api/reference/agronomics/norms
+https://docs.awhere.com/knowledge-base-docs/historical-agronomic-norms/
 }

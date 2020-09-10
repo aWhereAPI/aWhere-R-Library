@@ -74,5 +74,5 @@ and agronomics for that location in all the other APIs. The planting ID correspo
 }
 }
 \references{
-http://developer.awhere.com/api/reference/plantings/create
+https://docs.awhere.com/knowledge-base-docs/create-a-planting-in-a-field/
 }

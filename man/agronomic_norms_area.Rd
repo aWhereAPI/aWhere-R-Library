@@ -133,5 +133,5 @@ Note about dates: The system does not adjust for any difference in dates between
                               ,numcores = 2)}
 }
 \references{
-http://developer.awhere.com/api/reference/weather/norms
+https://docs.awhere.com/knowledge-base-docs/historical-agronomic-norms-by-geolocation/
 }

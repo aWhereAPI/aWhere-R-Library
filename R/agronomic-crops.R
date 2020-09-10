@@ -13,7 +13,7 @@
 #' what is planted there. When you do this, the system will use the default crop for that category.
 #' You'll know which crop record is the default by referencing the isDefaultForCrop property, described below.
 #'
-#' @references https://developer.awhere.com/api/reference/crops
+#' @references https://docs.awhere.com/knowledge-base-docs/crop-list-detail/
 #'
 #' @param - crop_id: Either a crop id to retrieve information for that specific crop
 #'                   or an empty string to retrieve information on all crops associated

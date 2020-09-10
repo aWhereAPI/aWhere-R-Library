@@ -85,5 +85,5 @@ Note about dates: The system does not adjust for any difference in dates between
                                  ,day_end = '2018-11-30')}
 }
 \references{
-http://developer.awhere.com/api/reference/agronomics/values
+https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations-by-geolocation/
 }

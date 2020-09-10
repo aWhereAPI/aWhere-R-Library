@@ -57,5 +57,5 @@ get_planting('field_test', current = T)
 get_planting(field_id='field_test', offset = '0', limit = '5')}
 }
 \references{
-http://developer.awhere.com/api/reference/plantings/get-plantings
+https://docs.awhere.com/knowledge-base-docs/get-plantings/
 }

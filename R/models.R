@@ -10,7 +10,7 @@
 #' Each models applies to particular crops from the Crops API, and after an initial
 #' review of the available models, you can often save the model ID and simply reference the details and results as needed.
 #'
-#' @references https://developer.awhere.com/api/reference/models/get-models
+#' @references https://docs.awhere.com/knowledge-base-docs/get-models/
 #'
 #' @param - model_id: Either a model id to retrieve information for that specific model
 #'                   or an empty string to retrieve information on all model associated
@@ -110,7 +110,7 @@ get_models <- function(model_id = ''
 #' This API will return those details; for the growth stage models currently available
 #' this API returns information about the crop stages that the model may return.
 #'
-#' @references https://developer.awhere.com/api/reference/models/details
+#' @references https://docs.awhere.com/knowledge-base-docs/get-model-details/
 #'
 #' @param - model_id: A model id to retrieve details for that specific model
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
@@ -201,7 +201,7 @@ get_model_details <- function(model_id
 #' information about a field and crop. When a Field is specified for this API, it will
 #' select the most recently created Planting record to retrieve the crop and planting date.
 #'
-#' @references https://developer.awhere.com/api/reference/models/results
+#' @references https://docs.awhere.com/knowledge-base-docs/get-model-results/
 #'
 #' @param - model_id: A model id to retrieve details for that specific model
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)

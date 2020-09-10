@@ -15,7 +15,7 @@
 #' (such as agronomics and models) can leverage that detail internally to more easily and seamlessly
 #' calculate information for you.
 #'
-#' @references http://developer.awhere.com/api/reference/fields/get-fields
+#' @references https://docs.awhere.com/knowledge-base-docs/get-field-locations/
 #'
 #' @param - field_id: Either a field id to retrieve information for that specific field
 #'                   or an empty string to retrieve information on all fields associated
@@ -202,8 +202,7 @@ get_fields <- function(field_id = ""
 #'
 #' @import httr
 #'
-#' @references http://developer.awhere.com/api/reference/plantings/get-plantings
-#'
+#' @references https://docs.awhere.com/knowledge-base-docs/get-plantings/
 #'
 #' @examples
 #' \dontrun{get_planting(field_id='field_test')
@@ -386,81 +385,4 @@ get_planting <- function(field_id = ""
   } else {
     return(as.data.frame(data))
   }
-}
-
-#' @title Get Job
-#'
-#' @description
-#' \code{get_job} Gets a job's results when complete.
-#'
-#' @details
-#' Once a batch job is queued you can check on its status with this API. If the job is complete and results are available, they will be included in the response body.
-#'
-#' @param - job_id: a job ID assigned by an aWhere create job.
-#' @param - wait: wait for job to complete before returning
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#'
-#' @return - data.frame containing the requested payload(s).
-#'
-#' @import httr
-#'
-#' @references https://developer.awhere.com/api/reference/batch/status-results
-#'
-#' @examples
-#' \dontrun{get_job(job_id='1234')}
-
-#' @export
-
-get_job <- function(job_id
-                    ,wait = TRUE
-                    ,retry_secs = 60
-                    ,num_retries = 60
-                    ,keyToUse = awhereEnv75247$uid
-                    ,secretToUse = awhereEnv75247$secret
-                    ,tokenToUse = awhereEnv75247$token) {
-  
-  checkCredentials(keyToUse,secretToUse,tokenToUse)
-  
-  ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/jobs/")
-  
-  if(is.na(job_id)) {
-    stop("must specify job_id")
-  }
-  
-  url <- paste0(url, job_id)
-  
-  doWeatherGet <- TRUE
-  retries <- 0
-  while (doWeatherGet == TRUE) {
-    request <- httr::GET(url,
-                         httr::content_type('application/json'),
-                         httr::add_headers(Authorization = paste0("Bearer ", tokenToUse)))
-    
-    a <- suppressMessages(httr::content(request))
-    
-    if (any(grepl('API Access Expired',a))) {
-      if(exists("awhereEnv75247")) {
-        if(tokenToUse == awhereEnv75247$token) {
-          get_token(keyToUse,secretToUse)
-          tokenToUse <- awhereEnv75247$token
-        } else {
-          stop("The token you passed in has expired. Please request a new one and retry your function call with the new token.")
-        }
-      } else {
-        stop("The token you passed in has expired. Please request a new one and retry your function call with the new token.")
-      }
-    } else if (a$jobStatus == "Done") {
-      doWeatherGet <- FALSE
-    } else if (retries >= num_retries) {
-      stop(paste("Get job for jobId:", job_id, "timed out after", num_retries, "retries"))
-    } else {
-      print(sprintf("job %s status: %s, retrying...", job_id, a$jobStatus))
-      Sys.sleep(retry_secs)
-      retries <- retries + 1
-    }
-  }
-  return(a)
 }

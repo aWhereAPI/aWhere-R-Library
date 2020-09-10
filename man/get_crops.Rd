@@ -41,5 +41,5 @@ You'll know which crop record is the default by referencing the isDefaultForCrop
 }
 }
 \references{
-https://developer.awhere.com/api/reference/crops
+https://docs.awhere.com/knowledge-base-docs/crop-list-detail/
 }

@@ -64,5 +64,5 @@ Note about dates: The system does not adjust for any difference in dates between
                           ,day_end = as.character(Sys.Date() + 5))}
 }
 \references{
-http://developer.awhere.com/api/forecast-weather-api
+https://docs.awhere.com/knowledge-base-docs/forecast-weather/
 }

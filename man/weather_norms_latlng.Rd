@@ -79,5 +79,5 @@ Note about dates: The system does not adjust for any difference in dates between
                               ,exclude_years =  c(2010,2011))}
 }
 \references{
-http://developer.awhere.com/api/reference/weather/norms
+https://docs.awhere.com/knowledge-base-docs/historical-weather-norms-by-geolocation/
 }

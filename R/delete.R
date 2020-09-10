@@ -16,6 +16,8 @@
 #'
 #' @return - a print text that informs if the query succeded or not
 #'
+#' @references https://docs.awhere.com/knowledge-base-docs/delete-a-field/
+#'
 #' @import httr
 #'
 #' @examples
@@ -79,6 +81,8 @@ delete_field <- function(field_id
 #'
 #' @return - a print text that informs if the query succeded or not
 #'
+#' @references https://docs.awhere.com/knowledge-base-docs/delete-a-planting/
+#' 
 #' @import httr
 #'
 #' @examples
