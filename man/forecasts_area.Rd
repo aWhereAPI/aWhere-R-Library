@@ -78,5 +78,5 @@ Note about dates: The system does not adjust for any difference in dates between
                         
 }
 \references{
-http://developer.awhere.com/api/reference/weather/forecasts/geolocation
+https://docs.awhere.com/knowledge-base-docs/forecast-weather-by-geolocation/
 }

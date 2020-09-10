@@ -33,3 +33,6 @@ purposes you can delete errant or incorrect plantings.
 \examples{
 \dontrun{delete_planting("field123",'133972')}
 }
+\references{
+https://docs.awhere.com/knowledge-base-docs/delete-a-planting/
+}

@@ -58,5 +58,5 @@ Note about dates: The system does not adjust for any difference in dates between
                                ,day_end = '2018-12-01')}
 }
 \references{
-http://developer.awhere.com/api/reference/weather/observations/geolocation
+https://docs.awhere.com/knowledge-base-docs/daily-observed-weather-by-geolocation/
 }

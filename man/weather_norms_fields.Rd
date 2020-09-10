@@ -76,5 +76,5 @@ Note about dates: The system does not adjust for any difference in dates between
                               ,year_end = 2015)}
 }
 \references{
-http://developer.awhere.com/api/reference/weather/norms
+https://docs.awhere.com/knowledge-base-docs/historical-weather-norms/
 }

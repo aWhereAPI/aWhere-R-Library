@@ -100,5 +100,5 @@ Note about dates: The system does not adjust for any difference in dates between
                                ,numcores = 2)}
 }
 \references{
-http://developer.awhere.com/api/reference/weather/observations/geolocation
+https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations-by-geolocation/
 }

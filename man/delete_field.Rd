@@ -32,3 +32,6 @@ This applies when we design/implement "Plantings" API.
 \examples{
 \dontrun{delete_field("field123")}
 }
+\references{
+https://docs.awhere.com/knowledge-base-docs/delete-a-field/
+}

@@ -54,3 +54,6 @@ also be set even if they are changed.
 \dontrun{update_planting("field_test", "156036", harvest_date = "2016-02-01", yield_amount = "60", yield_units = "Bushels")}
 
 }
+\references{
+https://docs.awhere.com/knowledge-base-docs/update-all-or-part-of-a-planting-in-a-field/
+}

@@ -33,5 +33,5 @@ this API returns information about the crop stages that the model may return.
 }
 }
 \references{
-https://developer.awhere.com/api/reference/models/details
+https://docs.awhere.com/knowledge-base-docs/get-model-details/
 }

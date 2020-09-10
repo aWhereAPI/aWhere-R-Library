@@ -40,5 +40,5 @@ select the most recently created Planting record to retrieve the crop and planti
 }
 }
 \references{
-https://developer.awhere.com/api/reference/models/results
+https://docs.awhere.com/knowledge-base-docs/get-model-results/
 }

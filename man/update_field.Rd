@@ -44,5 +44,5 @@ multiple variables associated with a field, please pass commands sequentially.
 \dontrun{update_field(field_id = 'field_test',variable_update = 'farmId', value_update = 'This is my territory')}
 }
 \references{
-http://developer.awhere.com/api/reference/fields/update-field
+https://docs.awhere.com/knowledge-base-docs/update-a-field-location/
 }
