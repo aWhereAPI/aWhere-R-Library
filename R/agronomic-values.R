@@ -22,7 +22,7 @@
 #'           date range is specified given any differences in timezone.  These differences can have implications
 #'           for whether a given date should be requested from the daily_observed functions or the forecast functions
 #'
-#' @references http://developer.awhere.com/api/reference/agronomics/values
+#' @references https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations/
 #'
 #' @param - field_id: the field_id associated with the location for which you want to pull data.
 #' Field IDs are created using the create_field function. (string)
@@ -280,7 +280,7 @@ agronomic_values_fields <- function(field_id
 #'           date range is specified given any differences in timezone.  These differences can have implications
 #'           for whether a given date should be requested from the daily_observed functions or the forecast functions
 #'
-#' @references http://developer.awhere.com/api/reference/agronomics/values
+#' @references https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations-by-geolocation/
 #'
 #' @param - latitude: the latitude of the requested location (double)
 #' @param - longitude: the longitude of the requested locations (double)
@@ -546,7 +546,7 @@ agronomic_values_latlng <- function(latitude
 #'           the responsibility of the user to either ensure that the date range specified is valid for all relevant
 #'           locations or to break the query into pieces.
 #'
-#' @references http://developer.awhere.com/api/reference/weather/observations/geolocation
+#' @references https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations-by-geolocation/
 #'
 #' @param - polygon: either a data.frame with column names lat/lon, SpatialPolygons object,
 #'                   well-known text string, or extent from raster package. If the object contains

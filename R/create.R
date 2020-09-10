@@ -29,7 +29,7 @@
 #'
 #' @return - printed text that informs if the query succeeded or not
 #'
-#' @references http://developer.awhere.com/api/reference/fields/create-field
+#' @references https://docs.awhere.com/knowledge-base-docs/create-a-field-location/
 #'
 #' @import httr
 #'
@@ -150,7 +150,7 @@ create_field <- function(field_id
 #'
 #' @return - system generated planting id along with a print text that informs if the query succeeded or not
 #'
-#' @references http://developer.awhere.com/api/reference/plantings/create
+#' @references https://docs.awhere.com/knowledge-base-docs/create-a-planting-in-a-field/
 #'
 #' @import httr
 #'
@@ -243,90 +243,4 @@ create_planting <- function(field_id
     cat(paste0('Operation Complete \n Planting ID: ', a$id),'\n')
   }
   return(a$id)
-}
-
-#' @title Create Job
-#'
-#' @description
-#' \code{create_job} This API will register a batch job in the aWhere platform.
-#'
-#' @details
-#' Batch jobs allow you to execute many API calls in a single batch, which is much more efficient and faster than making hundreds
-#' or thousands of individual requests. When you create a batch, you define each endpoint you want to call, and then aWhere's platform
-#' steps through each internally and provides all the results at once.  Any GET request from any of our Version-2 APIs can be included
-#  in a batch. The batch job system treats each API request individually, which means you can easily identify which API request produced
-#  which results. It is also fault-tolerant, so that if one request resulted in an error, all the others will execute normally. Note that
-#  if you request a set of paged results, only the first page of results will be returned; be sure to use the limit and offset parameters
-#  of that API to get all the results you need.
-#'
-#' Batch jobs are queued and executed in the order they are created, from across all customers using aWhere APIs. While many jobs can run
-#' concurrently, the rest are inserted into a queue and executed quite quickly. Use the Status and Results endpoint to monitor your job status
-#' and retrieve the results when complete.
-#'
-#' Important: This API will return a job ID which you must retain; there is not currently an API to list all jobs that you've created.
-#' Important: There is a limit of 10,000 requests per batch job.
-#' Note: The current conditions API cannot be included in batch jobs.
-#'
-#' @param - api_requests: a list of "verb endpoint" strings. This is the actual API request you're asking the Batch Jobs system to call.
-#'                        It must be a valid aWhere endpoint and is expressed as the HTTP verb, a space, and the relative URI.
-#'                        For example: "GET /v2/weather/fields/1234/observations"
-#' @param - titles: a vector of names for each individual request in api, which can aid in identifying each set of results within a batch.
-#'                  This need not be unique between all the jobs.
-#' @param - job_title: A name for the job, which can aid you in identifying the result set.
-#' @param - job_type: The type of job. Currently this system only supports the type "batch."
-#' @return - job_id: The Job ID. You will need this to retrieve the job status and results.
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#'
-#' @references https://developer.awhere.com/api/reference/batch/create
-#'
-#' @import httr
-#'
-#' @examples
-#' \dontrun{create_job(c("GET /v2/weather/fields/field_test/observations", "GET /v2/weather/fields/aWhereOffice/observations"), c("farmA", "farmB"), "job_1")}
-#' @export
-
-create_job <- function(api_requests
-                       ,request_titles
-                       ,job_title
-                       ,job_type = "batch"
-                       ,verbose = TRUE
-                       ,keyToUse = awhereEnv75247$uid
-                       ,secretToUse = awhereEnv75247$secret
-                       ,tokenToUse = awhereEnv75247$token) {
-
-  #############################################################
-  #Checking Input Parameters
-  checkCredentials(keyToUse,secretToUse,tokenToUse)
-
-  job_title <- gsub(' ','_', job_title)
-
-  ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/jobs")
-
-  requests <- data.frame(title=request_titles, api=api_requests)
-  postbody <- jsonlite::toJSON(list(title=job_title, type=job_type,
-                               requests=requests), auto_unbox=T)
-  doWeatherGet <- TRUE
-  while (doWeatherGet == TRUE) {
-    request <- httr::POST(url, body=postbody, httr::content_type('application/json'),
-                          httr::add_headers(Authorization = paste0("Bearer ", tokenToUse)))
-
-    temp <- check_JSON(a
-                       ,request
-                       ,keyToUse
-                       ,secretToUse
-                       ,tokenToUse)
-    
-    doWeatherGet <- temp[[1]]
-    
-    #if the token was updated, this will cause it to be used through function
-    tokenToUse <- temp[[3]]
-  }
-
-  if (verbose == TRUE) {
-    cat(paste0('Operation Complete \n Job ID: ',a$jobId,'\n'))
-  }
-  return(a$jobId)
 }

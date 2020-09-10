@@ -25,7 +25,7 @@
 #'
 #' @return - A message confirming the changes have been made
 #'
-#' @references http://developer.awhere.com/api/reference/fields/update-field
+#' @references https://docs.awhere.com/knowledge-base-docs/update-a-field-location/
 #'
 #' @import httr
 #'
@@ -99,6 +99,8 @@ update_field <- function(field_id
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - A message confirming the changes have been made
+#'
+#' @references https://docs.awhere.com/knowledge-base-docs/update-all-or-part-of-a-planting-in-a-field/
 #'
 #' @import httr
 #'
