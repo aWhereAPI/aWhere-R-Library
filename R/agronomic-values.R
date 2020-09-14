@@ -661,7 +661,8 @@ agronomic_values_area <- function(polygon
 
   observed <- foreach::foreach(j=c(1:length(grid))
                                ,.packages = c("aWhereAPI")
-                               ,.export = c('awhereEnv75247')) %dopar% {
+                               ,.export = c('awhereEnv75247')
+                               ,.errorhandling = 'pass') %dopar% {
 
     t <- agronomic_values_latlng(latitude = grid[[j]]$lat
                                  ,longitude = grid[[j]]$lon

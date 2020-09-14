@@ -186,6 +186,18 @@ check_JSON <- function(jsonObject
     }
   }
   
+  #Under some circumstances the message received is different
+  if (any(grepl('You have exceeded the quota allowed for this API',jsonObject))) {
+    
+    cat('Pausing thread due to Rate Limit Exceeded\n')
+    
+    Sys.sleep(runif(n = 1
+                    ,min = 1
+                    ,max = 5))
+    
+    return(list = TRUE,NA,tokenToUse)
+  }
+  
   #Finally check to see if there was a different problem with the query and if so return the message
   statusCode <- checkStatusCode(request)
   
