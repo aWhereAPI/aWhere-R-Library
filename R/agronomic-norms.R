@@ -848,6 +848,10 @@ agronomic_norms_area <- function(polygon
                             ,.packages = c("aWhereAPI")
                             ,.export = c('awhereEnv75247')
                             ,.errorhandling = 'pass') %dopar% {
+                              
+      if (verbose == TRUE & (j == 1 | (j %% 100) == 0)) {
+        cat(paste0('    Currently requesting data for location ',j,' of ',length(grid),'\n'))
+      }                                     
 
       t <- agronomic_norms_latlng(latitude = grid[[j]]$lat
                                   ,longitude = grid[[j]]$lon
