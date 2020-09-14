@@ -12,8 +12,8 @@ checkStatusCode<- function(request) {
     cat('Pausing thread due to Rate Limit Exceeded\n')
     
     Sys.sleep(runif(n = 1
-                    ,min = 1
-                    ,max = 5))
+                    ,min = 5
+                    ,max = 20))
   }
   
   if (!(request$status_code %in% c(200,201,204))) { # status code = 200 means that the query worked
