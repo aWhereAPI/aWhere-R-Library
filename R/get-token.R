@@ -192,8 +192,8 @@ check_JSON <- function(jsonObject
     cat('Pausing thread due to Rate Limit Exceeded\n')
     
     Sys.sleep(runif(n = 1
-                    ,min = 5
-                    ,max = 20))
+                    ,min = 15
+                    ,max = 45))
     
     return(list(TRUE,NA,tokenToUse))
   }
