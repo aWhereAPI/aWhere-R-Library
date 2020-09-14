@@ -195,7 +195,7 @@ check_JSON <- function(jsonObject
                     ,min = 1
                     ,max = 5))
     
-    return(list = TRUE,NA,tokenToUse)
+    return(list(TRUE,NA,tokenToUse))
   }
   
   #Finally check to see if there was a different problem with the query and if so return the message
@@ -203,7 +203,7 @@ check_JSON <- function(jsonObject
   
   #We need to repeat the query if 429 code encountered, above fxn will have paused the thread
   if (statusCode == 429) {
-    return(list = TRUE,NA,tokenToUse)
+    return(list(TRUE,NA,tokenToUse))
   } else {
     return(list(FALSE,NA,tokenToUse))
   }
