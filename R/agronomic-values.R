@@ -642,7 +642,7 @@ agronomic_values_area <- function(polygon
     if (!(all(colnames(polygon) %in% c('lat','lon')) & length(colnames(polygon)) == 2)) {
       stop('Data.Frame of Lat/Lon coordinates improperly specified, please correct')
     }
-    grid <-  polygon
+    grid <-  data.table::as.data.table(polygon)
     
     grid[,c('gridx'
             ,'gridy') := list(getGridX(longitude = lon)
