@@ -186,9 +186,26 @@ check_JSON <- function(jsonObject
     }
   }
   
-  #Finally check to see if there was a different problem with the query and if so return the message
-  checkStatusCode(request)
+  #Under some circumstances the message received is different
+  if (any(grepl('You have exceeded the quota allowed for this API',jsonObject))) {
+    
+    cat('Pausing thread due to Rate Limit Exceeded\n')
+    
+    Sys.sleep(runif(n = 1
+                    ,min = 15
+                    ,max = 45))
+    
+    return(list(TRUE,NA,tokenToUse))
+  }
   
-  return(list(FALSE,NA,tokenToUse))
+  #Finally check to see if there was a different problem with the query and if so return the message
+  statusCode <- checkStatusCode(request)
+  
+  #We need to repeat the query if 429 code encountered, above fxn will have paused the thread
+  if (statusCode == 429) {
+    return(list(TRUE,NA,tokenToUse))
+  } else {
+    return(list(FALSE,NA,tokenToUse))
+  }
 }
 

@@ -827,7 +827,7 @@ agronomic_norms_area <- function(polygon
     if (!(all(colnames(polygon) %in% c('lat','lon')) & length(colnames(polygon)) == 2)) {
       stop('Data.Frame of Lat/Lon coordinates improperly specified, please correct')
     }
-    grid <-  polygon
+    grid <-  data.table::as.data.table(polygon)
     
     grid[,c('gridx'
             ,'gridy') := list(getGridX(longitude = lon)
@@ -846,7 +846,12 @@ agronomic_norms_area <- function(polygon
 
   norms <- foreach::foreach(j=c(1:length(grid))
                             ,.packages = c("aWhereAPI")
-                            ,.export = c('awhereEnv75247')) %dopar% {
+                            ,.export = c('awhereEnv75247')
+                            ,.errorhandling = 'pass') %dopar% {
+                              
+      if (verbose == TRUE & (j == 1 | (j %% 100) == 0)) {
+        cat(paste0('    Currently requesting data for location ',j,' of ',length(grid),'\n'))
+      }                                     
 
       t <- agronomic_norms_latlng(latitude = grid[[j]]$lat
                                   ,longitude = grid[[j]]$lon
