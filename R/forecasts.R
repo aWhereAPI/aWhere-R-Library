@@ -459,14 +459,29 @@ forecasts_area <- function(polygon
   
   grid <- split(grid, seq(1,nrow(grid),1))
   
-  doParallel::registerDoParallel(cores=numcores)
+  if (numcores > 1) {
+    doParallel::registerDoParallel(cores=numcores)
+    '%loopToUse%' <- '%dopar%'
+  } else {
+    '%loopToUse%' <- '%do%'
+  }
+
+  if (length(grid) > 1000) {
+    howOftenPrintVerbose <- 100
+  } else if (length(grid) > 500) {
+    howOftenPrintVerbose <- 50
+  } else if (length(grid) > 100) {
+    howOftenPrintVerbose <- 25 
+  } else {
+    howOftenPrintVerbose <- 10
+  }
   
   forecasts <- foreach::foreach(j=c(1:length(grid))
                                 ,.packages = c("aWhereAPI")
                                 ,.export = c('awhereEnv75247')
-                                ,.errorhandling = 'pass') %dopar% {
+                                ,.errorhandling = 'pass') %loopToUse% {
     
-    if (verbose == TRUE & (j == 1 | (j %% 100) == 0)) {
+    if (verbose == TRUE & (j == 1 | (j %% howOftenPrintVerbose) == 0)) {
       cat(paste0('    Currently requesting data for location ',j,' of ',length(grid),'\n'))
     }
                                 
