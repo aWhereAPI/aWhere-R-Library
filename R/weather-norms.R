@@ -666,9 +666,9 @@ weather_norms_area <- function(polygon
 
   if (numcores > 1) {
     doParallel::registerDoParallel(cores=numcores)
-    '%loopToUse%' <- '%dopar%'
+    `%loopToUse%` <- `%dopar%`
   } else {
-    '%loopToUse%' <- '%do%'
+    `%loopToUse%` <- `%do%`
   }
   
   if (length(grid) > 1000) {
