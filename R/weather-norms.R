@@ -689,7 +689,6 @@ weather_norms_area <- function(polygon
 
   norms <- foreach::foreach(j=c(1:length(grid))
                             ,.packages = c("aWhereAPI")
-                            ,.export = c('awhereEnv75247')
                             ,.errorhandling = 'pass') %loopToUse% {
 
     if (verbose == TRUE & (j == 1 | (j %% howOftenPrintVerbose) == 0)) {
