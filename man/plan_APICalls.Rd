@@ -4,8 +4,7 @@
 \alias{plan_APICalls}
 \title{Plan Logic of API Calls}
 \usage{
-plan_APICalls(day_start, day_end, numObsReturned,
-  includesLeapYear = TRUE)
+plan_APICalls(day_start, day_end, numObsReturned, includesLeapYear = TRUE)
 }
 \arguments{
 \item{-}{JSON object returned from aWhere API}

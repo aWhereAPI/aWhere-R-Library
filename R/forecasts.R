@@ -38,6 +38,7 @@
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -65,7 +66,8 @@ forecasts_fields <- function(field_id
                              ,returnOnlySoilVars = FALSE
                              ,keyToUse = awhereEnv75247$uid
                              ,secretToUse = awhereEnv75247$secret
-                             ,tokenToUse = awhereEnv75247$token) {
+                             ,tokenToUse = awhereEnv75247$token
+                             ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
@@ -101,7 +103,7 @@ forecasts_fields <- function(field_id
   }
   
   #Create Query
-  urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+  urlAddress <- paste0(apiAddressToUse, "/weather")
 
   strBeg <- paste0('/fields')
   strCoord <- paste0('/',field_id)
@@ -210,6 +212,7 @@ forecasts_fields <- function(field_id
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return data.frame of requested data for dates requested
 #'
@@ -242,7 +245,8 @@ forecasts_latlng <- function(latitude
                              ,returnOnlySoilVars = FALSE
                              ,keyToUse = awhereEnv75247$uid
                              ,secretToUse = awhereEnv75247$secret
-                             ,tokenToUse = awhereEnv75247$token) {
+                             ,tokenToUse = awhereEnv75247$token
+                             ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidLatLong(latitude,longitude)
@@ -277,7 +281,7 @@ forecasts_latlng <- function(latitude
   
   
   #Create Query
-  urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+  urlAddress <- paste0(apiAddressToUse, "/weather")
 
   strBeg <- paste0('/locations')
   strCoord <- paste0('/',latitude,',',longitude)
@@ -389,6 +393,7 @@ forecasts_latlng <- function(latitude
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -425,7 +430,8 @@ forecasts_area <- function(polygon
                            ,returnOnlySoilVars = FALSE
                            ,keyToUse = awhereEnv75247$uid
                            ,secretToUse = awhereEnv75247$secret
-                           ,tokenToUse = awhereEnv75247$token) {
+                           ,tokenToUse = awhereEnv75247$token
+                           ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidStartEndDatesForecast(day_start,day_end)
@@ -500,7 +506,11 @@ forecasts_area <- function(polygon
                              ,day_end = day_end
                              ,block_size = block_size
                              ,useLocalTime = useLocalTime
-                             ,returnOnlySoilVars = returnOnlySoilVars)
+                             ,returnOnlySoilVars = returnOnlySoilVars
+                             ,keyToUse = keyToUse
+                             ,secretToUse = secretToUse
+                             ,tokenToUse = tokenToUse
+                             ,apiAddressToUse = apiAddressToUse)
     
     
           currentNames <- colnames(t)

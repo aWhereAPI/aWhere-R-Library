@@ -52,6 +52,7 @@
 #' @param - keyToUse: aWhere API uid to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -81,7 +82,8 @@ agronomic_values_fields <- function(field_id
                                     ,gdd_max_boundary = 30
                                     ,keyToUse = awhereEnv75247$uid
                                     ,secretToUse = awhereEnv75247$secret
-                                    ,tokenToUse = awhereEnv75247$token) {
+                                    ,tokenToUse = awhereEnv75247$token
+                                    ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
@@ -131,7 +133,7 @@ agronomic_values_fields <- function(field_id
       }
 
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/agronomics")
+      urlAddress <- paste0(apiAddressToUse, "/agronomics")
 
       strBeg <- paste0('/fields')
       strCoord <- paste0('/',field_id)
@@ -312,6 +314,7 @@ agronomic_values_fields <- function(field_id
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -340,7 +343,8 @@ agronomic_values_latlng <- function(latitude
                                     ,gdd_max_boundary = 30
                                     ,keyToUse = awhereEnv75247$uid
                                     ,secretToUse = awhereEnv75247$secret
-                                    ,tokenToUse = awhereEnv75247$token) {
+                                    ,tokenToUse = awhereEnv75247$token
+                                    ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidLatLong(latitude,longitude)
@@ -390,7 +394,7 @@ agronomic_values_latlng <- function(latitude
       }
 
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/agronomics")
+      urlAddress <- paste0(apiAddressToUse, "/agronomics")
 
       strBeg <- paste0('/locations')
       strCoord <- paste0('/',latitude,',',longitude)
@@ -587,6 +591,7 @@ agronomic_values_latlng <- function(latitude
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -624,7 +629,8 @@ agronomic_values_area <- function(polygon
                                   ,maxTryCount = 3
                                   ,keyToUse = awhereEnv75247$uid
                                   ,secretToUse = awhereEnv75247$secret
-                                  ,tokenToUse = awhereEnv75247$token) {
+                                  ,tokenToUse = awhereEnv75247$token
+                                  ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidStartEndDatesAgronomics(day_start,day_end)
@@ -699,7 +705,11 @@ agronomic_values_area <- function(polygon
                                    ,longitude = grid[[j]]$lon
                                    ,day_start = day_start
                                    ,day_end = day_end
-                                   ,propertiesToInclude = propertiesToInclude)
+                                   ,propertiesToInclude = propertiesToInclude
+                                   ,keyToUse = keyToUse
+                                   ,secretToUse = secretToUse
+                                   ,tokenToUse = tokenToUse
+                                   ,apiAddressToUse = apiAddressToUse)
 
           currentNames <- colnames(t)
       

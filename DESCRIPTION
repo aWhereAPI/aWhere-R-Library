@@ -1,6 +1,6 @@
 Package: aWhereAPI
 Title: API calls for aWhere API
-Version: 0.6.32
+Version: 0.6.33
 Authors@R: 
     c(person("Technical", "Support", ,"technicalsupport@awhere.com", role = c("aut","cre","ctb")))
 Description: 
@@ -10,7 +10,7 @@ Description:
     and forecast data.
 License: MIT, Copyright 2016 aWhere
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Depends: 
     R (>= 3.3.2)
 Imports: 

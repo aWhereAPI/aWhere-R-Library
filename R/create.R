@@ -26,6 +26,7 @@
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - printed text that informs if the query succeeded or not
 #'
@@ -49,7 +50,8 @@ create_field <- function(field_id
                          ,verbose = TRUE
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
-                         ,tokenToUse = awhereEnv75247$token) {
+                         ,tokenToUse = awhereEnv75247$token
+                         ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   #############################################################
   #Checking Input Parameters
@@ -67,7 +69,7 @@ create_field <- function(field_id
   farm_id <- gsub(' ','_',farm_id)
 
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/fields")
+  url <- paste0(apiAddressToUse, "/fields")
 
   postbody <- paste0('{"id":"', field_id, '",',
                      '"centerPoint":{"latitude":', latitude, ',"longitude":', longitude, '}',
@@ -147,6 +149,7 @@ create_field <- function(field_id
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - system generated planting id along with a print text that informs if the query succeeded or not
 #'
@@ -173,7 +176,8 @@ create_planting <- function(field_id
                             ,verbose = TRUE
                             ,keyToUse = awhereEnv75247$uid
                             ,secretToUse = awhereEnv75247$secret
-                            ,tokenToUse = awhereEnv75247$token) {
+                            ,tokenToUse = awhereEnv75247$token
+                            ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   ## Error checking for valid entries
@@ -188,7 +192,7 @@ create_planting <- function(field_id
 
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/", field_id, "/plantings")
+  url <- paste0(apiAddressToUse, "/agronomics/fields/", field_id, "/plantings")
 
   postbody <- paste0('{',
                      '"crop":"', crop, '",',

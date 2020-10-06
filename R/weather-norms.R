@@ -45,6 +45,7 @@
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -71,7 +72,8 @@ weather_norms_fields <- function(field_id
                                  ,includeFeb29thData = TRUE
                                  ,keyToUse = awhereEnv75247$uid
                                  ,secretToUse = awhereEnv75247$secret
-                                 ,tokenToUse = awhereEnv75247$token) {
+                                 ,tokenToUse = awhereEnv75247$token
+                                 ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   #Checking Input Parameters
   checkCredentials(keyToUse,secretToUse,tokenToUse)
@@ -154,7 +156,7 @@ weather_norms_fields <- function(field_id
 
       # Create query
 
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- paste0(apiAddressToUse, "/weather")
 
       strBeg <- paste0('/fields')
       strCoord <- paste0('/',field_id)
@@ -307,6 +309,7 @@ weather_norms_fields <- function(field_id
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -337,7 +340,8 @@ weather_norms_latlng <- function(latitude
                                  ,includeFeb29thData = TRUE
                                  ,keyToUse = awhereEnv75247$uid
                                  ,secretToUse = awhereEnv75247$secret
-                                 ,tokenToUse = awhereEnv75247$token) {
+                                 ,tokenToUse = awhereEnv75247$token
+                                 ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   #Checking Input Parameters
   checkCredentials(keyToUse,secretToUse,tokenToUse)
@@ -420,7 +424,7 @@ weather_norms_latlng <- function(latitude
 
       # Create query
 
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- paste0(apiAddressToUse, "/weather")
 
       strBeg <- paste0('/locations')
       strCoord <- paste0('/',latitude,',',longitude)
@@ -588,6 +592,7 @@ weather_norms_latlng <- function(latitude
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -626,7 +631,8 @@ weather_norms_area <- function(polygon
                                ,maxTryCount = 3
                                ,keyToUse = awhereEnv75247$uid
                                ,secretToUse = awhereEnv75247$secret
-                               ,tokenToUse = awhereEnv75247$token) {
+                               ,tokenToUse = awhereEnv75247$token
+                               ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   #Checking Input Parameters
   checkCredentials(keyToUse,secretToUse,tokenToUse)
@@ -707,7 +713,11 @@ weather_norms_area <- function(polygon
                                 ,year_end = year_end
                                 ,propertiesToInclude = propertiesToInclude
                                 ,exclude_years =  exclude_years
-                                ,includeFeb29thData = includeFeb29thData)
+                                ,includeFeb29thData = includeFeb29thData
+                                ,keyToUse = keyToUse
+                                ,secretToUse = secretToUse
+                                ,tokenToUse = tokenToUse
+                                ,apiAddressToUse = apiAddressToUse)
 
           currentNames <- colnames(t)
       

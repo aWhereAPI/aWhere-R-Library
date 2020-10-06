@@ -32,7 +32,8 @@
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#'
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' 
 #' @import httr
 #' @import data.table
 #' @import lubridate
@@ -53,7 +54,8 @@ daily_observed_fields <- function(field_id
                                   ,propertiesToInclude = ''
                                   ,keyToUse = awhereEnv75247$uid
                                   ,secretToUse = awhereEnv75247$secret
-                                  ,tokenToUse = awhereEnv75247$token) {
+                                  ,tokenToUse = awhereEnv75247$token
+                                  ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
@@ -105,10 +107,9 @@ daily_observed_fields <- function(field_id
         }
       }
       
-      
       # Create query
       
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- paste0(apiAddressToUse, "/weather")
       
       strBeg <- paste0('/fields')
       strCoord <- paste0('/',field_id)
@@ -231,6 +232,7 @@ daily_observed_fields <- function(field_id
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -254,7 +256,8 @@ daily_observed_latlng <- function(latitude
                                   ,propertiesToInclude = ''
                                   ,keyToUse = awhereEnv75247$uid
                                   ,secretToUse = awhereEnv75247$secret
-                                  ,tokenToUse = awhereEnv75247$token) {
+                                  ,tokenToUse = awhereEnv75247$token
+                                  ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidLatLong(latitude,longitude)
@@ -304,7 +307,7 @@ daily_observed_latlng <- function(latitude
       
       
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- paste0(apiAddressToUse, "/weather")
       
       strBeg <- paste0('/locations')
       strCoord <- paste0('/',latitude,',',longitude)
@@ -446,6 +449,7 @@ daily_observed_latlng <- function(latitude
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -478,7 +482,8 @@ daily_observed_area <- function(polygon
                                 ,maxTryCount = 3
                                 ,keyToUse = awhereEnv75247$uid
                                 ,secretToUse = awhereEnv75247$secret
-                                ,tokenToUse = awhereEnv75247$token) {
+                                ,tokenToUse = awhereEnv75247$token
+                                ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidStartEndDates(day_start,day_end)
@@ -547,10 +552,14 @@ daily_observed_area <- function(polygon
         tryCatch({
           t <-
             daily_observed_latlng(latitude = grid[[j]]$lat
-                                     ,longitude = grid[[j]]$lon
-                                     ,day_start = day_start
-                                     ,day_end = day_end
-                                     ,propertiesToInclude = propertiesToInclude)
+                                 ,longitude = grid[[j]]$lon
+                                 ,day_start = day_start
+                                 ,day_end = day_end
+                                 ,propertiesToInclude = propertiesToInclude
+                                 ,keyToUse = keyToUse
+                                 ,secretToUse = secretToUse
+                                 ,tokenToUse = tokenToUse
+                                 ,apiAddressToUse = apiAddressToUse)
           
           currentNames <- colnames(t)
           

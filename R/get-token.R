@@ -10,9 +10,10 @@
 #' @param - uid: Consumer key associated with the user's aWhere API account
 #' @param - secret: Consumer secret associated the user's aWhere API account
 #' @param - use_enviroment: Optional logical value, determines whether API access
-#' token will be saved in a local locked environment in addition to being returned
-#' by the function. Defaults to \code{TRUE} to avoid breaking existing code.
-#'
+#'          token will be saved in a local locked environment in addition to being returned
+#'          by the function. Defaults to \code{TRUE} to avoid breaking existing code.
+#' @param - apiAddress: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' 
 #' @return List with three elements:#'
 #' error: logical indicating whether there was an error
 #' error_message: \code{NULL} if error is \code{FALSE}, a character error message otherwise
@@ -116,6 +117,8 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
 #' an error from being returned by R
 #'
 #' @param - path_to_credentials: absolute or relative path to the text file
+#' @param - apiAddress: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+
 #' @return vector with uid and secret in positions 1, 2
 #'
 #' @examples

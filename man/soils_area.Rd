@@ -4,44 +4,24 @@
 \alias{soils_area}
 \title{soils_area}
 \usage{
-soils_area(polygon, day_start = as.character(Sys.Date()), day_end = "",
-  block_size = 1, useLocalTime = TRUE, numcores = 2,
-  bypassNumCallCheck = FALSE, returnSpatialData = FALSE,
-  verbose = TRUE, keyToUse = awhereEnv75247$uid,
+soils_area(
+  polygon,
+  day_start = as.character(Sys.Date()),
+  day_end = "",
+  block_size = 1,
+  useLocalTime = TRUE,
+  numcores = 2,
+  bypassNumCallCheck = FALSE,
+  returnSpatialData = FALSE,
+  verbose = TRUE,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
+)
 }
 \arguments{
-\item{-}{polygon: either a data.frame with column names lat/lon, SpatialPolygons object,
-well-known text string, or extent from raster package. If the object contains
-multiple polygons, the union of them is used.  Information from each individal
-polygon can be retrieved by returning spatial data and using
-the over function from the sp package}
-
-\item{-}{day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD}
-
-\item{-}{day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD}
-
-\item{-}{block_size: Integer value that corresponds to the number of hours to include in each time block.
-Defaults to a 1 hour block.  This value must divide evenly into 24. (integer - optional)}
-
-\item{-}{useLocalTime: whether the data specified is the date specified at the location where data is
-being requested from or at UTC = 0.  Default is TRUE}
-
-\item{-}{numcores: number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
-If you receive an error regarding the speed you are making calls, reduce this number}
-
-\item{-}{bypassNumCallCheck: set to TRUE to avoid prompting the user to confirm that they want to begin making API calls}
-
-\item{-}{returnSpatialData: returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
-NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
-as spatial data (sp package: optional)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.frame of requested data for dates requested

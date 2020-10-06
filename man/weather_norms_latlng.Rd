@@ -4,48 +4,24 @@
 \alias{weather_norms_latlng}
 \title{weather_norms_latlng}
 \usage{
-weather_norms_latlng(latitude, longitude, monthday_start, monthday_end,
-  year_start, year_end, propertiesToInclude = "", exclude_years = NULL,
-  includeFeb29thData = TRUE, keyToUse = awhereEnv75247$uid,
+weather_norms_latlng(
+  latitude,
+  longitude,
+  monthday_start,
+  monthday_end,
+  year_start,
+  year_end,
+  propertiesToInclude = "",
+  exclude_years = NULL,
+  includeFeb29thData = TRUE,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
+)
 }
 \arguments{
-\item{-}{latitude: the latitude of the requested location (double, required)}
-
-\item{-}{longitude: the longitude of the requested locations (double, required)}
-
-\item{-}{monthday_start: character string of the first month and day for which you want to retrieve data,
-in the form: MM-DD.  This is the start of your date range. e.g. '07-01' (July 1) (required)}
-
-\item{-}{monthday_end: character string of the last month and day for which you want to retrieve data,
-in the form: MM-DD.  This is the end of your date range. e.g. '07-01' (July 1) (required)}
-
-\item{-}{year_start: character string of the starting year (inclusive) of the range of years for which
-you're calculating norms, in the form YYYY. e.g., 2008 (required)}
-
-\item{-}{year_end: character string of the last year (inclusive) of the range of years for which
-you're calculating norms, in the form YYYY. e.g., 2015 (required)}
-
-\item{-}{propertiesToInclude: character vector of properties to retrieve from API.
-Valid values are meanTemp, maxTemp, minTemp, precipitation,
-solar, maxHumidity, minHumidity, dailyMaxWind (optional)}
-
-\item{-}{exclude_year: Year or years which you'd like to exclude from
- your range of years on which to calculate norms. To exclude
- multiple years, provide a vector of years. You must include
-at least three years of data with which to calculate the norms. (numeric, optional)}
-
-\item{-}{includeFeb29thData: Whether to keep data from Feb 29th on leap years.  Because weather/agronomics
-summary statistics are calculated via the calendar date and 3 years are required
-to generate a value, data from this date is more likely to be NA.  ALlows user
-to drop this data to avoid later problems (defaults to TRUE)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.frame of requested data for dates requested

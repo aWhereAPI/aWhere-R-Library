@@ -7,10 +7,6 @@
 checkDataReturn_daily(dataset, day_start, day_end)
 }
 \arguments{
-\item{-}{dataset: the data.frame to check}
-
-\item{-}{day_start: character string of the first day for which data was retrieved, in the form: YYYY-MM-DD}
-
 \item{-}{day_end: character string of the last day for which data was retrieved, in the form: YYYY-MM-DD}
 }
 \description{
