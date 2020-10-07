@@ -4,18 +4,16 @@
 \alias{get_model_details}
 \title{Get Model Details}
 \usage{
-get_model_details(model_id, keyToUse = awhereEnv75247$uid,
+get_model_details(
+  model_id,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
+)
 }
 \arguments{
-\item{-}{model_id: A model id to retrieve details for that specific model}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - data.frame containing details about requested model

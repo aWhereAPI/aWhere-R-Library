@@ -4,26 +4,19 @@
 \alias{daily_observed_fields}
 \title{daily_observed_fields}
 \usage{
-daily_observed_fields(field_id, day_start, day_end,
-  propertiesToInclude = "", keyToUse = awhereEnv75247$uid,
+daily_observed_fields(
+  field_id,
+  day_start,
+  day_end,
+  propertiesToInclude = "",
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
+)
 }
 \arguments{
-\item{-}{field_id: the field_id associated with the location for which you want to pull data.
-Field IDs are created using the create_field function.(string)}
-
-\item{-}{day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD.}
-
-\item{-}{day_end: character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD}
-
-\item{-}{propertiesToInclude: character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)}
-
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
-
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.frame of requested data for dates requested

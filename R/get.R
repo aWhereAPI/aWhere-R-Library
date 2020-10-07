@@ -27,6 +27,7 @@
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -45,7 +46,8 @@ get_fields <- function(field_id = ""
                        ,requestAllFields = TRUE
                        ,keyToUse = awhereEnv75247$uid
                        ,secretToUse = awhereEnv75247$secret
-                       ,tokenToUse = awhereEnv75247$token) {
+                       ,tokenToUse = awhereEnv75247$token
+                       ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
@@ -54,7 +56,7 @@ get_fields <- function(field_id = ""
   }
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/fields/")
+  url <- paste0(apiAddressToUse, "/fields/")
   
   if(field_id != "") {
     url <- paste0(url, field_id)
@@ -197,6 +199,7 @@ get_fields <- function(field_id = ""
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - data.frame containing information about requested field(s)
 #'
@@ -219,7 +222,8 @@ get_planting <- function(field_id = ""
                          ,requestAllPlantings = TRUE
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
-                         ,tokenToUse = awhereEnv75247$token) {
+                         ,tokenToUse = awhereEnv75247$token
+                         ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
@@ -228,7 +232,7 @@ get_planting <- function(field_id = ""
   }
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/")
+  url <- paste0(apiAddressToUse, "/agronomics/")
   
   if(field_id != "") {
     checkValidField(field_id,keyToUse,secretToUse,tokenToUse)

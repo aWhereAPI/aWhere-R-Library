@@ -7,8 +7,6 @@
 create_shapewkt(longitude, latitude)
 }
 \arguments{
-\item{-}{longitude: longitude coordinate for centroid}
-
 \item{-}{latitude: latitude coordinate for centroid}
 }
 \description{

@@ -7,12 +7,6 @@
 checkValidField(field_id, keyToUse, secretToUse, tokenToUse)
 }
 \arguments{
-\item{-}{field_id: the field_id having previously been created with the createField Function}
-
-\item{-}{keyToUse: aWhere API key to use}
-
-\item{-}{secretToUse: aWhere API secret to use}
-
 \item{-}{tokenToUse: aWhere API token to use}
 }
 \description{

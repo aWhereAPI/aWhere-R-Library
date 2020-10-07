@@ -32,7 +32,8 @@
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#'
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' 
 #' @import httr
 #' @import data.table
 #' @import lubridate
@@ -53,7 +54,8 @@ daily_observed_fields <- function(field_id
                                   ,propertiesToInclude = ''
                                   ,keyToUse = awhereEnv75247$uid
                                   ,secretToUse = awhereEnv75247$secret
-                                  ,tokenToUse = awhereEnv75247$token) {
+                                  ,tokenToUse = awhereEnv75247$token
+                                  ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
@@ -105,10 +107,9 @@ daily_observed_fields <- function(field_id
         }
       }
       
-      
       # Create query
       
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- paste0(apiAddressToUse, "/weather")
       
       strBeg <- paste0('/fields')
       strCoord <- paste0('/',field_id)
@@ -231,6 +232,7 @@ daily_observed_fields <- function(field_id
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -254,7 +256,8 @@ daily_observed_latlng <- function(latitude
                                   ,propertiesToInclude = ''
                                   ,keyToUse = awhereEnv75247$uid
                                   ,secretToUse = awhereEnv75247$secret
-                                  ,tokenToUse = awhereEnv75247$token) {
+                                  ,tokenToUse = awhereEnv75247$token
+                                  ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidLatLong(latitude,longitude)
@@ -304,7 +307,7 @@ daily_observed_latlng <- function(latitude
       
       
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/weather")
+      urlAddress <- paste0(apiAddressToUse, "/weather")
       
       strBeg <- paste0('/locations')
       strCoord <- paste0('/',latitude,',',longitude)
@@ -441,9 +444,12 @@ daily_observed_latlng <- function(latitude
 #' @param - returnSpatialData: returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
 #'                             NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
 #'                             as spatial data (sp package: optional)
+#' @param - verbose: Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI
+#' @param - maxTryCount: maximum number of times a call is repeated if the the API returns an error.  Random pause between each call
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -473,9 +479,11 @@ daily_observed_area <- function(polygon
                                 ,bypassNumCallCheck = FALSE
                                 ,returnSpatialData = FALSE
                                 ,verbose = TRUE
+                                ,maxTryCount = 3
                                 ,keyToUse = awhereEnv75247$uid
                                 ,secretToUse = awhereEnv75247$secret
-                                ,tokenToUse = awhereEnv75247$token) {
+                                ,tokenToUse = awhereEnv75247$token
+                                ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidStartEndDates(day_start,day_end)
@@ -508,33 +516,75 @@ daily_observed_area <- function(polygon
 
   grid <- split(grid, seq(1,nrow(grid),1))
   
-  doParallel::registerDoParallel(cores=numcores)
+  if (numcores > 1) {
+    doParallel::registerDoParallel(cores=numcores)
+    `%loopToUse%` <- `%dopar%`
+  } else {
+    `%loopToUse%` <- `%do%`
+  }
+  
+  if (length(grid) > 1000) {
+    howOftenPrintVerbose <- 100
+  } else if (length(grid) > 500) {
+    howOftenPrintVerbose <- 50
+  } else if (length(grid) > 100) {
+    howOftenPrintVerbose <- 25 
+  } else {
+    howOftenPrintVerbose <- 10
+  }
   
   observed <- foreach::foreach(j=c(1:length(grid))
                                ,.packages = c("aWhereAPI")
-                               ,.export = c('awhereEnv75247')
-                               ,.errorhandling = 'pass') %dopar% {
+                               ,.errorhandling = 'pass') %loopToUse% {
     
-    if (verbose == TRUE & (j == 1 | (j %% 100) == 0)) {
+    if (verbose == TRUE & (j == 1 | (j %% howOftenPrintVerbose) == 0)) {
       cat(paste0('    Currently requesting data for location ',j,' of ',length(grid),'\n'))
     }                             
-                                 
-    t <- daily_observed_latlng(latitude = grid[[j]]$lat
-                               ,longitude = grid[[j]]$lon
-                               ,day_start = day_start
-                               ,day_end = day_end
-                               ,propertiesToInclude = propertiesToInclude)
     
+    tryCount <- 1
     
-    currentNames <- colnames(t)
-    
-    t$gridy <- grid[[j]]$gridy
-    t$gridx <- grid[[j]]$gridx
-    
-    data.table::setcolorder(t, c(currentNames[c(1:2)], "gridy", "gridx", currentNames[c(3:length(currentNames))]))
-    
-    return(t)
-  
+    while (tryCount < maxTryCount) {
+      #this works because if no error occurs the loop will return the data
+      #given by the API.  If an error is received it will increment the
+      #tryCount timer and repear
+      tryCount <- 
+        tryCatch({
+          t <-
+            daily_observed_latlng(latitude = grid[[j]]$lat
+                                 ,longitude = grid[[j]]$lon
+                                 ,day_start = day_start
+                                 ,day_end = day_end
+                                 ,propertiesToInclude = propertiesToInclude
+                                 ,keyToUse = keyToUse
+                                 ,secretToUse = secretToUse
+                                 ,tokenToUse = tokenToUse
+                                 ,apiAddressToUse = apiAddressToUse)
+          
+          currentNames <- colnames(t)
+          
+          t$gridy <- grid[[j]]$gridy
+          t$gridx <- grid[[j]]$gridx
+          
+          data.table::setcolorder(t, c(currentNames[c(1:2)], "gridy", "gridx", currentNames[c(3:length(currentNames))]))
+          
+          return(t)
+        }, error = function(e) {
+          cat(paste0('        Error received from API on location ',j,': Try ',tryCount,'\n'))
+          
+          Sys.sleep(runif(n = 1
+                          ,min = 10
+                          ,max = 30))
+          
+          tryCount <- tryCount + 1
+          tryCount
+        })
+      
+      if (tryCount >= maxTryCount) {
+        cat(paste0('        NO DATA WAS ABLE TO RETRIEVED FROM API FOR LOCATION ',j,'\n'))
+        
+        return(simpleError(message = 'Consecutive Errors from API\n'))
+      }
+    }
   }
   
   grid <- data.table::rbindlist(grid)
