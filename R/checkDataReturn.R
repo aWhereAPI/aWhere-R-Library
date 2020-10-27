@@ -107,11 +107,11 @@ checkDataReturn_norms <- function(dataset,monthday_start,monthday_end,year_start
 
 checkDataReturn_forecasts <- function(dataset,day_start,day_end,block_size) {
   if (day_end != '') {
-    if (nrow(dataset) != round((difftime(day_end,day_start,units = 'days') +1L) * (24 / block_size))) {
+    if (nrow(dataset) != round((difftime(day_end,day_start,units = 'days') +1L)) * (24 / block_size)) {
       warning('Incorrect number of rows returned from API call; check returned data to determine issue',immediate. = TRUE)
     }
   } else {
-    if (nrow(dataset) != round((difftime(day_start,day_start,units = 'days') +1L) * (24 / block_size))) {
+    if (nrow(dataset) != round((difftime(day_start,day_start,units = 'days') +1L)) * (24 / block_size)) {
       warning('Incorrect number of rows returned from API call; check returned data to determine issue',immediate. = TRUE)
     }
   }
