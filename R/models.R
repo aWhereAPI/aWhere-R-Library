@@ -18,6 +18,7 @@
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -33,12 +34,13 @@
 get_models <- function(model_id = ''
                        ,keyToUse = awhereEnv75247$uid
                        ,secretToUse = awhereEnv75247$secret
-                       ,tokenToUse = awhereEnv75247$token) {
+                       ,tokenToUse = awhereEnv75247$token
+                       ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/models/")
+  url <- paste0(apiAddressToUse, "/agronomics/models/")
   
   if(model_id != "") {
     url <- paste0(url, model_id)
@@ -116,6 +118,7 @@ get_models <- function(model_id = ''
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -130,12 +133,13 @@ get_models <- function(model_id = ''
 get_model_details <- function(model_id
                               ,keyToUse = awhereEnv75247$uid
                               ,secretToUse = awhereEnv75247$secret
-                              ,tokenToUse = awhereEnv75247$token) {
+                              ,tokenToUse = awhereEnv75247$token
+                              ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/models/")
+  url <- paste0(apiAddressToUse, "/agronomics/models/")
   
   url <- paste0(url, model_id, "/details")
   
@@ -207,6 +211,7 @@ get_model_details <- function(model_id
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -224,12 +229,13 @@ get_model_results <- function(field_id
                               ,model_id
                               ,keyToUse = awhereEnv75247$uid
                               ,secretToUse = awhereEnv75247$secret
-                              ,tokenToUse = awhereEnv75247$token) {
+                              ,tokenToUse = awhereEnv75247$token
+                              ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/")
+  url <- paste0(apiAddressToUse, "/agronomics/fields/")
   
   url <- paste0(url, field_id, "/models/", model_id, "/results")
   
@@ -280,7 +286,6 @@ get_model_results <- function(field_id
     currentStage <- dplyr::mutate_at(currentStage, c("accumulatedGdds",'gddThreshold'), round, 2)
     
     currentStage <- dplyr::select(currentStage,c('date','stage','id','description','gddThreshold'))
-    
   }
   
   nextStage <- data.frame()

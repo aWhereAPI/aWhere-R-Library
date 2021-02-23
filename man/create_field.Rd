@@ -14,7 +14,8 @@ create_field(
   verbose = TRUE,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ create_field(
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{farmid}{an ID of your choosing for the farm to which this field belongs (string)}
 }
@@ -63,5 +66,5 @@ create_field(field_id = "field_test", latitude = 39.971906, longitude = -105.088
 }
 }
 \references{
-http://developer.awhere.com/api/reference/fields/create-field
+https://docs.awhere.com/knowledge-base-docs/create-a-field-location/
 }

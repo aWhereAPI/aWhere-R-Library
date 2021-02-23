@@ -8,7 +8,8 @@ get_models(
   model_id = "",
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ with the user's aWhere API account (string - optional)}
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - data.frame containing information about requested model(s)

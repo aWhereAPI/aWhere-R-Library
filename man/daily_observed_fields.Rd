@@ -11,7 +11,8 @@ daily_observed_fields(
   propertiesToInclude = "",
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ Field IDs are created using the create_field function.(string)}
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.frame of requested data for dates requested
@@ -59,7 +62,8 @@ Note about dates: The system does not adjust for any difference in dates between
 \dontrun{daily_observed_fields(field_id = 'field_test'
                                ,day_start = '2018-10-28'
                                ,day_end = '2018-12-01')}
+                               
 }
 \references{
-http://developer.awhere.com/api/reference/weather/observations
+https://docs.awhere.com/knowledge-base-docs/daily-observed-weather/
 }

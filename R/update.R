@@ -22,10 +22,11 @@
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - A message confirming the changes have been made
 #'
-#' @references http://developer.awhere.com/api/reference/fields/update-field
+#' @references https://docs.awhere.com/knowledge-base-docs/update-a-field-location/
 #'
 #' @import httr
 #'
@@ -39,13 +40,14 @@ update_field <- function(field_id
                          ,value_update
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
-                         ,tokenToUse = awhereEnv75247$token) {
+                         ,tokenToUse = awhereEnv75247$token
+                         ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
   ## Creating the request
-  url <- paste0(awhereEnv75247$apiAddress, "/fields/",field_id)
+  url <- paste0(apiAddressToUse, "/fields/",field_id)
 
   postbody <- paste0('[{"op":"replace","path":"/', variable_update, '","value":"', value_update, '"}]')
 
@@ -97,8 +99,11 @@ update_field <- function(field_id
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - A message confirming the changes have been made
+#'
+#' @references https://docs.awhere.com/knowledge-base-docs/update-all-or-part-of-a-planting-in-a-field/
 #'
 #' @import httr
 #'
@@ -118,7 +123,8 @@ update_planting <- function(field_id
                             ,harvest_date = ""
                             ,keyToUse = awhereEnv75247$uid
                             ,secretToUse = awhereEnv75247$secret
-                            ,tokenToUse = awhereEnv75247$token) {
+                            ,tokenToUse = awhereEnv75247$token
+                            ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
@@ -197,8 +203,7 @@ update_planting <- function(field_id
   body <- paste0(body, "]")
 
   ## Creating the request
-
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/", field_id, "/plantings/")
+  url <- paste0(apiAddressToUse, "/agronomics/fields/", field_id, "/plantings/")
 
   if(planting_id == "") {
     url <- paste0(url, "current")

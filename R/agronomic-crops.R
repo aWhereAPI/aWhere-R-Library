@@ -21,6 +21,7 @@
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -34,14 +35,15 @@
 #' @export
 
 get_crops <- function(crop_id = ''
-                       ,keyToUse = awhereEnv75247$uid
-                       ,secretToUse = awhereEnv75247$secret
-                       ,tokenToUse = awhereEnv75247$token) {
+                      ,keyToUse = awhereEnv75247$uid
+                      ,secretToUse = awhereEnv75247$secret
+                      ,tokenToUse = awhereEnv75247$token
+                      ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/crops/")
+  url <- paste0(apiAddressToUse, "/agronomics/crops/")
   
   if(crop_id != "") {
     url <- paste0(url, crop_id)

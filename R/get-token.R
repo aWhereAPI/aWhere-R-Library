@@ -12,7 +12,8 @@
 #' @param use_enviroment Optional logical value, determines whether API access
 #'                        token will be saved in a local locked environment in addition to being returned
 #'                        by the function. Defaults to \code{TRUE} to avoid breaking existing code.
-#'
+#' @param apiAddress Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' 
 #' @return List with three elements:#'
 #' error: logical indicating whether there was an error
 #' error_message: \code{NULL} if error is \code{FALSE}, a character error message otherwise
@@ -116,7 +117,8 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
 #' an error from being returned by R
 #'
 #' @param path_to_credentials absolute or relative path to the text file
-#' 
+#' @param apiAddress Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+
 #' @return vector with uid and secret in positions 1, 2
 #'
 #' @examples
@@ -187,9 +189,26 @@ check_JSON <- function(jsonObject
     }
   }
   
-  #Finally check to see if there was a different problem with the query and if so return the message
-  checkStatusCode(request)
+  #Under some circumstances the message received is different
+  if (any(grepl('You have exceeded the quota allowed for this API',jsonObject))) {
+    
+    cat('Pausing thread due to Rate Limit Exceeded\n')
+    
+    Sys.sleep(runif(n = 1
+                    ,min = 15
+                    ,max = 45))
+    
+    return(list(TRUE,NA,tokenToUse))
+  }
   
-  return(list(FALSE,NA,tokenToUse))
+  #Finally check to see if there was a different problem with the query and if so return the message
+  statusCode <- checkStatusCode(request)
+  
+  #We need to repeat the query if 429 code encountered, above fxn will have paused the thread
+  if (statusCode == 429) {
+    return(list(TRUE,NA,tokenToUse))
+  } else {
+    return(list(FALSE,NA,tokenToUse))
+  }
 }
 

@@ -21,7 +21,7 @@
 #'           date range is specified given any differences in timezone.  These differences can have implications
 #'           for whether a given date should be requested from the daily_observed functions or the forecast functions
 #'
-#' @references http://developer.awhere.com/api/reference/agronomics/norms
+#' @references https://docs.awhere.com/knowledge-base-docs/historical-agronomic-norms/
 #'
 #' @param field_id the field_id associated with the location for which you want to pull data.
 #'                  Field IDs are created using the create_field function. (string)
@@ -65,6 +65,7 @@
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -104,7 +105,8 @@ agronomic_norms_fields <- function(field_id
                                    ,includeFeb29thData = TRUE
                                    ,keyToUse = awhereEnv75247$uid
                                    ,secretToUse = awhereEnv75247$secret
-                                   ,tokenToUse = awhereEnv75247$token) {
+                                   ,tokenToUse = awhereEnv75247$token
+                                   ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   #############################################################
   #Checking Input Parameters
@@ -189,7 +191,7 @@ agronomic_norms_fields <- function(field_id
       ##############################################################################
 
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/agronomics")
+      urlAddress <- paste0(apiAddressToUse, "/agronomics")
 
       strBeg <- paste0('/fields')
       strCoord <- paste0('/',field_id)
@@ -298,6 +300,7 @@ agronomic_norms_fields <- function(field_id
         #the logic of the API requests can be recalculated
 
         calculateAPIRequests <- TRUE
+        break
       }
     }
     continueRequestingData <- FALSE
@@ -355,7 +358,7 @@ agronomic_norms_fields <- function(field_id
 #'           date range is specified given any differences in timezone.  These differences can have implications
 #'           for whether a given date should be requested from the daily_observed functions or the forecast functions
 #'
-#' @references http://developer.awhere.com/api/reference/agronomics/norms
+#' @references https://docs.awhere.com/knowledge-base-docs/historical-agronomic-norms-by-geolocation/
 #'
 #' @param latitude the latitude of the requested location (double, required)
 #' @param longitude the longitude of the requested locations (double, required)
@@ -399,6 +402,7 @@ agronomic_norms_fields <- function(field_id
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -408,7 +412,7 @@ agronomic_norms_fields <- function(field_id
 #' @return dataframe of requested data for dates requested
 #'
 #' @examples
-
+#' 
 #' \dontrun{agronomic_norms_latlng(latitude = 39.8282
 #'                                 ,longitude = -98.5795
 #'                                 ,month_day_start = '02-01'
@@ -421,8 +425,7 @@ agronomic_norms_fields <- function(field_id
 #'                                 ,gdd_base_temp = 10
 #'                                 ,gdd_min_boundary = 10
 #'                                 ,gdd_max_boundary = 30)}
-
-
+#'                                 
 #' @export
 
 
@@ -442,7 +445,8 @@ agronomic_norms_latlng <- function(latitude
                                    ,includeFeb29thData = TRUE
                                    ,keyToUse = awhereEnv75247$uid
                                    ,secretToUse = awhereEnv75247$secret
-                                   ,tokenToUse = awhereEnv75247$token) {
+                                   ,tokenToUse = awhereEnv75247$token
+                                   ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   #############################################################
   #Checking Input Parameters
@@ -527,7 +531,7 @@ agronomic_norms_latlng <- function(latitude
       ##############################################################################
 
       # Create query
-      urlAddress <- paste0(awhereEnv75247$apiAddress, "/agronomics")
+      urlAddress <- paste0(apiAddressToUse, "/agronomics")
 
       strBeg <- paste0('/locations')
       strCoord <- paste0('/',latitude,',',longitude)
@@ -636,6 +640,7 @@ agronomic_norms_latlng <- function(latitude
         #the logic of the API requests can be recalculated
 
         calculateAPIRequests <- TRUE
+        break
       }
     }
     continueRequestingData <- FALSE
@@ -697,7 +702,7 @@ agronomic_norms_latlng <- function(latitude
 #'           the responsibility of the user to either ensure that the date range specified is valid for all relevant
 #'           locations or to break the query into pieces.
 #'
-#' @references http://developer.awhere.com/api/reference/weather/norms
+#' @references https://docs.awhere.com/knowledge-base-docs/historical-agronomic-norms-by-geolocation/
 #'
 #' @param polygon either a data.frame with column names lat/lon, SpatialPolygons object,
 #'                   well-known text string, or extent from raster package. If the object contains
@@ -747,9 +752,12 @@ agronomic_norms_latlng <- function(latitude
 #' @param returnSpatialData returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
 #'                             NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
 #'                             as spatial data (sp package: optional)
+#' @param verbose Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI
+#' @param maxTryCount maximum number of times a call is repeated if the the API returns an error.  Random pause between each call
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -775,9 +783,8 @@ agronomic_norms_latlng <- function(latitude
 #'                               ,gdd_min_boundary = 10
 #'                               ,gdd_max_boundary = 30
 #'                               ,numcores = 2)}
-
+#'                               
 #' @export
-
 
 agronomic_norms_area <- function(polygon
                                  ,month_day_start
@@ -796,9 +803,11 @@ agronomic_norms_area <- function(polygon
                                  ,returnSpatialData = FALSE
                                  ,bypassNumCallCheck = FALSE
                                  ,verbose = TRUE
+                                 ,maxTryCount = 3
                                  ,keyToUse = awhereEnv75247$uid
                                  ,secretToUse = awhereEnv75247$secret
-                                 ,tokenToUse = awhereEnv75247$token) {
+                                 ,tokenToUse = awhereEnv75247$token
+                                 ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   #Checking Input Parameters
   checkCredentials(keyToUse,secretToUse,tokenToUse)
@@ -822,7 +831,7 @@ agronomic_norms_area <- function(polygon
     if (!(all(colnames(polygon) %in% c('lat','lon')) & length(colnames(polygon)) == 2)) {
       stop('Data.Frame of Lat/Lon coordinates improperly specified, please correct')
     }
-    grid <-  polygon
+    grid <-  data.table::as.data.table(polygon)
     
     grid[,c('gridx'
             ,'gridy') := list(getGridX(longitude = lon)
@@ -837,13 +846,41 @@ agronomic_norms_area <- function(polygon
 
   grid <- split(grid, seq(1,nrow(grid),1))
 
-  doParallel::registerDoParallel(cores=numcores)
+  if (numcores > 1) {
+    doParallel::registerDoParallel(cores=numcores)
+    `%loopToUse%` <- `%dopar%`
+  } else {
+    `%loopToUse%` <- `%do%`
+  }
+  
+  if (length(grid) > 1000) {
+    howOftenPrintVerbose <- 100
+  } else if (length(grid) > 500) {
+    howOftenPrintVerbose <- 50
+  } else if (length(grid) > 100) {
+    howOftenPrintVerbose <- 25 
+  } else {
+    howOftenPrintVerbose <- 10
+  }
 
   norms <- foreach::foreach(j=c(1:length(grid))
                             ,.packages = c("aWhereAPI")
-                            ,.export = c('awhereEnv75247')) %dopar% {
+                            ,.errorhandling = 'pass') %loopToUse% {
+                              
+    if (verbose == TRUE & (j == 1 | (j %% howOftenPrintVerbose) == 0)) {
+      cat(paste0('    Currently requesting data for location ',j,' of ',length(grid),'\n'))
+    }                                     
 
-      t <- agronomic_norms_latlng(latitude = grid[[j]]$lat
+    tryCount <- 1
+    
+    while (tryCount < maxTryCount) {
+      #this works because if no error occurs the loop will return the data
+      #given by the API.  If an error is received it will increment the
+      #tryCount timer and repear
+      tryCount <- 
+        tryCatch({
+          t <- 
+            agronomic_norms_latlng(latitude = grid[[j]]$lat
                                   ,longitude = grid[[j]]$lon
                                   ,month_day_start = month_day_start
                                   ,month_day_end = month_day_end
@@ -856,16 +893,37 @@ agronomic_norms_area <- function(polygon
                                   ,gdd_base_temp = gdd_base_temp
                                   ,gdd_min_boundary = gdd_min_boundary
                                   ,gdd_max_boundary = gdd_max_boundary
-                                  ,includeFeb29thData = includeFeb29thData)
+                                  ,includeFeb29thData = includeFeb29thData
+                                  ,keyToUse = keyToUse
+                                  ,secretToUse = secretToUse
+                                  ,tokenToUse = tokenToUse
+                                  ,apiAddressToUse = apiAddressToUse)
 
-      currentNames <- colnames(t)
-
-      t$gridy <- grid[[j]]$gridy
-      t$gridx <- grid[[j]]$gridx
-
-      data.table::setcolorder(t, c(currentNames[c(1:2)], "gridy", "gridx", currentNames[c(3:length(currentNames))]))
-
-      return(t)
+          currentNames <- colnames(t)
+    
+          t$gridy <- grid[[j]]$gridy
+          t$gridx <- grid[[j]]$gridx
+    
+          data.table::setcolorder(t, c(currentNames[c(1:2)], "gridy", "gridx", currentNames[c(3:length(currentNames))]))
+    
+          return(t)
+        }, error = function(e) {
+          cat(paste0('        Error received from API on location ',j,': Try ',tryCount,'\n'))
+          
+          Sys.sleep(runif(n = 1
+                          ,min = 10
+                          ,max = 30))
+          
+          tryCount <- tryCount + 1
+          tryCount
+        })
+      
+      if (tryCount >= maxTryCount) {
+        cat(paste0('        NO DATA WAS ABLE TO RETRIEVED FROM API FOR LOCATION ',j,'\n'))
+        
+        return(simpleError(message = 'Consecutive Errors from API\n'))
+      }
+    }
   }
 
   grid <- data.table::rbindlist(grid)

@@ -10,7 +10,8 @@ update_field(
   value_update,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -27,6 +28,8 @@ value can be found using get_fields("field_id") (character string) (required)}
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - A message confirming the changes have been made
@@ -49,5 +52,5 @@ multiple variables associated with a field, please pass commands sequentially.
 \dontrun{update_field(field_id = 'field_test',variable_update = 'farmId', value_update = 'This is my territory')}
 }
 \references{
-http://developer.awhere.com/api/reference/fields/update-field
+https://docs.awhere.com/knowledge-base-docs/update-a-field-location/
 }

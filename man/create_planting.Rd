@@ -17,7 +17,8 @@ create_planting(
   verbose = TRUE,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -44,6 +45,8 @@ create_planting(
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - system generated planting id along with a print text that informs if the query succeeded or not
@@ -84,5 +87,5 @@ and agronomics for that location in all the other APIs. The planting ID correspo
 }
 }
 \references{
-http://developer.awhere.com/api/reference/plantings/create
+https://docs.awhere.com/knowledge-base-docs/create-a-planting-in-a-field/
 }

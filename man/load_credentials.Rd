@@ -8,6 +8,8 @@ load_credentials(path_to_credentials, apiAddress = "api.awhere.com")
 }
 \arguments{
 \item{path_to_credentials}{absolute or relative path to the text file}
+
+\item{apiAddress}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 vector with uid and secret in positions 1, 2

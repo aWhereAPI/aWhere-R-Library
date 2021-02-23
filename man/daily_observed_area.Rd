@@ -13,9 +13,11 @@ daily_observed_area(
   bypassNumCallCheck = FALSE,
   returnSpatialData = FALSE,
   verbose = TRUE,
+  maxTryCount = 3,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -37,11 +39,17 @@ the over function from the sp package}
 NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
 as spatial data (sp package: optional)}
 
+\item{verbose}{Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI}
+
+\item{maxTryCount}{maximum number of times a call is repeated if the the API returns an error.  Random pause between each call}
+
 \item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{numcores:}{number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
 If you receive an error regarding the speed you are making calls, reduce this number}
@@ -83,5 +91,5 @@ Note about dates: The system does not adjust for any difference in dates between
                                
 }
 \references{
-http://developer.awhere.com/api/reference/weather/observations/geolocation
+https://docs.awhere.com/knowledge-base-docs/daily-observed-weather-by-geolocation/
 }

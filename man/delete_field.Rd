@@ -9,7 +9,8 @@ delete_field(
   verbose = TRUE,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ delete_field(
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - a print text that informs if the query succeded or not
@@ -35,4 +38,7 @@ This applies when we design/implement "Plantings" API.
 }
 \examples{
 \dontrun{delete_field("field123")}
+}
+\references{
+https://docs.awhere.com/knowledge-base-docs/delete-a-field/
 }

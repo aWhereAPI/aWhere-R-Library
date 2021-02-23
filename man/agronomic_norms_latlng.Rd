@@ -21,7 +21,8 @@ agronomic_norms_latlng(
   includeFeb29thData = TRUE,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -79,6 +80,8 @@ to drop this data to avoid later problems (defaults to TRUE)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
 \item{exclude_year}{Year or years which you'd like to exclude from
  your range of years on which to calculate norms. To exclude
  multiple years, provide a vector of years. You must include
@@ -109,6 +112,7 @@ Note about dates: The system does not adjust for any difference in dates between
           for whether a given date should be requested from the daily_observed functions or the forecast functions
 }
 \examples{
+
 \dontrun{agronomic_norms_latlng(latitude = 39.8282
                                 ,longitude = -98.5795
                                 ,month_day_start = '02-01'
@@ -121,7 +125,8 @@ Note about dates: The system does not adjust for any difference in dates between
                                 ,gdd_base_temp = 10
                                 ,gdd_min_boundary = 10
                                 ,gdd_max_boundary = 30)}
+                                
 }
 \references{
-http://developer.awhere.com/api/reference/agronomics/norms
+https://docs.awhere.com/knowledge-base-docs/historical-agronomic-norms-by-geolocation/
 }

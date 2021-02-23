@@ -13,8 +13,11 @@
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - a print text that informs if the query succeded or not
+#'
+#' @references https://docs.awhere.com/knowledge-base-docs/delete-a-field/
 #'
 #' @import httr
 #'
@@ -26,12 +29,13 @@ delete_field <- function(field_id
                          ,verbose = TRUE
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
-                         ,tokenToUse = awhereEnv75247$token) {
+                         ,tokenToUse = awhereEnv75247$token
+                         ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
-  url <- paste0(awhereEnv75247$apiAddress, "/fields/", field_id)
+  url <- paste0(apiAddressToUse, "/fields/", field_id)
 
   postbody <- paste0('{', field_id, '}');
 
@@ -76,9 +80,12 @@ delete_field <- function(field_id
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - a print text that informs if the query succeded or not
 #'
+#' @references https://docs.awhere.com/knowledge-base-docs/delete-a-planting/
+#' 
 #' @import httr
 #'
 #' @examples
@@ -91,12 +98,13 @@ delete_planting <- function(field_id
                             ,verbose = TRUE
                             ,keyToUse = awhereEnv75247$uid
                             ,secretToUse = awhereEnv75247$secret
-                            ,tokenToUse = awhereEnv75247$token) {
+                            ,tokenToUse = awhereEnv75247$token
+                            ,apiAddressToUse = awhereEnv75247$apiAddress) {
 
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   checkValidField(field_id,keyToUse,secretToUse,tokenToUse)
 
-  url <- paste0(awhereEnv75247$apiAddress, "/agronomics/fields/", field_id,'/plantings/',planting_id)
+  url <- paste0(apiAddressToUse, "/agronomics/fields/", field_id,'/plantings/',planting_id)
 
   doWeatherGet = TRUE
   while (doWeatherGet == TRUE) {
@@ -121,4 +129,3 @@ delete_planting <- function(field_id
     cat(paste0('Operation Complete'))
   }
 }
-

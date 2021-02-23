@@ -13,7 +13,8 @@ soils_latlng(
   useLocalTime = TRUE,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -38,6 +39,8 @@ being requested from or at UTC = 0.  Default is TRUE}
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.frame of requested data for dates requested
@@ -71,5 +74,5 @@ Note about dates: The system does not adjust for any difference in dates between
                           ,block_size = 12)}
 }
 \references{
-http://developer.awhere.com/api/reference/weather/forecasts/geolocation
+https://docs.awhere.com/knowledge-base-docs/forecast-weather-by-geolocation/
 }

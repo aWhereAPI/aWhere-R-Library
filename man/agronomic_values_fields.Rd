@@ -16,7 +16,8 @@ agronomic_values_fields(
   gdd_max_boundary = 30,
   keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token
+  tokenToUse = awhereEnv75247$token,
+  apiAddressToUse = awhereEnv75247$apiAddress
 )
 }
 \arguments{
@@ -59,6 +60,8 @@ The default value of 30 will be used if none is specified. (optional)}
 \item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
 \item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 dataframe of requested data for dates requested
@@ -95,5 +98,5 @@ Note about dates: The system does not adjust for any difference in dates between
                                  ,gdd_max_boundary = 30)}
 }
 \references{
-http://developer.awhere.com/api/reference/agronomics/values
+https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations/
 }

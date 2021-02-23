@@ -53,10 +53,20 @@ checkDataReturn_norms <- function(dataset,monthday_start,monthday_end,year_start
     currentYear <- yearsToTest[x]
     currentMonthDay_start <- paste0(currentYear,'-',monthday_start)
     currentMonthDay_end   <- paste0(currentYear,'-',monthday_end)
-    currentNumDays <- round(difftime(currentMonthDay_end
+    
+    currentNumDays <- tryCatch({round(difftime(currentMonthDay_end
                                      ,currentMonthDay_start
                                      ,units = 'days') +1L)
+    
+    
+    }, error = function(e) {
+      return(e)
+    })
 
+    if (any(class(currentNumDays) == 'simpleError')) {
+      next
+    }
+    
     if (includeFeb29thData == FALSE) {
       if (is.leapyear(currentYear) == TRUE) {
         if (currentMonthDay_start <= paste0(currentYear,'-02-29')) {
@@ -97,11 +107,11 @@ checkDataReturn_norms <- function(dataset,monthday_start,monthday_end,year_start
 
 checkDataReturn_forecasts <- function(dataset,day_start,day_end,block_size) {
   if (day_end != '') {
-    if (nrow(dataset) != round((difftime(day_end,day_start,units = 'days') +1L) * (24 / block_size))) {
+    if (nrow(dataset) != round((difftime(day_end,day_start,units = 'days') +1L)) * (24 / block_size)) {
       warning('Incorrect number of rows returned from API call; check returned data to determine issue',immediate. = TRUE)
     }
   } else {
-    if (nrow(dataset) != round((difftime(day_start,day_start,units = 'days') +1L) * (24 / block_size))) {
+    if (nrow(dataset) != round((difftime(day_start,day_start,units = 'days') +1L)) * (24 / block_size)) {
       warning('Incorrect number of rows returned from API call; check returned data to determine issue',immediate. = TRUE)
     }
   }

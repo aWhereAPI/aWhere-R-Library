@@ -21,7 +21,7 @@
 #'           date range is specified given any differences in timezone.  These differences can have implications
 #'           for whether a given date should be requested from the daily_observed functions or the forecast functions
 #'
-#' @references http://developer.awhere.com/api/forecast-weather-api
+#' @references https://docs.awhere.com/knowledge-base-docs/forecast-weather/
 #'
 #' @param field_id the field_id associated with the location for which you want to pull data.
 #'                Field IDs are created using the create_field function. (string)
@@ -36,6 +36,7 @@
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -62,7 +63,8 @@ soils_fields <- function(field_id
                          ,useLocalTime = TRUE
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
-                         ,tokenToUse = awhereEnv75247$token) {
+                         ,tokenToUse = awhereEnv75247$token
+                         ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   
   data <- 
@@ -74,7 +76,8 @@ soils_fields <- function(field_id
                      ,returnOnlySoilVars = TRUE
                      ,keyToUse = keyToUse
                      ,secretToUse = secretToUse
-                     ,tokenToUse = tokenToUse) 
+                     ,tokenToUse = tokenToUse
+                     ,apiAddressToUse = apiAddressToUse) 
   
   return(data)
   
@@ -103,7 +106,7 @@ soils_fields <- function(field_id
 #'           date range is specified given any differences in timezone.  These differences can have implications
 #'           for whether a given date should be requested from the daily_observed functions or the forecast functions
 #'
-#' @references http://developer.awhere.com/api/reference/weather/forecasts/geolocation
+#' @references https://docs.awhere.com/knowledge-base-docs/forecast-weather-by-geolocation/
 #'
 #' @param latitude the latitude of the requested location (double)
 #' @param longitude the longitude of the requested locations (double)
@@ -118,6 +121,7 @@ soils_fields <- function(field_id
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return data.frame of requested data for dates requested
 #'
@@ -144,7 +148,8 @@ soils_latlng <- function(latitude
                          ,useLocalTime = TRUE
                          ,keyToUse = awhereEnv75247$uid
                          ,secretToUse = awhereEnv75247$secret
-                         ,tokenToUse = awhereEnv75247$token) {
+                         ,tokenToUse = awhereEnv75247$token
+                         ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   data <- 
     forecasts_latlng(latitude = latitude
@@ -156,7 +161,8 @@ soils_latlng <- function(latitude
                      ,returnOnlySoilVars = TRUE
                      ,keyToUse = keyToUse
                      ,secretToUse = secretToUse
-                     ,tokenToUse = tokenToUse) 
+                     ,tokenToUse = tokenToUse
+                     ,apiAddressToUse = apiAddressToUse) 
   
   return(data)
 }
@@ -184,7 +190,7 @@ soils_latlng <- function(latitude
 #'           date range is specified given any differences in timezone.  These differences can have implications
 #'           for whether a given date should be requested from the daily_observed functions or the forecast functions
 #'
-#' @references http://developer.awhere.com/api/reference/weather/forecasts/geolocation
+#' @references https://docs.awhere.com/knowledge-base-docs/forecast-weather-by-geolocation/
 #'
 #' @param polygon either a data.frame with column names lat/lon, SpatialPolygons object,
 #'                   well-known text string, or extent from raster package. If the object contains
@@ -206,6 +212,7 @@ soils_latlng <- function(latitude
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -230,17 +237,18 @@ soils_latlng <- function(latitude
 
 
 soils_area <- function(polygon
-                           ,day_start = as.character(Sys.Date())
-                           ,day_end = ''
-                           ,block_size = 1
-                           ,useLocalTime = TRUE
-                           ,numcores = 2
-                           ,bypassNumCallCheck = FALSE
-                           ,returnSpatialData = FALSE
-                           ,verbose = TRUE
-                           ,keyToUse = awhereEnv75247$uid
-                           ,secretToUse = awhereEnv75247$secret
-                           ,tokenToUse = awhereEnv75247$token) {
+                       ,day_start = as.character(Sys.Date())
+                       ,day_end = ''
+                       ,block_size = 1
+                       ,useLocalTime = TRUE
+                       ,numcores = 2
+                       ,bypassNumCallCheck = FALSE
+                       ,returnSpatialData = FALSE
+                       ,verbose = TRUE
+                       ,keyToUse = awhereEnv75247$uid
+                       ,secretToUse = awhereEnv75247$secret
+                       ,tokenToUse = awhereEnv75247$token
+                       ,apiAddressToUse = awhereEnv75247$apiAddress) {
   
   data <- 
     forecasts_area(polygon = polygon
@@ -255,8 +263,8 @@ soils_area <- function(polygon
                    ,verbose = verbose
                    ,keyToUse = keyToUse
                    ,secretToUse = secretToUse
-                   ,tokenToUse = tokenToUse)
+                   ,tokenToUse = tokenToUse
+                   ,apiAddressToUse = apiAddressToUse)
   
   return(data)
 }
-
