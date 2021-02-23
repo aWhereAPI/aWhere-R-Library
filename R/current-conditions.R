@@ -18,12 +18,12 @@
 #'
 #' @references http://developer.awhere.com/api/reference/weather/current
 #'
-#' @param - field_id: the field_id having previously been created with the createField Function
-#' @param - sources: Which source to use for pulling the current conditions.  Valid values are
+#' @param field_id the field_id having previously been created with the createField Function
+#' @param sources Which source to use for pulling the current conditions.  Valid values are
 #'                    'metar', 'mesonet', 'metar-mesonet', 'pws', 'all'.  Default value is 'all'
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -112,13 +112,13 @@ current_conditions_fields <- function(field_id
 #'
 #' @references http://developer.awhere.com/api/reference/weather/current
 #'
-#' @param - latitude: the latitude of the requested location
-#' @param - longitude: the longitude of the requested locations
-#' @param - sources: Which source to use for pulling the current conditions.  Valid values are
-#'                    'metar', 'mesonet', 'metar-mesonet', 'pws', 'all'.  Default value is 'all'
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param latitude the latitude of the requested location
+#' @param longitude the longitude of the requested locations
+#' @param sources Which source to use for pulling the current conditions.  Valid values are
+#'                  'metar', 'mesonet', 'metar-mesonet', 'pws', 'all'.  Default value is 'all'
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return data.table of requested data for dates requested
 #'

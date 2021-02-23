@@ -7,9 +7,9 @@
 checkValidLatLong(latitude, longitude)
 }
 \arguments{
-\item{-}{latitude: the latitude for the location for which you want data}
+\item{latitude}{the latitude for the location for which you want data}
 
-\item{-}{longitude: the latitude for the location for which you want data}
+\item{longitude}{the latitude for the location for which you want data}
 }
 \description{
 \code{checkValidLatLong} Checks to see if Lat/Long coordinates are valid

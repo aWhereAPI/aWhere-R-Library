@@ -24,14 +24,14 @@
 #'
 #' @references http://developer.awhere.com/api/reference/weather/observations
 #'
-#' @param - field_id: the field_id associated with the location for which you want to pull data.
-#'          Field IDs are created using the create_field function.(string)
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD.
-#' @param - day_end: character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
-#' @param - propertiesToInclude: character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param field_id the field_id associated with the location for which you want to pull data.
+#'                  Field IDs are created using the create_field function.(string)
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD.
+#' @param day_end character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
+#' @param propertiesToInclude character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -47,6 +47,7 @@
 #'                                ,day_end = '2018-12-01')}
 
 #' @export
+
 daily_observed_fields <- function(field_id
                                   ,day_start
                                   ,day_end
@@ -222,14 +223,14 @@ daily_observed_fields <- function(field_id
 #'
 #' @references http://developer.awhere.com/api/reference/weather/observations/geolocation
 #'
-#' @param - latitude: the latitude of the requested location (double)
-#' @param - longitude: the longitude of the requested locations (double)
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - propertiesToInclude: character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param latitude the latitude of the requested location (double)
+#' @param longitude the longitude of the requested locations (double)
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param propertiesToInclude character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -425,23 +426,23 @@ daily_observed_latlng <- function(latitude
 #'
 #' @references http://developer.awhere.com/api/reference/weather/observations/geolocation
 #' 
-#' @param - polygon: either a data.frame with column names lat/lon, SpatialPolygons object,
+#' @param polygon either a data.frame with column names lat/lon, SpatialPolygons object,
 #'                  well-known text string, or extent from raster package. If the object contains
 #'                  multiple polygons, the union of them is used.  Information from each individal
 #'                  polygon can be retrieved by returning spatial data and using
 #'                  the over function from the sp package
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - propertiesToInclude: character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)
-#' @param - numcores: number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param propertiesToInclude character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)
+#' @param numcores: number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
 #'                    If you receive an error regarding the speed you are making calls, reduce this number
-#' @param - bypassNumCallCheck: set to TRUE to avoid prompting the user to confirm that they want to begin making API calls
-#' @param - returnSpatialData: returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
+#' @param bypassNumCallCheck set to TRUE to avoid prompting the user to confirm that they want to begin making API calls
+#' @param returnSpatialData returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
 #'                             NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
 #'                             as spatial data (sp package: optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table

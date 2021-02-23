@@ -3,7 +3,7 @@
 #' @description
 #' \code{checkStatusCode} Checks to see if valid aWhere API credentials are loaded
 #'
-#' @param - request: object returned from HTTR
+#' @param request object returned from HTTR
 
 checkStatusCode<- function(request) {
 

@@ -4,33 +4,40 @@
 \alias{soils_latlng}
 \title{soils_latlng}
 \usage{
-soils_latlng(latitude, longitude, day_start = as.character(Sys.Date()),
-  day_end = "", block_size = 1, useLocalTime = TRUE,
-  keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+soils_latlng(
+  latitude,
+  longitude,
+  day_start = as.character(Sys.Date()),
+  day_end = "",
+  block_size = 1,
+  useLocalTime = TRUE,
+  keyToUse = awhereEnv75247$uid,
+  secretToUse = awhereEnv75247$secret,
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{latitude: the latitude of the requested location (double)}
+\item{latitude}{the latitude of the requested location (double)}
 
-\item{-}{longitude: the longitude of the requested locations (double)}
+\item{longitude}{the longitude of the requested locations (double)}
 
-\item{-}{day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+\item{day_start}{character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
 Defaults to system date if left blank. (optional)}
 
-\item{-}{day_end: character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
+\item{day_end}{character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
 Returns all available forecast if left blank. (optional)}
 
-\item{-}{block_size: Integer value that corresponds to the number of hours to include in each time block.
+\item{block_size}{Integer value that corresponds to the number of hours to include in each time block.
 Defaults to a 1 hour block.  This value must divide evenly into 24. (integer - optional)}
 
-\item{-}{useLocalTime: whether the data specified is the date specified at the location where data is
+\item{useLocalTime}{whether the data specified is the date specified at the location where data is
 being requested from or at UTC = 0.  Default is TRUE}
 
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.frame of requested data for dates requested

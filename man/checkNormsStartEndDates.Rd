@@ -7,10 +7,10 @@
 checkNormsStartEndDates(month_day_start, month_day_end)
 }
 \arguments{
-\item{-}{monthday_start: character string of the month and day for the start
+\item{monthday_start}{character string of the month and day for the start
 of the range of days you are calculating norms for, e.g., '07-01' (July 1)}
 
-\item{-}{monthday_end: character string of the month and day for the end of the
+\item{monthday_end}{character string of the month and day for the end of the
 range of days you are calculating norms for, e.g., '07-10' (July 10)}
 }
 \description{

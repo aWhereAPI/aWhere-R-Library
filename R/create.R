@@ -17,15 +17,15 @@
 #'
 #' All spaces will be converted to underscores to conform with the requirements of the API.
 #'
-#' @param - field_id: an ID of your choosing (string)
-#' @param - latitude: the latitude of the field location in decimal format (double)
-#' @param - longitude: the longitude of the field location in decimal format (double)
-#' @param - farmid: an ID of your choosing for the farm to which this field belongs (string)
-#' @param - field_name: a name of the location (optional - string)
-#' @param - acres: the acres of the field (optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param field_id an ID of your choosing (string)
+#' @param latitude the latitude of the field location in decimal format (double)
+#' @param longitude the longitude of the field location in decimal format (double)
+#' @param farmid an ID of your choosing for the farm to which this field belongs (string)
+#' @param field_name a name of the location (optional - string)
+#' @param acres the acres of the field (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - printed text that informs if the query succeeded or not
 #'
@@ -135,18 +135,18 @@ create_field <- function(field_id
 #' This script creates a planting in a field location in the aWhere platform. By setting an Id you can retrieve the weather
 #' and agronomics for that location in all the other APIs. The planting ID corresponds to a planting within a field.
 #'
-#' @param - field_id: an ID of your choosing (string)
-#' @param - crop: cropId or crop name (string)
-#' @param - planting_date: date crop was planted in the field. Format as YYYY-MM-DD (string)
-#' @param - proj_yield_amount: amount of projected yield from planting (string)
-#' @param - proj_yield_units: units of projected yield (string - optional)
-#' @param - proj_harvest_date: projected harvest date at the start of the season. Format as YYYY-MM-DD (string - optional)
-#' @param - yield_amount: actual yield (string - optional)
-#' @param - yield_units: units of actual yield (string - optional)
-#' @param - harvest_date: actual harvest date at end of season. Format as YYYY-MM-DD (string - optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param field_id an ID of your choosing (string)
+#' @param crop cropId or crop name (string)
+#' @param planting_date date crop was planted in the field. Format as YYYY-MM-DD (string)
+#' @param proj_yield_amount amount of projected yield from planting (string)
+#' @param proj_yield_units units of projected yield (string - optional)
+#' @param proj_harvest_date projected harvest date at the start of the season. Format as YYYY-MM-DD (string - optional)
+#' @param yield_amount actual yield (string - optional)
+#' @param yield_units units of actual yield (string - optional)
+#' @param harvest_date actual harvest date at end of season. Format as YYYY-MM-DD (string - optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - system generated planting id along with a print text that informs if the query succeeded or not
 #'
@@ -267,17 +267,18 @@ create_planting <- function(field_id
 #' Important: There is a limit of 10,000 requests per batch job.
 #' Note: The current conditions API cannot be included in batch jobs.
 #'
-#' @param - api_requests: a list of "verb endpoint" strings. This is the actual API request you're asking the Batch Jobs system to call.
+#' @param api_requests a list of "verb endpoint" strings. This is the actual API request you're asking the Batch Jobs system to call.
 #'                        It must be a valid aWhere endpoint and is expressed as the HTTP verb, a space, and the relative URI.
 #'                        For example: "GET /v2/weather/fields/1234/observations"
-#' @param - titles: a vector of names for each individual request in api, which can aid in identifying each set of results within a batch.
+#' @param titles a vector of names for each individual request in api, which can aid in identifying each set of results within a batch.
 #'                  This need not be unique between all the jobs.
-#' @param - job_title: A name for the job, which can aid you in identifying the result set.
-#' @param - job_type: The type of job. Currently this system only supports the type "batch."
-#' @return - job_id: The Job ID. You will need this to retrieve the job status and results.
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param job_title A name for the job, which can aid you in identifying the result set.
+#' @param job_type The type of job. Currently this system only supports the type "batch."
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#'
+#' @return job_id: The Job ID. You will need this to retrieve the job status and results.
 #'
 #' @references https://developer.awhere.com/api/reference/batch/create
 #'

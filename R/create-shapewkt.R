@@ -3,8 +3,8 @@
 #' @description
 #' \code{create_shapewkt} writes the WKT for a grid cell, based on a centroid coordinate
 #'
-#' @param - longitude: longitude coordinate for centroid
-#' @param - latitude: latitude coordinate for centroid
+#' @param longitude longitude coordinate for centroid
+#' @param latitude latitude coordinate for centroid
 #'
 #' @export
 create_shapewkt <- function(longitude, latitude) {
@@ -30,7 +30,7 @@ create_shapewkt <- function(longitude, latitude) {
 #' @description
 #' \code{custom_fortify} breaks up a shapewkt string into a numeric vector containing the points in the WKT
 #'
-#' @param - shapewkt: a well-known text string for a grid cell polygon
+#' @param shapewkt a well-known text string for a grid cell polygon
 #'
 #' @export
 custom_fortify <- function(shapewkt) {

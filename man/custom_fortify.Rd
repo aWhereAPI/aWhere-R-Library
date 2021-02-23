@@ -7,7 +7,7 @@
 custom_fortify(shapewkt)
 }
 \arguments{
-\item{-}{shapewkt: a well-known text string for a grid cell polygon}
+\item{shapewkt}{a well-known text string for a grid cell polygon}
 }
 \description{
 \code{custom_fortify} breaks up a shapewkt string into a numeric vector containing the points in the WKT

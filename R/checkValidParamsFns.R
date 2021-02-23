@@ -3,9 +3,9 @@
 #' @description
 #' \code{checkCredentials} Checks to see if valid aWhere API credentials are loaded
 #'
-#' @param - keyToUse: aWhere API key to use
-#' @param - secretToUse: aWhere API secret to use
-#' @param - tokenToUse: aWhere API token to use
+#' @param keyToUse aWhere API key to use
+#' @param secretToUse aWhere API secret to use
+#' @param tokenToUse aWhere API token to use
 
 checkCredentials <- function(keyToUse,secretToUse,tokenToUse) {
 
@@ -19,10 +19,10 @@ checkCredentials <- function(keyToUse,secretToUse,tokenToUse) {
 #' @description
 #' \code{checkValidField} Checks to see if the Field ID is valid
 #'
-#' @param - field_id: the field_id having previously been created with the createField Function
-#' @param - keyToUse: aWhere API key to use
-#' @param - secretToUse: aWhere API secret to use
-#' @param - tokenToUse: aWhere API token to use
+#' @param field_id the field_id having previously been created with the createField Function
+#' @param keyToUse aWhere API key to use
+#' @param secretToUse aWhere API secret to use
+#' @param tokenToUse aWhere API token to use
 
 
 checkValidField <- function(field_id
@@ -46,8 +46,8 @@ checkValidField <- function(field_id
 #' @description
 #' \code{checkValidLatLong} Checks to see if Lat/Long coordinates are valid
 #'
-#' @param - latitude: the latitude for the location for which you want data
-#' @param - longitude: the latitude for the location for which you want data
+#' @param latitude the latitude for the location for which you want data
+#' @param longitude the latitude for the location for which you want data
 
 checkValidLatLong <- function(latitude,longitude) {
   if (suppressWarnings(is.na(as.double(latitude))) == FALSE) {
@@ -72,8 +72,8 @@ checkValidLatLong <- function(latitude,longitude) {
 #' @description
 #' \code{checkValidStartEndDates} Checks to see if Start/End Dates passed are valid
 #'
-#' @param - day_start: character string of start date in form: YYYY-MM-DD
-#' @param - day_end: character string of end date in form: YYYY-MM-DD
+#' @param day_start character string of start date in form: YYYY-MM-DD
+#' @param day_end character string of end date in form: YYYY-MM-DD
 
 checkValidStartEndDates <- function(day_start,day_end) {
 
@@ -112,8 +112,8 @@ checkValidStartEndDates <- function(day_start,day_end) {
 #' @description
 #' \code{checkValidStartEndDates} Checks to see if Start/End Dates passed are valid
 #'
-#' @param - day_start: character string of start date in form: YYYY-MM-DD
-#' @param - day_end: character string of end date in form: YYYY-MM-DD
+#' @param day_start character string of start date in form: YYYY-MM-DD
+#' @param day_end character string of end date in form: YYYY-MM-DD
 
 checkValidStartEndDatesAgronomics <- function(day_start,day_end) {
 
@@ -147,8 +147,8 @@ checkValidStartEndDatesAgronomics <- function(day_start,day_end) {
 #' @description
 #' \code{checkForecastParams} Checks to see if Forecast Params are valid
 #'
-#' @param - day_start: character string of start date in form: YYYY-MM-DD
-#' @param - block_size: Integer value that corresponds to the number of hours to include in each time block.
+#' @param day_start character string of start date in form: YYYY-MM-DD
+#' @param block_size Integer value that corresponds to the number of hours to include in each time block.
 
 checkForecastParams <- function(block_size) {
 
@@ -162,8 +162,8 @@ checkForecastParams <- function(block_size) {
 #' @description
 #' \code{checkValidStartEndDatesForecast} Checks to see if Start/End Dates passed are valid for Forecast
 #'
-#' @param - day_start: character string of start date in form: YYYY-MM-DD
-#' @param - day_end: character string of end date in form: YYYY-MM-DD
+#' @param day_start character string of start date in form: YYYY-MM-DD
+#' @param day_end character string of end date in form: YYYY-MM-DD
 
 checkValidStartEndDatesForecast <- function(day_start,day_end) {
 
@@ -198,16 +198,16 @@ checkValidStartEndDatesForecast <- function(day_start,day_end) {
 #' @description
 #' \code{checkGDDParams} Checks to see if GDD params are valid
 #'
-#' @param - gdd_method: There are variety of equations available for calculating growing degree-days.
+#' @param gdd_method There are variety of equations available for calculating growing degree-days.
 #'                     Valid entries are: 'standard', 'modifiedstandard', 'min-temp-cap', 'min-temp-constant'
 #'                     See the API documentation for a description of each method.  The standard
 #'                     method will be used if none is specified
-#' @param - gdd_base_temp: The base temp to use for the any of the GDD equations. The default value of 10 will
+#' @param gdd_base_temp The base temp to use for the any of the GDD equations. The default value of 10 will
 #'                       be used if none is specified
-#' @param - gdd_min_boundary: The minimum boundary to use in the selected GDD equation.
+#' @param gdd_min_boundary The minimum boundary to use in the selected GDD equation.
 #'                           The behavior of this value is different depending on the equation you're using
 #'                           The default value of 10 will be used if none is specified
-#' @param - gdd_max_boundary: The max boundary to use in the selected GDD equation. The
+#' @param gdd_max_boundary The max boundary to use in the selected GDD equation. The
 #'                          behavior of this value is different depending on the equation you're using.
 #'                          The default value of 30 will be used if none is specified
 
@@ -236,7 +236,7 @@ checkGDDParams <- function(gdd_method,gdd_base_temp,gdd_min_boundary,gdd_max_bou
 #' @description
 #' \code{checkAccumulationStartDate} Checks to see if the accumulation start date is valid
 #'
-#' @param - accumulation_start_date: If you want to start counting accumulations from
+#' @param accumulation_start_date If you want to start counting accumulations from
 #'                                 before the specified start date (or before the
 #'                                 planting date if using the most recent Planting),
 #'                                 use this parameter to specify the date from which
@@ -298,7 +298,7 @@ checkAccumulationStartDate <- function(accumulation_start_date,month_day_start) 
 #' @description
 #' \code{checkAccumulationStartDate} Checks to see if the accumulation start date is valid
 #'
-#' @param - accumulation_start_date: If you want to start counting accumulations from
+#' @param accumulation_start_date If you want to start counting accumulations from
 #'                                 before the specified start date (or before the
 #'                                 planting date if using the most recent Planting),
 #'                                 use this parameter to specify the date from which
@@ -355,9 +355,9 @@ checkForecastSources <- function(sources) {
 #' @description
 #' \code{checkNormsStartEndDates} Checks Start/End Dates for Norms endpoint are valid
 #'
-#' @param - monthday_start: character string of the month and day for the start
+#' @param monthday_start character string of the month and day for the start
 #'                         of the range of days you are calculating norms for, e.g., '07-01' (July 1)
-#' @param - monthday_end: character string of the month and day for the end of the
+#' @param monthday_end character string of the month and day for the end of the
 #'                       range of days you are calculating norms for, e.g., '07-10' (July 10)
 
 checkNormsStartEndDates <- function(month_day_start,month_day_end) {
@@ -405,11 +405,11 @@ checkNormsStartEndDates <- function(month_day_start,month_day_end) {
 #' @description
 #' \code{checkNormsYearsToRequest} Check that the Years to be Requested for Norms is valid
 #'
-#' @param - year_start: the starting year (inclusive) of the range of years for which
+#' @param year_start the starting year (inclusive) of the range of years for which
 #'                     you're calculating norms, e.g., 2008
-#' @param - year_end: the end year (inclusive) of the range of years for which you're
-#'                     calculating norms, e.g., 2015
-#' @param - exclude_years: You can opt to exclude one or more years from the range, and
+#' @param year_end the end year (inclusive) of the range of years for which you're
+#'                   calculating norms, e.g., 2015
+#' @param exclude_years You can opt to exclude one or more years from the range, and
 #'                        it's values will not be included in the averages. To exclude
 #'                       multiple years, provide a vector of years. Note: You must always have
 #'                       at least three years of data to average
@@ -465,7 +465,7 @@ checkNormsYearsToRequest <- function(year_start,year_end,month_day_start,month_d
 #' @description
 #' \code{checkPropertiesWeather} Check that the Years to be Requested for Norms is valid
 #'
-#' @param - propertiesToInclude: vector of properties requested from API
+#' @param propertiesToInclude vector of properties requested from API
 
 checkPropertiesEndpoint <- function(endpoint,propertiesToInclude) {
 

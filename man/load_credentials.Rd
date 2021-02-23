@@ -7,7 +7,7 @@
 load_credentials(path_to_credentials, apiAddress = "api.awhere.com")
 }
 \arguments{
-\item{-}{path_to_credentials: absolute or relative path to the text file}
+\item{path_to_credentials}{absolute or relative path to the text file}
 }
 \value{
 vector with uid and secret in positions 1, 2

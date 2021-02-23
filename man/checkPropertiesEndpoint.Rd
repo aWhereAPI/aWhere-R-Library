@@ -7,7 +7,7 @@
 checkPropertiesEndpoint(endpoint, propertiesToInclude)
 }
 \arguments{
-\item{-}{propertiesToInclude: vector of properties requested from API}
+\item{propertiesToInclude}{vector of properties requested from API}
 }
 \description{
 \code{checkPropertiesWeather} Check that the Years to be Requested for Norms is valid

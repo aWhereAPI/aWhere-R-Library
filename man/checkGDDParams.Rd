@@ -4,23 +4,22 @@
 \alias{checkGDDParams}
 \title{Check Valid GDD Params}
 \usage{
-checkGDDParams(gdd_method, gdd_base_temp, gdd_min_boundary,
-  gdd_max_boundary)
+checkGDDParams(gdd_method, gdd_base_temp, gdd_min_boundary, gdd_max_boundary)
 }
 \arguments{
-\item{-}{gdd_method: There are variety of equations available for calculating growing degree-days.
+\item{gdd_method}{There are variety of equations available for calculating growing degree-days.
 Valid entries are: 'standard', 'modifiedstandard', 'min-temp-cap', 'min-temp-constant'
 See the API documentation for a description of each method.  The standard
 method will be used if none is specified}
 
-\item{-}{gdd_base_temp: The base temp to use for the any of the GDD equations. The default value of 10 will
+\item{gdd_base_temp}{The base temp to use for the any of the GDD equations. The default value of 10 will
 be used if none is specified}
 
-\item{-}{gdd_min_boundary: The minimum boundary to use in the selected GDD equation.
+\item{gdd_min_boundary}{The minimum boundary to use in the selected GDD equation.
 The behavior of this value is different depending on the equation you're using
 The default value of 10 will be used if none is specified}
 
-\item{-}{gdd_max_boundary: The max boundary to use in the selected GDD equation. The
+\item{gdd_max_boundary}{The max boundary to use in the selected GDD equation. The
 behavior of this value is different depending on the equation you're using.
 The default value of 30 will be used if none is specified}
 }

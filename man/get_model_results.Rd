@@ -4,18 +4,22 @@
 \alias{get_model_results}
 \title{Get Model Results}
 \usage{
-get_model_results(field_id, model_id, keyToUse = awhereEnv75247$uid,
+get_model_results(
+  field_id,
+  model_id,
+  keyToUse = awhereEnv75247$uid,
   secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{model_id: A model id to retrieve details for that specific model}
+\item{model_id}{A model id to retrieve details for that specific model}
 
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - 3 element named list containing information on previous growth stages

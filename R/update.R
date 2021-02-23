@@ -14,14 +14,14 @@
 #' updated one variable at a time, for one field at a time. If you need to update multiple fields or
 #' multiple variables associated with a field, please pass commands sequentially.
 #'
-#' @param - field_id: the unique field ID for the field you want to update (character string) (required)
-#' @param - variable_update: the variable that needs to be updated, either "farmId", "name", or "acres"
+#' @param field_id the unique field ID for the field you want to update (character string) (required)
+#' @param variable_update the variable that needs to be updated, either "farmId", "name", or "acres"
 #'                           (character string) (required)
-#' @param - value_update: the new value for variable_update, to replace the existing value. The existing
+#' @param value_update the new value for variable_update, to replace the existing value. The existing
 #'                        value can be found using get_fields("field_id") (character string) (required)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - A message confirming the changes have been made
 #'
@@ -85,18 +85,18 @@ update_field <- function(field_id
 #' were previously set, and now are not, will be null'd. The required properties must
 #' also be set even if they are changed.
 #'
-#' @param - planting_id: ID of planting to update
-#' @param - field_id: ID of field to search for plantings within
-#' @param - planting_date: new date to update as planting's plant date
-#' @param - proj_yield_amount: new amount to update as planting's projected yield amount
-#' @param - proj_yield_units: new units to update as planting's projected yield units
-#' @param - proj_harvest_date: new projected harvest date to update as planting's projected harvest date
-#' @param - yield_amount: new amount to update as planting's yield amount
-#' @param - yield_units: new units to update as planting's yield units
-#' @param - harvest_date: new actual harvest date to update as planting's harvest date
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param planting_id ID of planting to update
+#' @param field_id ID of field to search for plantings within
+#' @param planting_date new date to update as planting's plant date
+#' @param proj_yield_amount new amount to update as planting's projected yield amount
+#' @param proj_yield_units new units to update as planting's projected yield units
+#' @param proj_harvest_date new projected harvest date to update as planting's projected harvest date
+#' @param yield_amount new amount to update as planting's yield amount
+#' @param yield_units new units to update as planting's yield units
+#' @param harvest_date new actual harvest date to update as planting's harvest date
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - A message confirming the changes have been made
 #'
@@ -106,6 +106,7 @@ update_field <- function(field_id
 #' \dontrun{update_planting("field_test", "156036", harvest_date = "2016-02-01", yield_amount = "60", yield_units = "Bushels")}
 #'
 #' @export
+
 update_planting <- function(field_id
                             ,planting_id
                             ,planting_date = ""
@@ -227,4 +228,3 @@ update_planting <- function(field_id
 
   cat(paste0('Operation Complete'))
 }
-

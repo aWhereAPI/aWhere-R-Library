@@ -7,7 +7,7 @@
 verify_api_calls(grid, bypassNumCallCheck)
 }
 \arguments{
-\item{-}{grid: data frame returned from create_awhere_grid}
+\item{grid}{data frame returned from create_awhere_grid}
 }
 \description{
 \code{verify_api_calls} Tells user how many api calls will be made to pull the data requested

@@ -4,7 +4,7 @@
 #' @description
 #' \code{removeUnnecessaryColumns} Removes unnecessary columns from API Return
 #'
-#' @param - data: data.table to have columns removed from
+#' @param data data.table to have columns removed from
 #' 
 #' @import tidyr
 #' @import data.table
@@ -51,7 +51,7 @@ removeUnnecessaryColumns <- function(data, returnOnlySoilVars = FALSE) {
 #' @description
 #' \code{recalculateAccumulations} manually recalculate accumulations over API calls
 #'
-#' @param - dataList: list of data.table to have accumulations corrected
+#' @param dataList list of data.table to have accumulations corrected
 
 recalculateAccumulations <- function(dataList) {
   accumulatedColumns <- grep(pattern = 'accumulated'

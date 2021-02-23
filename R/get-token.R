@@ -7,11 +7,11 @@
 #' This script provides an aWhere access token for the current session of the API. Information for the key and secret in this
 #' function can be found on a user's account at developer.awhere.com, under the apps.
 #'
-#' @param - uid: Consumer key associated with the user's aWhere API account
-#' @param - secret: Consumer secret associated the user's aWhere API account
-#' @param - use_enviroment: Optional logical value, determines whether API access
-#' token will be saved in a local locked environment in addition to being returned
-#' by the function. Defaults to \code{TRUE} to avoid breaking existing code.
+#' @param uid Consumer key associated with the user's aWhere API account
+#' @param secret Consumer secret associated the user's aWhere API account
+#' @param use_enviroment Optional logical value, determines whether API access
+#'                        token will be saved in a local locked environment in addition to being returned
+#'                        by the function. Defaults to \code{TRUE} to avoid breaking existing code.
 #'
 #' @return List with three elements:#'
 #' error: logical indicating whether there was an error
@@ -115,7 +115,8 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
 #' second line should be the associated secret.  A blank 3rd line should be inserted to prevent
 #' an error from being returned by R
 #'
-#' @param - path_to_credentials: absolute or relative path to the text file
+#' @param path_to_credentials absolute or relative path to the text file
+#' 
 #' @return vector with uid and secret in positions 1, 2
 #'
 #' @examples
@@ -141,12 +142,12 @@ load_credentials <- function(path_to_credentials,apiAddress = "api.awhere.com") 
 #'
 #' @details
 #' Checks that aWhere API didn't return an error code and that the token used in query hasn't expired
-#'
-#' @param - JSON object returned from aWhere API
-#' @param - keyToUse: aWhere API key to use. 
-#' @param - request: the returned request code
-#' @param - secretToUse: aWhere API secret to use. 
-#' @param - tokenToUse: aWhere API token to use. 
+#
+#' @param JSON object returned from aWhere API
+#' @param keyToUse aWhere API key to use. 
+#' @param request the returned request code
+#' @param secretToUse aWhere API secret to use. 
+#' @param tokenToUse aWhere API token to use. 
 #' 
 #' @return boolean for whether another query should be made
 

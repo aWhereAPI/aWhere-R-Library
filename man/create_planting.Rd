@@ -4,36 +4,46 @@
 \alias{create_planting}
 \title{Create Planting}
 \usage{
-create_planting(field_id, crop, planting_date, proj_yield_amount = "",
-  proj_yield_units = "", proj_harvest_date = "", yield_amount = "",
-  yield_units = "", harvest_date = "", verbose = TRUE,
-  keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+create_planting(
+  field_id,
+  crop,
+  planting_date,
+  proj_yield_amount = "",
+  proj_yield_units = "",
+  proj_harvest_date = "",
+  yield_amount = "",
+  yield_units = "",
+  harvest_date = "",
+  verbose = TRUE,
+  keyToUse = awhereEnv75247$uid,
+  secretToUse = awhereEnv75247$secret,
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{field_id: an ID of your choosing (string)}
+\item{field_id}{an ID of your choosing (string)}
 
-\item{-}{crop: cropId or crop name (string)}
+\item{crop}{cropId or crop name (string)}
 
-\item{-}{planting_date: date crop was planted in the field. Format as YYYY-MM-DD (string)}
+\item{planting_date}{date crop was planted in the field. Format as YYYY-MM-DD (string)}
 
-\item{-}{proj_yield_amount: amount of projected yield from planting (string)}
+\item{proj_yield_amount}{amount of projected yield from planting (string)}
 
-\item{-}{proj_yield_units: units of projected yield (string - optional)}
+\item{proj_yield_units}{units of projected yield (string - optional)}
 
-\item{-}{proj_harvest_date: projected harvest date at the start of the season. Format as YYYY-MM-DD (string - optional)}
+\item{proj_harvest_date}{projected harvest date at the start of the season. Format as YYYY-MM-DD (string - optional)}
 
-\item{-}{yield_amount: actual yield (string - optional)}
+\item{yield_amount}{actual yield (string - optional)}
 
-\item{-}{yield_units: units of actual yield (string - optional)}
+\item{yield_units}{units of actual yield (string - optional)}
 
-\item{-}{harvest_date: actual harvest date at end of season. Format as YYYY-MM-DD (string - optional)}
+\item{harvest_date}{actual harvest date at end of season. Format as YYYY-MM-DD (string - optional)}
 
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - system generated planting id along with a print text that informs if the query succeeded or not

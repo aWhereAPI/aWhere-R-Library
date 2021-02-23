@@ -17,16 +17,16 @@
 #'
 #' @references http://developer.awhere.com/api/reference/fields/get-fields
 #'
-#' @param - field_id: Either a field id to retrieve information for that specific field
+#' @param field_id Either a field id to retrieve information for that specific field
 #'                   or an empty string to retrieve information on all fields associated
 #'                   with the user's aWhere API account (string - optional)
-#' @param - offset: The number of objects to skip before returning objects. Used in conjunction with offset to paginate. (optional)
-#' @param - limit: The number of results to include on each of page of listed fields. Used in conjunction with offset to paginate. (optional)
-#' @param - requestAllFields: Causes function to execute logic to return all of a users fields using the minimum number of API calls 
+#' @param offset The number of objects to skip before returning objects. Used in conjunction with offset to paginate. (optional)
+#' @param limit The number of results to include on each of page of listed fields. Used in conjunction with offset to paginate. (optional)
+#' @param requestAllFields Causes function to execute logic to return all of a users fields using the minimum number of API calls 
 #'                            based on the limit parameter.  If used, offset must be set to default value (optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -186,17 +186,17 @@ get_fields <- function(field_id = ""
 #' for any given field in the platform. In this function by setting an Id you can retrieve the weather
 #' and agronomics for that location in all the other APIs.
 #'
-#' @param - field_id: a field ID to look within (string - optional)
-#' @param - planting_id: a planting ID to look for (string - optional)
-#' @param - current: whether to just get current plantings(T) or include historical plantings(F).
+#' @param field_id a field ID to look within (string - optional)
+#' @param planting_id a planting ID to look for (string - optional)
+#' @param current whether to just get current plantings(T) or include historical plantings(F).
 #'                   To get most recent planting record for a field, set current to TRUE and do not pass in a planting_id (boolean - optional)
-#' @param - offset: The number of objects to skip before returning objects. Used in conjunction with offset to paginate. (optional)
-#' @param - limit: The number of results to include on each of page of listed fields. Used in conjunction with offset to paginate. (optional)
-#' @param - requestAllPlantings: Causes function to execute logic to return all of a users plantins using the minimum number of API calls 
-#'                            based on the limit parameter and the value of current.  If used, offset must be set to default value (optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param offset The number of objects to skip before returning objects. Used in conjunction with offset to paginate. (optional)
+#' @param limit The number of results to include on each of page of listed fields. Used in conjunction with offset to paginate. (optional)
+#' @param requestAllPlantings Causes function to execute logic to return all of a users plantins using the minimum number of API calls 
+#'                          based on the limit parameter and the value of current.  If used, offset must be set to default value (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - data.frame containing information about requested field(s)
 #'
@@ -396,11 +396,11 @@ get_planting <- function(field_id = ""
 #' @details
 #' Once a batch job is queued you can check on its status with this API. If the job is complete and results are available, they will be included in the response body.
 #'
-#' @param - job_id: a job ID assigned by an aWhere create job.
-#' @param - wait: wait for job to complete before returning
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param job_id a job ID assigned by an aWhere create job.
+#' @param wait wait for job to complete before returning
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - data.frame containing the requested payload(s).
 #'

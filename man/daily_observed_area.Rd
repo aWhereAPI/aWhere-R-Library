@@ -4,39 +4,47 @@
 \alias{daily_observed_area}
 \title{daily_observed_area}
 \usage{
-daily_observed_area(polygon, day_start, day_end,
-  propertiesToInclude = "", numcores = 2, bypassNumCallCheck = FALSE,
-  returnSpatialData = FALSE, verbose = TRUE,
-  keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+daily_observed_area(
+  polygon,
+  day_start,
+  day_end,
+  propertiesToInclude = "",
+  numcores = 2,
+  bypassNumCallCheck = FALSE,
+  returnSpatialData = FALSE,
+  verbose = TRUE,
+  keyToUse = awhereEnv75247$uid,
+  secretToUse = awhereEnv75247$secret,
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{polygon: either a data.frame with column names lat/lon, SpatialPolygons object,
+\item{polygon}{either a data.frame with column names lat/lon, SpatialPolygons object,
 well-known text string, or extent from raster package. If the object contains
 multiple polygons, the union of them is used.  Information from each individal
 polygon can be retrieved by returning spatial data and using
 the over function from the sp package}
 
-\item{-}{day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD}
+\item{day_start}{character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD}
 
-\item{-}{day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD}
+\item{day_end}{character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD}
 
-\item{-}{propertiesToInclude: character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)}
+\item{propertiesToInclude}{character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)}
 
-\item{-}{numcores: number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
-If you receive an error regarding the speed you are making calls, reduce this number}
+\item{bypassNumCallCheck}{set to TRUE to avoid prompting the user to confirm that they want to begin making API calls}
 
-\item{-}{bypassNumCallCheck: set to TRUE to avoid prompting the user to confirm that they want to begin making API calls}
-
-\item{-}{returnSpatialData: returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
+\item{returnSpatialData}{returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
 NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
 as spatial data (sp package: optional)}
 
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{numcores:}{number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
+If you receive an error regarding the speed you are making calls, reduce this number}
 }
 \value{
 data.frame of requested data for dates requested

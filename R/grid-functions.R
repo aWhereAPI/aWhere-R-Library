@@ -1,5 +1,3 @@
-
-
 #' Get aWhere GridX from longitude coordinate(s)
 #'
 #'
@@ -61,14 +59,11 @@ getLongitude <- function(gridX) {
 
   differenceLon <- (MaxLon - MinLon)/2
 
-
   gridX[which(gridX < 0)] <- ((differenceLon/MaxGridX) * gridX[which(gridX < 0)]) + (differenceLon/(MaxGridX*2))
 
   gridX[which(gridX > 0)] <- ((differenceLon/MaxGridX) * gridX[which(gridX > 0)]) - (differenceLon/(MaxGridX*2))
 
-
   return (gridX)
-
 }
 
 getLatitude <- function(gridY) {
@@ -80,14 +75,10 @@ getLatitude <- function(gridY) {
   MinGridY = -1080
 
   differenceLat <- (MaxLat - MinLat)/2
-
-
+  
   gridY[which(gridY < 0)] <- ((differenceLat/MaxGridY) * gridY[which(gridY < 0)]) + (differenceLat/(MaxGridY*2))
 
   gridY[which(gridY > 0)] <- ((differenceLat/MaxGridY) * gridY[which(gridY > 0)]) - (differenceLat/(MaxGridY*2))
 
-
-
   return (gridY)
-
 }

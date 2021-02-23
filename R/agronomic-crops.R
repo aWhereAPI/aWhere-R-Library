@@ -15,12 +15,12 @@
 #'
 #' @references https://developer.awhere.com/api/reference/crops
 #'
-#' @param - crop_id: Either a crop id to retrieve information for that specific crop
+#' @param crop_id Either a crop id to retrieve information for that specific crop
 #'                   or an empty string to retrieve information on all crops associated
 #'                   with the user's aWhere API account (string - optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'

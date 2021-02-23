@@ -4,23 +4,28 @@
 \alias{current_conditions_latlng}
 \title{current_conditions_latlng}
 \usage{
-current_conditions_latlng(latitude, longitude, sources = "all",
-  keyToUse = awhereEnv75247$uid, secretToUse = awhereEnv75247$secret,
-  tokenToUse = awhereEnv75247$token)
+current_conditions_latlng(
+  latitude,
+  longitude,
+  sources = "all",
+  keyToUse = awhereEnv75247$uid,
+  secretToUse = awhereEnv75247$secret,
+  tokenToUse = awhereEnv75247$token
+)
 }
 \arguments{
-\item{-}{latitude: the latitude of the requested location}
+\item{latitude}{the latitude of the requested location}
 
-\item{-}{longitude: the longitude of the requested locations}
+\item{longitude}{the longitude of the requested locations}
 
-\item{-}{sources: Which source to use for pulling the current conditions.  Valid values are
+\item{sources}{Which source to use for pulling the current conditions.  Valid values are
 'metar', 'mesonet', 'metar-mesonet', 'pws', 'all'.  Default value is 'all'}
 
-\item{-}{keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 
-\item{-}{tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.table of requested data for dates requested

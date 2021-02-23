@@ -4,15 +4,14 @@
 \alias{get_token}
 \title{Get Access Token}
 \usage{
-get_token(uid, secret, use_environment = TRUE,
-  apiAddress = "api.awhere.com")
+get_token(uid, secret, use_environment = TRUE, apiAddress = "api.awhere.com")
 }
 \arguments{
-\item{-}{uid: Consumer key associated with the user's aWhere API account}
+\item{uid}{Consumer key associated with the user's aWhere API account}
 
-\item{-}{secret: Consumer secret associated the user's aWhere API account}
+\item{secret}{Consumer secret associated the user's aWhere API account}
 
-\item{-}{use_enviroment: Optional logical value, determines whether API access
+\item{use_enviroment}{Optional logical value, determines whether API access
 token will be saved in a local locked environment in addition to being returned
 by the function. Defaults to \code{TRUE} to avoid breaking existing code.}
 }
