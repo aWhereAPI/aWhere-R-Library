@@ -590,7 +590,9 @@ agronomic_values_latlng <- function(latitude
 #' @param - maxTryCount: maximum number of times a call is repeated if the the API returns an error.  Random pause between each call
 #' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter.  Note that if you specify
+#'                      your own token there is no functionality in this function for requesting a new token if the one originally used expires while
+#'                      requesting data.  Use at your own risk (optional)
 #' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
@@ -638,6 +640,12 @@ agronomic_values_area <- function(polygon
   checkAccumulationStartDate(accumulation_start_date)
   checkPropertiesEndpoint('agronomics',propertiesToInclude)
 
+  if (tokenToUse == awhereEnv75247$token) {
+    useTokenFromEnv <- TRUE
+  } else {
+    useTokenFromEnv <- FALSE
+  }
+  
   if (!(all(class(polygon) %in% c('data.frame','data.table')))) {
 
     if (verbose == TRUE) {
@@ -699,6 +707,11 @@ agronomic_values_area <- function(polygon
       #tryCount timer and repear
       tryCount <- 
         tryCatch({
+          
+          if (useTokenFromEnv == TRUE) {
+            tokenToUse = awhereEnv75247$token
+          }
+          
           t <-
             agronomic_values_latlng(latitude = grid[[j]]$lat
                                    ,longitude = grid[[j]]$lon
