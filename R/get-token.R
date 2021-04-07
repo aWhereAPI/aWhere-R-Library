@@ -172,6 +172,8 @@ check_JSON <- function(jsonObject
   if (any(grepl('API Access Expired',jsonObject))) {
     if(exists("awhereEnv75247")) {
       if(tokenToUse == awhereEnv75247$token) {
+        cat('The current token has expired, requesting new token to proceed with request\n')
+        
         get_token(uid = keyToUse
                   ,secret = secretToUse
                   ,apiAddress = gsub(pattern = 'https://|/v2'
@@ -182,10 +184,10 @@ check_JSON <- function(jsonObject
         #This boolean will cause the API request to be repeated
         return(list(TRUE,NA,tokenToUse))
       } else {
-        stop("The token you passed in has expired. Please request a new one and retry your function call with the new token.")
+        stop("The token you passed in has expired. Please request a new one and retry your function call with the new token\n")
       }
     } else {
-      stop("The token you passed in has expired. Please request a new one and retry your function call with the new token.")
+      stop("The token you passed in has expired. Please request a new one and retry your function call with the new token\n")
     }
   }
   

@@ -211,7 +211,9 @@ soils_latlng <- function(latitude
 #'                             as spatial data (sp package: optional)
 #' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter.  Note that if you specify
+#'                      your own token there is no functionality in this function for requesting a new token if the one originally used expires while
+#'                      requesting data.  Use at your own risk (optional)
 #' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
