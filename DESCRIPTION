@@ -1,9 +1,9 @@
 Package: aWhereAPI
 Title: API calls for aWhere API
-Version: 0.7.1
-Authors@R: 
+Version: 0.7.2
+Authors@R:
     c(person("Technical", "Support", ,"technicalsupport@awhere.com", role = c("aut","cre","ctb")))
-Description: 
+Description:
     R package to work with aWhere APIs. Provide functions to allow creating,
     deleting, updating fields, planting and batch jobs. Pulling daily observed
     weather, long term normal weather, daily agronomic, long term agronomic
@@ -11,9 +11,9 @@ Description:
 License: MIT, Copyright 2016 aWhere
 LazyData: true
 RoxygenNote: 7.1.1
-Depends: 
+Depends:
     R (>= 3.3.2)
-Imports: 
+Imports:
     base64enc,
     curl(>= 3.2),
     data.table,
@@ -28,9 +28,9 @@ Imports:
     doParallel,
     magrittr,
     tidyr (>= 1.0.0)
-Suggests: 
-    testthat, 
-    knitr, 
+Suggests:
+    testthat,
+    knitr,
     rmarkdown
-VignetteBuilder: 
+VignetteBuilder:
     knitr
