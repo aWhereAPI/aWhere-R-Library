@@ -7,7 +7,7 @@
 recalculateAccumulations(dataList)
 }
 \arguments{
-\item{-}{dataList: list of data.table to have accumulations corrected}
+\item{dataList}{list of data.table to have accumulations corrected}
 }
 \description{
 \code{recalculateAccumulations} manually recalculate accumulations over API calls

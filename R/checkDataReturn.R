@@ -3,9 +3,9 @@
 #' @description
 #' \code{checkDataReturn_daily} Checks to see if data return is complete from API endpoints with daily data
 #'
-#' @param - dataset: the data.frame to check
-#' @param - day_start: character string of the first day for which data was retrieved, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which data was retrieved, in the form: YYYY-MM-DD
+#' @param dataset the data.frame to check
+#' @param day_start character string of the first day for which data was retrieved, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which data was retrieved, in the form: YYYY-MM-DD
 
 checkDataReturn_daily <- function(dataset,day_start,day_end) {
   if (nrow(dataset) != round(difftime(day_end,day_start,units = 'days') +1L)) {
@@ -25,20 +25,20 @@ checkDataReturn_daily <- function(dataset,day_start,day_end) {
 #' @description
 #' \code{checkDataReturn_norms} Checks to see if data return is complete from norms API
 #'
-#' @param - dataset: the data.frame to check
-#' @param - monthday_start: character string of the first month and day for which you want to retrieve data,
+#' @param dataset the data.frame to check
+#' @param monthday_start character string of the first month and day for which you want to retrieve data,
 #'                          in the form: MM-DD.  This is the start of your date range. e.g. '07-01' (July 1)
-#' @param - monthday_end: character string of the last month and day for which you want to retrieve data,
+#' @param monthday_end character string of the last month and day for which you want to retrieve data,
 #'                          in the form: MM-DD.  This is the end of your date range. e.g. '07-01' (July 1)
-#' @param - year_start: character string of the starting year (inclusive) of the range of years for which
+#' @param year_start character string of the starting year (inclusive) of the range of years for which
 #'                     you're calculating norms, in the form YYYY. e.g., 2008
-#' @param - year_end: character string of the last year (inclusive) of the range of years for which
+#' @param year_end character string of the last year (inclusive) of the range of years for which
 #'                     you're calculating norms, in the form YYYY. e.g., 2015
-#' @param - exclude_year: Year or years which you'd like to exclude from
+#' @param exclude_year Year or years which you'd like to exclude from
 #'                        your range of years on which to calculate norms. To exclude
 #'                        multiple years, provide a vector of years. You must include
 #'                       at least three years of data with which to calculate the norms.
-#' @param - includeFeb29thData: Whether to keep data from Feb 29th on leap years.
+#' @param includeFeb29thData Whether to keep data from Feb 29th on leap years.
 
 checkDataReturn_norms <- function(dataset,monthday_start,monthday_end,year_start,year_end,exclude_year,includeFeb29thData) {
   yearsToTest <- seq(year_start,year_end,1)
@@ -99,10 +99,10 @@ checkDataReturn_norms <- function(dataset,monthday_start,monthday_end,year_start
 #' @description
 #' \code{checkDataReturn_forecasts} Checks to see if data return is complete from forecasts API endpoint
 #'
-#' @param - dataset: the data.frame to check
-#' @param - day_start: character string of the first day for which data was retrieved, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which data was retrieved, in the form: YYYY-MM-DD
-#' @param - block_size: Integer value that corresponds to the number of hours to include in each time block.
+#' @param dataset the data.frame to check
+#' @param day_start character string of the first day for which data was retrieved, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which data was retrieved, in the form: YYYY-MM-DD
+#' @param block_size Integer value that corresponds to the number of hours to include in each time block.
 #'                     Defaults to a 1 hour block.  This value must divide evenly into 24.
 
 checkDataReturn_forecasts <- function(dataset,day_start,day_end,block_size) {

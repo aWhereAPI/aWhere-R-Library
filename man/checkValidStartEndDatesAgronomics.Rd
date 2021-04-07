@@ -7,7 +7,9 @@
 checkValidStartEndDatesAgronomics(day_start, day_end)
 }
 \arguments{
-\item{-}{day_end: character string of end date in form: YYYY-MM-DD}
+\item{day_start}{character string of start date in form: YYYY-MM-DD}
+
+\item{day_end}{character string of end date in form: YYYY-MM-DD}
 }
 \description{
 \code{checkValidStartEndDates} Checks to see if Start/End Dates passed are valid

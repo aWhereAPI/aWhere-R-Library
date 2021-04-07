@@ -7,6 +7,14 @@
 checkAccumulationStartDate(accumulation_start_date, month_day_start)
 }
 \arguments{
+\item{accumulation_start_date}{If you want to start counting accumulations from
+before the specified start date (or before the
+planting date if using the most recent Planting),
+use this parameter to specify the date from which
+you wish to start counting. The daily values object
+will still only return the days between the start
+and end date. This date must come before the start date.}
+
 \item{-}{month_day_start}
 }
 \description{

@@ -19,7 +19,25 @@ create_field(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{field_id}{an ID of your choosing (string)}
+
+\item{latitude}{the latitude of the field location in decimal format (double)}
+
+\item{longitude}{the longitude of the field location in decimal format (double)}
+
+\item{field_name}{a name of the location (optional - string)}
+
+\item{acres}{the acres of the field (optional)}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{farmid}{an ID of your choosing for the farm to which this field belongs (string)}
 }
 \value{
 - printed text that informs if the query succeeded or not

@@ -24,12 +24,12 @@
 #'
 #' @references https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations/
 #'
-#' @param - field_id: the field_id associated with the location for which you want to pull data.
-#' Field IDs are created using the create_field function. (string)
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - propertiesToInclude: character vector of properties to retrieve from API.  Valid values are accumulations, gdd, pet, ppet, accumulatedGdd, accumulatedPrecipitation, accumulatedPet, accumulatedPpet (optional)
-#' @param - accumulation_start_date: Allows the user to start counting accumulations from
+#' @param field_id the field_id associated with the location for which you want to pull data.
+#'                  Field IDs are created using the create_field function. (string)
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param propertiesToInclude character vector of properties to retrieve from API.  Valid values are accumulations, gdd, pet, ppet, accumulatedGdd, accumulatedPrecipitation, accumulatedPet, accumulatedPpet (optional)
+#' @param accumulation_start_date Allows the user to start counting accumulations from
 #'                                 before the specified start date (or before the
 #'                                 planting date if using the most recent planting).
 #'                                 Use this parameter to specify the date from which
@@ -37,22 +37,22 @@
 #'                                 The daily values object
 #'                                 will still only return the days between the start
 #'                                 and end date. This date must come before the start date. (optional)
-#' @param - gdd_method: There are variety of equations available for calculating growing degree-days.
+#' @param gdd_method There are variety of equations available for calculating growing degree-days.
 #'                     Valid entries are: 'standard', 'modifiedstandard', 'min-temp-cap', 'min-temp-constant'
 #'                     See the API documentation for a description of each method.  The standard
 #'                     method will be used if none is specified. (character - optional)
-#' @param - gdd_base_temp: The base temp to use for the any of the GDD equations. The default value of 10 will
+#' @param gdd_base_temp The base temp to use for the any of the GDD equations. The default value of 10 will
 #'                       be used if none is specified. (optional)
-#' @param - gdd_min_boundary: The minimum boundary to use in the selected GDD equation.
+#' @param gdd_min_boundary The minimum boundary to use in the selected GDD equation.
 #'                           The behavior of this value is different depending on the equation you're using
 #'                           The default value of 10 will be used if none is specified. (optional)
-#' @param - gdd_max_boundary: The max boundary to use in the selected GDD equation. The
+#' @param gdd_max_boundary The max boundary to use in the selected GDD equation. The
 #'                          behavior of this value is different depending on the equation you're using.
 #'                          The default value of 30 will be used if none is specified. (optional)
-#' @param - keyToUse: aWhere API uid to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API uid to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -284,14 +284,14 @@ agronomic_values_fields <- function(field_id
 #'
 #' @references https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations-by-geolocation/
 #'
-#' @param - latitude: the latitude of the requested location (double)
-#' @param - longitude: the longitude of the requested locations (double)
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - propertiesToInclude: character vector of properties to retrieve from API.
+#' @param latitude the latitude of the requested location (double)
+#' @param longitude the longitude of the requested locations (double)
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param propertiesToInclude character vector of properties to retrieve from API.
 #'                               Valid values are accumulations, gdd, pet, ppet, accumulatedGdd,
 #'                               accumulatedPrecipitation, accumulatedPet, accumulatedPpet (optional)
-#' @param - accumulation_start_date: Allows the user to start counting accumulations from
+#' @param accumulation_start_date Allows the user to start counting accumulations from
 #'                                 before the specified start date (or before the
 #'                                 planting date if using the most recent planting).
 #'                                 Use this parameter to specify the date from which
@@ -299,22 +299,22 @@ agronomic_values_fields <- function(field_id
 #'                                 The daily values object
 #'                                 will still only return the days between the start
 #'                                 and end date. This date must come before the start date. (optional)
-#' @param - gdd_method: There are variety of equations available for calculating growing degree-days.
+#' @param gdd_method There are variety of equations available for calculating growing degree-days.
 #'                     Valid entries are: 'standard', 'modifiedstandard', 'min-temp-cap', 'min-temp-constant'
 #'                     See the API documentation for a description of each method.  The standard
 #'                     method will be used if none is specified. (character - optional)
-#' @param - gdd_base_temp: The base temp to use for the any of the GDD equations. The default value of 10 will
+#' @param gdd_base_temp The base temp to use for the any of the GDD equations. The default value of 10 will
 #'                       be used if none is specified. (optional)
-#' @param - gdd_min_boundary: The minimum boundary to use in the selected GDD equation.
+#' @param gdd_min_boundary The minimum boundary to use in the selected GDD equation.
 #'                           The behavior of this value is different depending on the equation you're using
 #'                           The default value of 10 will be used if none is specified. (optional)
-#' @param - gdd_max_boundary: The max boundary to use in the selected GDD equation. The
+#' @param gdd_max_boundary The max boundary to use in the selected GDD equation. The
 #'                          behavior of this value is different depending on the equation you're using.
 #'                          The default value of 30 will be used if none is specified. (optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -552,15 +552,15 @@ agronomic_values_latlng <- function(latitude
 #'
 #' @references https://docs.awhere.com/knowledge-base-docs/agronomic-values-accumulations-by-geolocation/
 #'
-#' @param - polygon: either a data.frame with column names lat/lon, SpatialPolygons object,
+#' @param polygon either a data.frame with column names lat/lon, SpatialPolygons object,
 #'                   well-known text string, or extent from raster package. If the object contains
 #'                   multiple polygons, the union of them is used.  Information from each individal
 #'                   polygon can be retrieved by returning spatial data and using
 #'                   the over function from the sp package
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - propertiesToInclude: character vector of properties to retrieve from API.  Valid values are accumulations, gdd, pet, ppet, accumulatedGdd, accumulatedPrecipitation, accumulatedPet, accumulatedPpet (optional)
-#' @param - accumulation_start_date: Allows the user to start counting accumulations from
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param propertiesToInclude character vector of properties to retrieve from API.  Valid values are accumulations, gdd, pet, ppet, accumulatedGdd, accumulatedPrecipitation, accumulatedPet, accumulatedPpet (optional)
+#' @param accumulation_start_date Allows the user to start counting accumulations from
 #'                                 before the specified start date (or before the
 #'                                 planting date if using the most recent planting).
 #'                                 Use this parameter to specify the date from which
@@ -568,32 +568,32 @@ agronomic_values_latlng <- function(latitude
 #'                                 The daily values object
 #'                                 will still only return the days between the start
 #'                                 and end date. This date must come before the start date. (optional)
-#' @param - gdd_method: There are variety of equations available for calculating growing degree-days.
+#' @param gdd_method There are variety of equations available for calculating growing degree-days.
 #'                     Valid entries are: 'standard', 'modifiedstandard', 'min-temp-cap', 'min-temp-constant'
 #'                     See the API documentation for a description of each method.  The standard
 #'                     method will be used if none is specified. (character - optional)
-#' @param - gdd_base_temp: The base temp to use for the any of the GDD equations. The default value of 10 will
+#' @param gdd_base_temp The base temp to use for the any of the GDD equations. The default value of 10 will
 #'                       be used if none is specified. (optional)
-#' @param - gdd_min_boundary: The minimum boundary to use in the selected GDD equation.
+#' @param gdd_min_boundary The minimum boundary to use in the selected GDD equation.
 #'                           The behavior of this value is different depending on the equation you're using
 #'                           The default value of 10 will be used if none is specified. (optional)
-#' @param - gdd_max_boundary: The max boundary to use in the selected GDD equation. The
+#' @param gdd_max_boundary The max boundary to use in the selected GDD equation. The
 #'                          behavior of this value is different depending on the equation you're using.
 #'                          The default value of 30 will be used if none is specified. (optional)
-#' @param - numcores: number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
+#' @param numcores number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
 #'                    If you receive an error regarding the speed you are making calls, reduce this number
-#' @param - bypassNumCallCheck: set to TRUE to avoid prompting the user to confirm that they want to begin making API calls
-#' @param - returnSpatialData: returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
+#' @param bypassNumCallCheck set to TRUE to avoid prompting the user to confirm that they want to begin making API calls
+#' @param returnSpatialData returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
 #'                             NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
 #'                             as spatial data (sp package: optional)
-#' @param - verbose: Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI
-#' @param - maxTryCount: maximum number of times a call is repeated if the the API returns an error.  Random pause between each call
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter.  Note that if you specify
+#' @param verbose Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI
+#' @param maxTryCount maximum number of times a call is repeated if the the API returns an error.  Random pause between each call
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter.  Note that if you specify
 #'                      your own token there is no functionality in this function for requesting a new token if the one originally used expires while
 #'                      requesting data.  Use at your own risk (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table

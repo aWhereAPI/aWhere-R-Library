@@ -7,7 +7,7 @@
 removeUnnecessaryColumns(data, returnOnlySoilVars = FALSE)
 }
 \arguments{
-\item{-}{data: data.table to have columns removed from}
+\item{data}{data.table to have columns removed from}
 }
 \description{
 \code{removeUnnecessaryColumns} Removes unnecessary columns from API Return

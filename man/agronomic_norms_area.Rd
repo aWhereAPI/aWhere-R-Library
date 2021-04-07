@@ -30,7 +30,81 @@ agronomic_norms_area(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{polygon}{either a data.frame with column names lat/lon, SpatialPolygons object,
+well-known text string, or extent from raster package. If the object contains
+multiple polygons, the union of them is used.  Information from each individal
+polygon can be retrieved by returning spatial data and using
+the over function from the sp package}
+
+\item{month_day_start}{character string of the first month and day for which you want to retrieve data,
+in the form: MM-DD.  This is the start of your date range. e.g. '07-01' (July 1) (required)}
+
+\item{month_day_end}{character string of the last month and day for which you want to retrieve data,
+in the form: MM-DD.  This is the end of your date range. e.g. '07-01' (July 1) (required)}
+
+\item{year_start}{character string of the starting year (inclusive) of the range of years for which
+you're calculating norms, in the form YYYY. e.g., 2008 (required)}
+
+\item{year_end}{character string of the last year (inclusive) of the range of years for which
+you're calculating norms, in the form YYYY. e.g., 2015 (required)}
+
+\item{propertiesToInclude}{character vector of properties to retrieve from API.  Valid values are accumulations, gdd, pet, ppet, accumulatedGdd, accumulatedPrecipitation, accumulatedPet, accumulatedPpet (optional)}
+
+\item{accumulation_start_date}{Allows the user to start counting accumulations from
+before the specified start date (or before the
+planting date if using the most recent planting).
+Use this parameter to specify the date from which
+you wish to start counting, in the form: YYYY-MM-DD.
+The daily values object
+will still only return the days between the start
+and end date. This date must come before the start date. (optional)}
+
+\item{gdd_method}{There are variety of equations available for calculating growing degree-days.
+Valid entries are: 'standard', 'modifiedstandard', 'min-temp-cap', 'min-temp-constant'
+See the API documentation for a description of each method.  The standard
+method will be used if none is specified. (character - optional)}
+
+\item{gdd_base_temp}{The base temp to use for the any of the GDD equations. The default value of 10 will
+be used if none is specified. (optional)}
+
+\item{gdd_min_boundary}{The minimum boundary to use in the selected GDD equation.
+The behavior of this value is different depending on the equation you're using
+The default value of 10 will be used if none is specified. (optional)}
+
+\item{gdd_max_boundary}{The max boundary to use in the selected GDD equation. The
+behavior of this value is different depending on the equation you're using.
+The default value of 30 will be used if none is specified. (optional)}
+
+\item{includeFeb29thData}{Whether to keep data from Feb 29th on leap years.  Because weather/agronomics
+summary statistics are calculated via the calendar date and 3 years are required
+to generate a value, data from this date is more likely to be NA.  ALlows user
+to drop this data to avoid later problems (defaults to TRUE)}
+
+\item{numcores}{number of cores to use in parallel loop. To check number of available cores: parallel::detectCores().
+If you receive an error regarding the speed you are making calls, reduce this number}
+
+\item{returnSpatialData}{returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
+NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
+as spatial data (sp package: optional)}
+
+\item{bypassNumCallCheck}{set to TRUE to avoid prompting the user to confirm that they want to begin making API calls}
+
+\item{verbose}{Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI}
+
+\item{maxTryCount}{maximum number of times a call is repeated if the the API returns an error.  Random pause between each call}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{exclude_year}{Year or years which you'd like to exclude from
+ your range of years on which to calculate norms. To exclude
+ multiple years, provide a vector of years. You must include
+at least three years of data with which to calculate the norms. (numeric, optional)}
 }
 \value{
 data.frame of requested data for dates requested
@@ -73,6 +147,7 @@ Note about dates: The system does not adjust for any difference in dates between
                               ,gdd_min_boundary = 10
                               ,gdd_max_boundary = 30
                               ,numcores = 2)}
+                              
 }
 \references{
 https://docs.awhere.com/knowledge-base-docs/historical-agronomic-norms-by-geolocation/

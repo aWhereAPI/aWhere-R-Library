@@ -13,7 +13,15 @@ get_model_details(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{model_id}{A model id to retrieve details for that specific model}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - data.frame containing details about requested model
@@ -31,5 +39,5 @@ this API returns information about the crop stages that the model may return.
 }
 }
 \references{
-https://docs.awhere.com/knowledge-base-docs/get-model-details/
+https://developer.awhere.com/api/reference/models/details
 }

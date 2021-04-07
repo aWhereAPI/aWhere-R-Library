@@ -15,7 +15,17 @@ delete_planting(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{field_id}{the ID of the field for which you want to delete an associated planting (string)}
+
+\item{planting_id}{The planting Id that you want to delete.  You can also use "current" to delete the most recent planting (string)}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - a print text that informs if the query succeded or not

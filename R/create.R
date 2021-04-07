@@ -17,16 +17,16 @@
 #'
 #' All spaces will be converted to underscores to conform with the requirements of the API.
 #'
-#' @param - field_id: an ID of your choosing (string)
-#' @param - latitude: the latitude of the field location in decimal format (double)
-#' @param - longitude: the longitude of the field location in decimal format (double)
-#' @param - farmid: an ID of your choosing for the farm to which this field belongs (string)
-#' @param - field_name: a name of the location (optional - string)
-#' @param - acres: the acres of the field (optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param field_id an ID of your choosing (string)
+#' @param latitude the latitude of the field location in decimal format (double)
+#' @param longitude the longitude of the field location in decimal format (double)
+#' @param farmid an ID of your choosing for the farm to which this field belongs (string)
+#' @param field_name a name of the location (optional - string)
+#' @param acres the acres of the field (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - printed text that informs if the query succeeded or not
 #'
@@ -137,19 +137,19 @@ create_field <- function(field_id
 #' This script creates a planting in a field location in the aWhere platform. By setting an Id you can retrieve the weather
 #' and agronomics for that location in all the other APIs. The planting ID corresponds to a planting within a field.
 #'
-#' @param - field_id: an ID of your choosing (string)
-#' @param - crop: cropId or crop name (string)
-#' @param - planting_date: date crop was planted in the field. Format as YYYY-MM-DD (string)
-#' @param - proj_yield_amount: amount of projected yield from planting (string)
-#' @param - proj_yield_units: units of projected yield (string - optional)
-#' @param - proj_harvest_date: projected harvest date at the start of the season. Format as YYYY-MM-DD (string - optional)
-#' @param - yield_amount: actual yield (string - optional)
-#' @param - yield_units: units of actual yield (string - optional)
-#' @param - harvest_date: actual harvest date at end of season. Format as YYYY-MM-DD (string - optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param field_id an ID of your choosing (string)
+#' @param crop cropId or crop name (string)
+#' @param planting_date date crop was planted in the field. Format as YYYY-MM-DD (string)
+#' @param proj_yield_amount amount of projected yield from planting (string)
+#' @param proj_yield_units units of projected yield (string - optional)
+#' @param proj_harvest_date projected harvest date at the start of the season. Format as YYYY-MM-DD (string - optional)
+#' @param yield_amount actual yield (string - optional)
+#' @param yield_units units of actual yield (string - optional)
+#' @param harvest_date actual harvest date at end of season. Format as YYYY-MM-DD (string - optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - system generated planting id along with a print text that informs if the query succeeded or not
 #'

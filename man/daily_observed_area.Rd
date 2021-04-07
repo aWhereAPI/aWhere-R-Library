@@ -21,7 +21,38 @@ daily_observed_area(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{polygon}{either a data.frame with column names lat/lon, SpatialPolygons object,
+well-known text string, or extent from raster package. If the object contains
+multiple polygons, the union of them is used.  Information from each individal
+polygon can be retrieved by returning spatial data and using
+the over function from the sp package}
+
+\item{day_start}{character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD}
+
+\item{day_end}{character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD}
+
+\item{propertiesToInclude}{character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)}
+
+\item{bypassNumCallCheck}{set to TRUE to avoid prompting the user to confirm that they want to begin making API calls}
+
+\item{returnSpatialData}{returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
+NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
+as spatial data (sp package: optional)}
+
+\item{verbose}{Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI}
+
+\item{maxTryCount}{maximum number of times a call is repeated if the the API returns an error.  Random pause between each call}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{numcores:}{number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
+If you receive an error regarding the speed you are making calls, reduce this number}
 }
 \value{
 data.frame of requested data for dates requested

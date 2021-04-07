@@ -10,15 +10,15 @@
 #' Each models applies to particular crops from the Crops API, and after an initial
 #' review of the available models, you can often save the model ID and simply reference the details and results as needed.
 #'
-#' @references https://docs.awhere.com/knowledge-base-docs/get-models/
+#' @references https://developer.awhere.com/api/reference/models/get-models
 #'
-#' @param - model_id: Either a model id to retrieve information for that specific model
+#' @param model_id Either a model id to retrieve information for that specific model
 #'                   or an empty string to retrieve information on all model associated
 #'                   with the user's aWhere API account (string - optional)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -112,13 +112,13 @@ get_models <- function(model_id = ''
 #' This API will return those details; for the growth stage models currently available
 #' this API returns information about the crop stages that the model may return.
 #'
-#' @references https://docs.awhere.com/knowledge-base-docs/get-model-details/
+#' @references https://developer.awhere.com/api/reference/models/details
 #'
-#' @param - model_id: A model id to retrieve details for that specific model
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param model_id A model id to retrieve details for that specific model
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -205,13 +205,13 @@ get_model_details <- function(model_id
 #' information about a field and crop. When a Field is specified for this API, it will
 #' select the most recently created Planting record to retrieve the crop and planting date.
 #'
-#' @references https://docs.awhere.com/knowledge-base-docs/get-model-results/
+#' @references https://developer.awhere.com/api/reference/models/results
 #'
-#' @param - model_id: A model id to retrieve details for that specific model
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param model_id A model id to retrieve details for that specific model
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #'
@@ -286,7 +286,6 @@ get_model_results <- function(field_id
     currentStage <- dplyr::mutate_at(currentStage, c("accumulatedGdds",'gddThreshold'), round, 2)
     
     currentStage <- dplyr::select(currentStage,c('date','stage','id','description','gddThreshold'))
-    
   }
   
   nextStage <- data.frame()

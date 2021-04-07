@@ -7,7 +7,13 @@
 checkDataReturn_forecasts(dataset, day_start, day_end, block_size)
 }
 \arguments{
-\item{-}{block_size: Integer value that corresponds to the number of hours to include in each time block.
+\item{dataset}{the data.frame to check}
+
+\item{day_start}{character string of the first day for which data was retrieved, in the form: YYYY-MM-DD}
+
+\item{day_end}{character string of the last day for which data was retrieved, in the form: YYYY-MM-DD}
+
+\item{block_size}{Integer value that corresponds to the number of hours to include in each time block.
 Defaults to a 1 hour block.  This value must divide evenly into 24.}
 }
 \description{

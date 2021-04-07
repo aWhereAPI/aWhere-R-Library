@@ -13,7 +13,17 @@ get_crops(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{crop_id}{Either a crop id to retrieve information for that specific crop
+or an empty string to retrieve information on all crops associated
+with the user's aWhere API account (string - optional)}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - data.frame containing information about requested crop(s)
@@ -37,5 +47,5 @@ You'll know which crop record is the default by referencing the isDefaultForCrop
 }
 }
 \references{
-https://docs.awhere.com/knowledge-base-docs/crop-list-detail/
+https://developer.awhere.com/api/reference/crops
 }

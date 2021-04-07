@@ -7,7 +7,11 @@
 checkDataReturn_daily(dataset, day_start, day_end)
 }
 \arguments{
-\item{-}{day_end: character string of the last day for which data was retrieved, in the form: YYYY-MM-DD}
+\item{dataset}{the data.frame to check}
+
+\item{day_start}{character string of the first day for which data was retrieved, in the form: YYYY-MM-DD}
+
+\item{day_end}{character string of the last day for which data was retrieved, in the form: YYYY-MM-DD}
 }
 \description{
 \code{checkDataReturn_daily} Checks to see if data return is complete from API endpoints with daily data

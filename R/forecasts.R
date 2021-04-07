@@ -25,20 +25,20 @@
 #'
 #' @references https://docs.awhere.com/knowledge-base-docs/forecast-weather/
 #'
-#' @param - field_id: the field_id associated with the location for which you want to pull data.
-#' Field IDs are created using the create_field function. (string)
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param field_id the field_id associated with the location for which you want to pull data.
+#'                  Field IDs are created using the create_field function. (string)
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
 #'                    Defaults to system date if left blank. (optional)
-#' @param - day_end: character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
 #'                 Returns all available forecast if left blank. (optional)
-#' @param - block_size: Integer value that corresponds to the number of hours to include in each time block.
+#' @param block_size Integer value that corresponds to the number of hours to include in each time block.
 #'                     Defaults to a 1 hour block.  This value must divide evenly into 24. (integer - optional)
-#' @param - useLocalTime: whether the data specified is the date specified at the location where data is
+#' @param useLocalTime whether the data specified is the date specified at the location where data is
 #'                        being requested from or at UTC = 0.  Default is TRUE
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table
@@ -199,20 +199,20 @@ forecasts_fields <- function(field_id
 #'
 #' @references https://docs.awhere.com/knowledge-base-docs/forecast-weather-by-geolocation/
 #'
-#' @param - latitude: the latitude of the requested location (double)
-#' @param - longitude: the longitude of the requested locations (double)
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param latitude the latitude of the requested location (double)
+#' @param longitude the longitude of the requested locations (double)
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
 #'                    Defaults to system date if left blank. (optional)
-#' @param - day_end: character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in form: YYYY-MM-DD
 #'                  Returns all available forecast if left blank. (optional)
-#' @param - block_size: Integer value that corresponds to the number of hours to include in each time block.
+#' @param block_size Integer value that corresponds to the number of hours to include in each time block.
 #'                     Defaults to a 1 hour block.  This value must divide evenly into 24. (integer - optional)
-#' @param - useLocalTime: whether the data specified is the date specified at the location where data is
+#' @param useLocalTime whether the data specified is the date specified at the location where data is
 #'                        being requested from or at UTC = 0.  Default is TRUE
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return data.frame of requested data for dates requested
 #'
@@ -371,31 +371,31 @@ forecasts_latlng <- function(latitude
 #'
 #' @references https://docs.awhere.com/knowledge-base-docs/forecast-weather-by-geolocation/
 #'
-#' @param - polygon: either a data.frame with column names lat/lon, SpatialPolygons object,
+#' @param polygon either a data.frame with column names lat/lon, SpatialPolygons object,
 #'                   well-known text string, or extent from raster package. If the object contains
 #'                   multiple polygons, the union of them is used.  Information from each individal
 #'                   polygon can be retrieved by returning spatial data and using
 #'                   the over function from the sp package
-#' @param - day_start: character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - day_end: character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
-#' @param - block_size: Integer value that corresponds to the number of hours to include in each time block.
+#' @param day_start character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param day_end character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD
+#' @param block_size Integer value that corresponds to the number of hours to include in each time block.
 #'                     Defaults to a 1 hour block.  This value must divide evenly into 24. (integer - optional)
-#' @param - useLocalTime: whether the data specified is the date specified at the location where data is
+#' @param useLocalTime whether the data specified is the date specified at the location where data is
 #'                        being requested from or at UTC = 0.  Default is TRUE
-#' @param - numcores: number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
+#' @param numcores number of cores to use in parallel loop. To check number of available cores: parallel::detectCores()
 #'                    If you receive an error regarding the speed you are making calls, reduce this number
-#' @param - bypassNumCallCheck: set to TRUE to avoid prompting the user to confirm that they want to begin making API calls
-#' @param - returnSpatialData: returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
+#' @param bypassNumCallCheck set to TRUE to avoid prompting the user to confirm that they want to begin making API calls
+#' @param returnSpatialData returns the data as a SpatialPixels object.  Can be convered to raster with the command raster::stack
 #'                             NOTE: if multiple days worth of data is returned, it is necessary to subset to specific day for working with
 #'                             as spatial data (sp package: optional)
-#' @param - verbose: Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI
-#' @param - maxTryCount: maximum number of times a call is repeated if the the API returns an error.  Random pause between each call
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter.  Note that if you specify
+#' @param verbose Set to TRUE tp print messages to console about state of parallization call.  Typically only visible if run from console and not GUI
+#' @param maxTryCount maximum number of times a call is repeated if the the API returns an error.  Random pause between each call                             
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter.  Note that if you specify
 #'                      your own token there is no functionality in this function for requesting a new token if the one originally used expires while
 #'                      requesting data.  Use at your own risk (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @import httr
 #' @import data.table

@@ -7,7 +7,7 @@
 checkStatusCode(request)
 }
 \arguments{
-\item{-}{request: object returned from HTTR}
+\item{request}{object returned from HTTR}
 }
 \description{
 \code{checkStatusCode} Checks to see if valid aWhere API credentials are loaded

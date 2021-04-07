@@ -21,7 +21,31 @@ update_planting(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{field_id}{ID of field to search for plantings within}
+
+\item{planting_id}{ID of planting to update}
+
+\item{planting_date}{new date to update as planting's plant date}
+
+\item{proj_yield_amount}{new amount to update as planting's projected yield amount}
+
+\item{proj_yield_units}{new units to update as planting's projected yield units}
+
+\item{proj_harvest_date}{new projected harvest date to update as planting's projected harvest date}
+
+\item{yield_amount}{new amount to update as planting's yield amount}
+
+\item{yield_units}{new units to update as planting's yield units}
+
+\item{harvest_date}{new actual harvest date to update as planting's harvest date}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - A message confirming the changes have been made

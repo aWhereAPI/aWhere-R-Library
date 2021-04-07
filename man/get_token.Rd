@@ -7,7 +7,15 @@
 get_token(uid, secret, use_environment = TRUE, apiAddress = "api.awhere.com")
 }
 \arguments{
-\item{-}{apiAddress: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{uid}{Consumer key associated with the user's aWhere API account}
+
+\item{secret}{Consumer secret associated the user's aWhere API account}
+
+\item{apiAddress}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{use_enviroment}{Optional logical value, determines whether API access
+token will be saved in a local locked environment in addition to being returned
+by the function. Defaults to \code{TRUE} to avoid breaking existing code.}
 }
 \value{
 List with three elements:#'

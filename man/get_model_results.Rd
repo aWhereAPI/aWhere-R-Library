@@ -14,7 +14,15 @@ get_model_results(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{model_id}{A model id to retrieve details for that specific model}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - 3 element named list containing information on previous growth stages
@@ -39,5 +47,5 @@ select the most recently created Planting record to retrieve the crop and planti
 }
 }
 \references{
-https://docs.awhere.com/knowledge-base-docs/get-model-results/
+https://developer.awhere.com/api/reference/models/results
 }

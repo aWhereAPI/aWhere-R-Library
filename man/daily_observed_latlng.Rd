@@ -17,7 +17,23 @@ daily_observed_latlng(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{latitude}{the latitude of the requested location (double)}
+
+\item{longitude}{the longitude of the requested locations (double)}
+
+\item{day_start}{character string of the first day for which you want to retrieve data, in the form: YYYY-MM-DD}
+
+\item{day_end}{character string of the last day for which you want to retrieve data, in the form: YYYY-MM-DD}
+
+\item{propertiesToInclude}{character vector of properties to retrieve from API.  Valid values are temperatures, precipitation, solar, relativeHumidity, wind (optional)}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 data.frame of requested data for dates requested

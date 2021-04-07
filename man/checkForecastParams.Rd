@@ -7,7 +7,9 @@
 checkForecastParams(block_size)
 }
 \arguments{
-\item{-}{block_size: Integer value that corresponds to the number of hours to include in each time block.}
+\item{block_size}{Integer value that corresponds to the number of hours to include in each time block.}
+
+\item{day_start}{character string of start date in form: YYYY-MM-DD}
 }
 \description{
 \code{checkForecastParams} Checks to see if Forecast Params are valid

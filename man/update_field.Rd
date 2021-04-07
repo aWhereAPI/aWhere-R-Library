@@ -15,7 +15,21 @@ update_field(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{field_id}{the unique field ID for the field you want to update (character string) (required)}
+
+\item{variable_update}{the variable that needs to be updated, either "farmId", "name", or "acres"
+(character string) (required)}
+
+\item{value_update}{the new value for variable_update, to replace the existing value. The existing
+value can be found using get_fields("field_id") (character string) (required)}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - A message confirming the changes have been made

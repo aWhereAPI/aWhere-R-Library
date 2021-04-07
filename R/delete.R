@@ -9,11 +9,11 @@
 #' The delete should cascade, if there are associated records to a field, they are deleted as well.
 #' This applies when we design/implement "Plantings" API.
 #'
-#' @param - field_id: an ID of your choosing (string)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param field_id an ID of your choosing (string)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - a print text that informs if the query succeded or not
 #'
@@ -75,12 +75,12 @@ delete_field <- function(field_id
 #' models, but if you want to keep your planting records clean for reporting and historical tracking
 #' purposes you can delete errant or incorrect plantings.
 #'
-#' @param - field_id: the ID of the field for which you want to delete an associated planting (string)
-#' @param - planting_id: The planting Id that you want to delete.  You can also use "current" to delete the most recent planting (string)
-#' @param - keyToUse: aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - secretToUse: aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - tokenToUse: aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
-#' @param - apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param field_id the ID of the field for which you want to delete an associated planting (string)
+#' @param planting_id The planting Id that you want to delete.  You can also use "current" to delete the most recent planting (string)
+#' @param keyToUse aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param secretToUse aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param tokenToUse aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)
+#' @param apiAddressToUse Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)
 #'
 #' @return - a print text that informs if the query succeded or not
 #'
@@ -129,4 +129,3 @@ delete_planting <- function(field_id
     cat(paste0('Operation Complete'))
   }
 }
-

@@ -7,7 +7,9 @@
 create_shapewkt(longitude, latitude)
 }
 \arguments{
-\item{-}{latitude: latitude coordinate for centroid}
+\item{longitude}{longitude coordinate for centroid}
+
+\item{latitude}{latitude coordinate for centroid}
 }
 \description{
 \code{create_shapewkt} writes the WKT for a grid cell, based on a centroid coordinate

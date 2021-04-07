@@ -6,8 +6,7 @@
 #' @details
 #' Calculate logic of API calls based on the number of days that can be returned
 #' with each call as well as start and end dates
-#'
-#' @param - JSON object returned from aWhere API
+#' 
 #' @return list(allDates,loops)
 
 plan_APICalls <- function(day_start

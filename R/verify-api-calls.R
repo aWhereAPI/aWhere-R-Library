@@ -4,7 +4,7 @@
 #' @description
 #' \code{verify_api_calls} Tells user how many api calls will be made to pull the data requested
 #'
-#' @param - grid: data frame returned from create_awhere_grid
+#' @param grid data frame returned from create_awhere_grid
 
 verify_api_calls <- function(grid,bypassNumCallCheck) {
   

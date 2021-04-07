@@ -22,7 +22,31 @@ create_planting(
 )
 }
 \arguments{
-\item{-}{apiAddressToUse: Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+\item{field_id}{an ID of your choosing (string)}
+
+\item{crop}{cropId or crop name (string)}
+
+\item{planting_date}{date crop was planted in the field. Format as YYYY-MM-DD (string)}
+
+\item{proj_yield_amount}{amount of projected yield from planting (string)}
+
+\item{proj_yield_units}{units of projected yield (string - optional)}
+
+\item{proj_harvest_date}{projected harvest date at the start of the season. Format as YYYY-MM-DD (string - optional)}
+
+\item{yield_amount}{actual yield (string - optional)}
+
+\item{yield_units}{units of actual yield (string - optional)}
+
+\item{harvest_date}{actual harvest date at end of season. Format as YYYY-MM-DD (string - optional)}
+
+\item{keyToUse}{aWhere API key to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{secretToUse}{aWhere API secret to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{tokenToUse}{aWhere API token to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
+
+\item{apiAddressToUse}{Address of aWhere API to use.  For advanced use only.  Most users will not need to use this parameter (optional)}
 }
 \value{
 - system generated planting id along with a print text that informs if the query succeeded or not
