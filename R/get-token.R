@@ -91,7 +91,6 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
       lockBinding('token',  awhereEnv75247)
       lockBinding('apiAddress', awhereEnv75247)
       
-      lockEnvironment(awhereEnv75247,bindings = TRUE)
       rm(awhereEnv75247)
     }
   }
