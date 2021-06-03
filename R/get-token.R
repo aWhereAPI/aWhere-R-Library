@@ -56,7 +56,7 @@ get_token <- function(uid, secret, use_environment = TRUE, apiAddress = "api.awh
     if (use_environment) {
       if (exists('awhereEnv75247') == FALSE) {
         awhereEnv75247 <- new.env()
-        assign('awhereEnv75247',awhereEnv75247,envir = baseenv())
+        assign('awhereEnv75247',awhereEnv75247,envir = .GlobalEnv)
         rm(awhereEnv75247)
       }
       
