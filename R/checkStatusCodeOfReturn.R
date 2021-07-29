@@ -21,11 +21,9 @@ checkStatusCode<- function(request) {
 
     a <- suppressMessages(httr::content(request, as = "parsed"))
     
-    stop(paste0('\n'
-                ,a$statusName
-                ,'\nstatusCode:',request$status_code
-                ,'\n'
-                ,a$detailedMessage
+    stop(paste0('\nstatusName: ',a$statusName
+                ,'\nstatusCode: ',request$status_code
+                ,'\n',a$detailedMessage
                 ,'\nErrorID: ',a$errorId))
   }
   
