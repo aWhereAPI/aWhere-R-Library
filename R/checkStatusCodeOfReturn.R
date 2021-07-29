@@ -21,11 +21,11 @@ checkStatusCode<- function(request) {
     cat('Unexpected Error Received from API... Retrying Query after Short Pause\n')
     
     Sys.sleep(runif(n = 1
-                    ,min = 5
-                    ,max = 15))
+                    ,min = 30
+                    ,max = 60))
   }
   
-  if (!(request$status_code %in% c(200,201,204))) { # status code = 200 means that the query worked
+  if (!(request$status_code %in% c(200,201,204,429,500,502,503))) { # status code = 200's means that the query worked
 
     a <- suppressMessages(httr::content(request, as = "parsed"))
     
