@@ -20,7 +20,13 @@ checkStatusCode<- function(request) {
   if (!(request$status_code %in% c(200,201,204))) { # status code = 200 means that the query worked
 
     a <- suppressMessages(httr::content(request, as = "parsed"))
-    stop(paste0(a$statusName,'\n',a$detailedMessage,'\nErrorID: ',a$errorId))
+    
+    stop(paste0('\n'
+                ,a$statusName
+                ,'\nstatusCode:',request$status_code
+                ,'\n'
+                ,a$detailedMessage
+                ,'\nErrorID: ',a$errorId))
   }
   
   return(request$status_code)
