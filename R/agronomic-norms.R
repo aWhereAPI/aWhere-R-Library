@@ -248,7 +248,10 @@ agronomic_norms_fields <- function(field_id
                               ,propertiesString))
 
       doWeatherGet <- TRUE
+      tryCount <- 0
       while (doWeatherGet == TRUE) {
+        tryCount <- tryCount + 1
+        
         postbody = ''
         request <- httr::GET(url, body = postbody, httr::content_type('application/json'),
                              httr::add_headers(Authorization =paste0("Bearer ", tokenToUse)))
@@ -257,6 +260,7 @@ agronomic_norms_fields <- function(field_id
 
         temp <- check_JSON(a
                            ,request
+                           ,tryCount
                            ,keyToUse
                            ,secretToUse
                            ,tokenToUse)
@@ -588,7 +592,10 @@ agronomic_norms_latlng <- function(latitude
                               ,propertiesString))
 
       doWeatherGet <- TRUE
+      tryCount <- 0
       while (doWeatherGet == TRUE) {
+        tryCount <- tryCount + 1
+        
         postbody = ''
         request <- httr::GET(url, body = postbody, httr::content_type('application/json'),
                              httr::add_headers(Authorization =paste0("Bearer ", tokenToUse)))
@@ -597,6 +604,7 @@ agronomic_norms_latlng <- function(latitude
 
         temp <- check_JSON(a
                            ,request
+                           ,tryCount
                            ,keyToUse
                            ,secretToUse
                            ,tokenToUse)

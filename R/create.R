@@ -83,7 +83,10 @@ create_field <- function(field_id
   postbody <- paste0(postbody, '}')
 
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::POST(url, body=postbody, httr::content_type('application/json'),
                           httr::add_headers(Authorization = paste0("Bearer ", tokenToUse)))
 
@@ -91,6 +94,7 @@ create_field <- function(field_id
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
@@ -225,7 +229,10 @@ create_planting <- function(field_id
   postbody <- paste0(postbody, '}')
 
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::POST(url, body=postbody, httr::content_type('application/json'),
                           httr::add_headers(Authorization = paste0("Bearer ", tokenToUse)))
 
@@ -233,6 +240,7 @@ create_planting <- function(field_id
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)

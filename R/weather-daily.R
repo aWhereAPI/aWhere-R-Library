@@ -134,8 +134,10 @@ daily_observed_fields <- function(field_id
                               ,propertiesString))
       
       doWeatherGet <- TRUE
-      
+      tryCount <- 0
       while (doWeatherGet == TRUE) {
+        tryCount <- tryCount + 1
+        
         postbody = ''
         request <- httr::GET(url, body = postbody, httr::content_type('application/json'),
                              httr::add_headers(Authorization =paste0("Bearer ", tokenToUse)))
@@ -144,6 +146,7 @@ daily_observed_fields <- function(field_id
         
         temp <- check_JSON(a
                            ,request
+                           ,tryCount
                            ,keyToUse
                            ,secretToUse
                            ,tokenToUse)
@@ -331,10 +334,12 @@ daily_observed_latlng <- function(latitude
                               ,propertiesString))
       
       doWeatherGet <- TRUE
-      
+      tryCount <- 0
       #The reason for the while loop is that if the token has expired a new token
       #will be automatically requsted and the query will be repeated
       while (doWeatherGet == TRUE) {
+        tryCount <- tryCount + 1
+        
         postbody = ''
         request <- httr::GET(url, body = postbody, httr::content_type('application/json'),
                              httr::add_headers(Authorization =paste0("Bearer ", tokenToUse)))
@@ -344,6 +349,7 @@ daily_observed_latlng <- function(latitude
         
         temp <- check_JSON(a
                            ,request
+                           ,tryCount
                            ,keyToUse
                            ,secretToUse
                            ,tokenToUse)

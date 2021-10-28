@@ -73,7 +73,10 @@ get_fields <- function(field_id = ""
   }
   
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
@@ -83,6 +86,7 @@ get_fields <- function(field_id = ""
     
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
@@ -261,7 +265,10 @@ get_planting <- function(field_id = ""
   url <- paste0(url,'&sort=id')
   
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
@@ -271,6 +278,7 @@ get_planting <- function(field_id = ""
     
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)

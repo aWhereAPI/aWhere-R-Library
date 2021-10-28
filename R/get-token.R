@@ -154,6 +154,7 @@ load_credentials <- function(path_to_credentials,apiAddress = "api.awhere.com") 
 
 check_JSON <- function(jsonObject
                        ,request
+                       ,tryCount
                        ,keyToUse 
                        ,secretToUse 
                        ,tokenToUse) {
@@ -191,7 +192,8 @@ check_JSON <- function(jsonObject
   }
   
   #Finally check to see if there was a different problem with the query and if so return the message
-  statusCode <- checkStatusCode(request)
+  statusCode <- checkStatusCode(request
+                                ,tryCount)
   
   #We need to repeat the query if 429 code encountered, above fxn will have paused the thread
   if (statusCode %in% c(429,500,502,503)) {

@@ -6,10 +6,19 @@
 #' @param request object returned from HTTR
 
 
-checkStatusCode<- function(request) {
+checkStatusCode<- function(request
+                           ,tryCount) {
 
-  #Pause thread if rate exceeded for random interval
-  if (request$status_code %in% c(429)) { #Status Code = 429 means that rate limit exceeded
+  #Pause thread if rate exceeded for random interval or if user out of API calls
+  if (request$status_code %in% c(429)) { 
+    
+    if (tryCount >= 5) {
+      stop(paste0('\nstatusName: ',a$statusName
+                  ,'\nstatusCode: ',request$status_code
+                  ,'\n',a$detailedMessage
+                  ,'\nErrorID: ',a$errorId))
+    }
+    
     cat('Pausing thread due to Rate Limit Exceeded\n')
     
     Sys.sleep(runif(n = 1

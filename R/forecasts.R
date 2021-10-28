@@ -123,7 +123,10 @@ forecasts_fields <- function(field_id
   url <- paste0(urlAddress, strBeg, strCoord, strType, strDates,blockString,localTimeString)
 
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     postbody = ''
     request <- httr::GET(url, body = postbody, httr::content_type('application/json'),
                          httr::add_headers(Authorization =paste0("Bearer ", tokenToUse)))
@@ -132,6 +135,7 @@ forecasts_fields <- function(field_id
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
@@ -293,7 +297,10 @@ forecasts_latlng <- function(latitude
   url <- paste0(urlAddress, strBeg, strCoord, strType, strDates,blockString,localTimeString)
 
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     postbody = ''
     request <- httr::GET(url, body = postbody, httr::content_type('application/json'),
                          httr::add_headers(Authorization =paste0("Bearer ", tokenToUse)))
@@ -303,6 +310,7 @@ forecasts_latlng <- function(latitude
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
