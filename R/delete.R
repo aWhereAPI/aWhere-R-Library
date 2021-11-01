@@ -40,7 +40,9 @@ delete_field <- function(field_id
   postbody <- paste0('{', field_id, '}');
 
   doWeatherGet = TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
     ## Get data
 
     request <- httr::DELETE(url, body=postbody, httr::content_type('application/json'),
@@ -50,6 +52,7 @@ delete_field <- function(field_id
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
@@ -107,7 +110,9 @@ delete_planting <- function(field_id
   url <- paste0(apiAddressToUse, "/agronomics/fields/", field_id,'/plantings/',planting_id)
 
   doWeatherGet = TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
     ## Get data
     request <- httr::DELETE(url, httr::add_headers(Authorization = paste0("Bearer ", tokenToUse)))
 
@@ -115,6 +120,7 @@ delete_planting <- function(field_id
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)

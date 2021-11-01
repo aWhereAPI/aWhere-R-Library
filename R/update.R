@@ -52,7 +52,10 @@ update_field <- function(field_id
   postbody <- paste0('[{"op":"replace","path":"/', variable_update, '","value":"', value_update, '"}]')
 
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::PATCH(url, body = postbody, httr::content_type('application/json'),
                            httr:: add_headers(Authorization = paste0("Bearer ", tokenToUse)))
 
@@ -61,6 +64,7 @@ update_field <- function(field_id
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
@@ -212,8 +216,11 @@ update_planting <- function(field_id
   }
 
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
-  ##Send request
+    tryCount <- tryCount + 1
+    
+    ##Send request
     request <- httr::PATCH(url, body = body, httr::content_type('application/json'),
                            httr::add_headers(Authorization = paste0("Bearer ", tokenToUse)))
 
@@ -221,6 +228,7 @@ update_planting <- function(field_id
 
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)

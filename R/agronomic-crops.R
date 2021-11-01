@@ -50,7 +50,10 @@ get_crops <- function(crop_id = ''
   }
   
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
@@ -60,6 +63,7 @@ get_crops <- function(crop_id = ''
     
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)

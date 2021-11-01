@@ -47,7 +47,10 @@ get_models <- function(model_id = ''
   }
   
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
@@ -57,6 +60,7 @@ get_models <- function(model_id = ''
     
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
@@ -145,7 +149,10 @@ get_model_details <- function(model_id
   
   
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
@@ -155,6 +162,7 @@ get_model_details <- function(model_id
     
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
@@ -235,13 +243,13 @@ get_model_results <- function(field_id
   checkCredentials(keyToUse,secretToUse,tokenToUse)
   
   ## Create Request
-  url <- paste0(apiAddressToUse, "/agronomics/fields/")
-  
-  url <- paste0(url, field_id, "/models/", model_id, "/results")
-  
+  url <- paste0(apiAddressToUse, "/agronomics/fields/",field_id, "/models/", model_id, "/results")
   
   doWeatherGet <- TRUE
+  tryCount <- 0
   while (doWeatherGet == TRUE) {
+    tryCount <- tryCount + 1
+    
     request <- httr::GET(url,
                          httr::content_type('application/json'),
                          httr::add_headers(Authorization =
@@ -251,6 +259,7 @@ get_model_results <- function(field_id
     
     temp <- check_JSON(a
                        ,request
+                       ,tryCount
                        ,keyToUse
                        ,secretToUse
                        ,tokenToUse)
