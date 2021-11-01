@@ -12,7 +12,9 @@ checkStatusCode<- function(request
   #Pause thread if rate exceeded for random interval or if user out of API calls
   if (request$status_code %in% c(429)) { 
     
-    if (tryCount >= 5) {
+    if (tryCount > 5) {
+      a <- suppressMessages(httr::content(request, as = "parsed"))
+      
       stop(paste0('\nstatusName: ',a$statusName
                   ,'\nstatusCode: ',request$status_code
                   ,'\n',a$detailedMessage
